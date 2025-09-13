@@ -23,12 +23,14 @@ An MCP (Model Context Protocol) server that generates RSS feed URLs from various
 ## Features
 
 - **Comprehensive URL Support**: Handles 20+ YouTube URL formats including:
-  - Channel IDs (`youtube.com/channel/[CHANNEL_ID]`)
-  - Handles (`youtube.com/@[HANDLE]`)
-  - Custom names (`youtube.com/c/[CUSTOM_NAME]`)
-  - Usernames (`youtube.com/user/[USERNAME]`)
-  - Playlists (`youtube.com/playlist?list=[PLAYLIST_ID]`)
-  - Videos, Shorts, Live streams, and more
+  - Channel IDs (`youtube.com/channel/[CHANNEL_ID]`) ✅
+  - Handles (`youtube.com/@[HANDLE]`) ✅
+  - Custom names (`youtube.com/c/[CUSTOM_NAME]`) ✅
+  - Usernames (`youtube.com/user/[USERNAME]`) ✅
+  - Playlists (`youtube.com/playlist?list=[PLAYLIST_ID]`) ✅
+  - Videos (`youtube.com/watch?v=[VIDEO_ID]`) ✅ - Extracts channel RSS
+  - Shorts (`youtube.com/shorts/[VIDEO_ID]`) ✅ - Extracts channel RSS
+  - Live streams (`youtube.com/live/[VIDEO_ID]`) ✅ - Extracts channel RSS
   - Mobile URLs (`m.youtube.com`)
   - International TLDs (`youtube.co.uk`, `youtube.de`, etc.)
   - Short URLs (`youtu.be`)
@@ -253,20 +255,20 @@ Process multiple YouTube URLs at once.
 
 ### Channels
 - `youtube.com/channel/[CHANNEL_ID]` → ✅ Direct RSS generation
-- `youtube.com/@[HANDLE]` → ⚠️ Requires channel ID resolution
-- `youtube.com/c/[CUSTOM_NAME]` → ⚠️ Requires channel ID resolution
+- `youtube.com/@[HANDLE]` → ✅ Automatically resolves to channel RSS
+- `youtube.com/c/[CUSTOM_NAME]` → ✅ Automatically resolves to channel RSS
 - `youtube.com/user/[USERNAME]` → ✅ Direct RSS generation
-- `youtube.com/[CUSTOM_NAME]` → ⚠️ Requires channel ID resolution
+- `youtube.com/[CUSTOM_NAME]` → ✅ Automatically resolves to channel RSS
 
 ### Playlists
-- `youtube.com/playlist?list=[PLAYLIST_ID]` → ✅ Direct RSS generation
-- `youtube.com/watch?v=[VIDEO_ID]&list=[PLAYLIST_ID]` → ✅ Extracts playlist RSS
+- `youtube.com/playlist?list=[PLAYLIST_ID]` → ✅ Extracts channel RSS from playlist owner
+- `youtube.com/watch?v=[VIDEO_ID]&list=[PLAYLIST_ID]` → ✅ Extracts channel RSS from playlist owner
 
-### Videos (Not supported for RSS)
-- `youtube.com/watch?v=[VIDEO_ID]` → ❌ Individual videos don't have RSS feeds
-- `youtu.be/[VIDEO_ID]` → ❌ Individual videos don't have RSS feeds
-- `youtube.com/shorts/[VIDEO_ID]` → ❌ Shorts don't have RSS feeds
-- `youtube.com/live/[VIDEO_ID]` → ❌ Live streams don't have RSS feeds
+### Videos (Channel RSS extracted)
+- `youtube.com/watch?v=[VIDEO_ID]` → ✅ Extracts channel RSS from video
+- `youtu.be/[VIDEO_ID]` → ✅ Extracts channel RSS from video
+- `youtube.com/shorts/[VIDEO_ID]` → ✅ Extracts channel RSS from short
+- `youtube.com/live/[VIDEO_ID]` → ✅ Extracts channel RSS from live stream
 
 ## Output RSS Feed Formats
 
@@ -278,11 +280,11 @@ The server generates three types of RSS feed URLs:
 
 ## Limitations
 
-- **Handles and Custom Names**: YouTube handles (`@username`) and custom channel names (`/c/name`) cannot be directly converted to RSS feeds. These require resolving to a channel ID first, which would require additional API access.
+- **Network Dependency**: The server now fetches YouTube pages to extract channel information from videos, playlists, handles, and custom names. This requires network access and may be affected by YouTube's rate limiting or changes to their page structure.
 
-- **Individual Videos**: RSS feeds are not available for individual videos, shorts, or live streams. You need to provide the channel or playlist URL instead.
+- **Rate Limiting**: YouTube may rate limit both RSS feed access and page fetching. The server includes caching to minimize repeated requests.
 
-- **Rate Limiting**: YouTube may rate limit RSS feed access. The server includes caching to minimize repeated validation requests.
+- **Page Structure Changes**: Channel extraction from videos and playlists depends on YouTube's HTML structure. If YouTube changes their page layout, extraction may fail until the patterns are updated.
 
 ## Development
 

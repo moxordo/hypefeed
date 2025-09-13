@@ -4,6 +4,8 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { YouTubeURLParser } from './parser.js';
 import { RSSValidator } from './validator.js';
+// Export for testing
+export { generateRSSFeed };
 // Define the tools
 const TOOLS = [
     {
@@ -58,7 +60,7 @@ const TOOLS = [
  */
 async function generateRSSFeed(url, validate = true) {
     const parsed = YouTubeURLParser.parse(url);
-    const feedUrl = YouTubeURLParser.generateRSSUrl(parsed);
+    const feedUrl = await YouTubeURLParser.generateRSSUrl(parsed);
     const result = {
         success: false,
         feedUrl: null,
@@ -77,14 +79,23 @@ async function generateRSSFeed(url, validate = true) {
         }
     };
     if (!feedUrl) {
-        if (parsed.sourceType === 'handle' || parsed.sourceType === 'custom_name') {
-            result.validation.error = 'Cannot directly generate RSS feed for handles or custom channel names. These require channel ID resolution.';
+        if (parsed.sourceType === 'handle') {
+            result.validation.error = `Unable to extract channel RSS feed for @${parsed.id}. The channel page may be unavailable or the format has changed.`;
         }
-        else if (parsed.sourceType === 'video' || parsed.sourceType === 'short' || parsed.sourceType === 'live') {
-            result.validation.error = 'Cannot generate RSS feed for individual videos. Please provide a channel or playlist URL.';
+        else if (parsed.sourceType === 'custom_name') {
+            result.validation.error = `Unable to extract channel RSS feed for /c/${parsed.id}. The channel page may be unavailable or the format has changed.`;
+        }
+        else if (parsed.sourceType === 'video') {
+            result.validation.error = `Unable to extract channel RSS feed from video ${parsed.id}. The video may be unavailable or from a deleted channel.`;
+        }
+        else if (parsed.sourceType === 'short') {
+            result.validation.error = `Unable to extract channel RSS feed from short ${parsed.id}. The short may be unavailable or from a deleted channel.`;
+        }
+        else if (parsed.sourceType === 'live') {
+            result.validation.error = `Unable to extract channel RSS feed from live stream ${parsed.id}. The stream may be unavailable or from a deleted channel.`;
         }
         else {
-            result.validation.error = 'Unable to generate RSS feed URL from the provided YouTube URL';
+            result.validation.error = 'Unable to generate RSS feed URL from the provided YouTube URL. The content may be unavailable or the URL format is not recognized.';
         }
         return result;
     }
@@ -158,7 +169,7 @@ async function batchGenerateRSSFeeds(urls, validate = true, continueOnError = tr
 async function main() {
     const server = new Server({
         name: 'youtube-rss-generator',
-        version: '1.0.0'
+        version: '1.0.2'
     }, {
         capabilities: {
             tools: {}

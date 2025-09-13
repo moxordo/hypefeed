@@ -1,11 +1,11 @@
 {
-  "name": "youtube-rss-generator",
-  "version": "1.0.0",
-  "description": "MCP server for generating YouTube RSS feed links",
+  "name": "youtube-rss-mcp-server",
+  "version": "1.0.2",
+  "description": "Model Context Protocol (MCP) server for generating YouTube RSS feed URLs from various YouTube URL formats",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "youtube-rss-generator": "./dist/index.js"
+    "youtube-rss-mcp-server": "./dist/index.js"
   },
   "files": [
     "dist/**/*",
@@ -25,11 +25,21 @@
     "rss",
     "feed"
   ],
-  "author": "",
+  "author": "andy",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andy/youtube-rss-mcp-server"
+  },
+  "homepage": "https://github.com/andy/youtube-rss-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/andy/youtube-rss-mcp-server/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.5.0",
-    "node-fetch": "^3.3.2"
+    "@modelcontextprotocol/sdk": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
