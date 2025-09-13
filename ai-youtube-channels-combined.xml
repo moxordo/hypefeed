@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>AI Pioneer YouTube Channels - Combined Feed</title>
+    <description>Combined RSS feed aggregating content from top AI pioneer YouTube channels with 100K+ subscribers, regular posting frequency, and high engagement</description>
+    <link>https://github.com/your-repo/hypefeed</link>
+    <atom:link href="https://raw.githubusercontent.com/your-repo/hypefeed/main/ai-youtube-channels-combined.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 GMT</lastBuildDate>
+    <generator>HypeFeed AI Channel Aggregator</generator>
+    <language>en-US</language>
+    <managingEditor>noreply@hypefeed.com</managingEditor>
+    <webMaster>noreply@hypefeed.com</webMaster>
+    <category>Technology/Artificial Intelligence</category>
+    <ttl>60</ttl>
+    
+    <!-- Channel Sources -->
+    <item>
+      <title>📋 Channel Sources Reference</title>
+      <description><![CDATA[
+        <h2>AI Pioneer YouTube Channels - RSS Feed Sources</h2>
+        <p>This combined feed aggregates content from the following channels:</p>
+        <ul>
+          <li><strong>Two Minute Papers</strong> (@TwoMinutePapers) - 1.66M subs - Research paper summaries</li>
+          <li><strong>Krish Naik</strong> (@krishnaik06) - 1.25M subs - ML/Data Science tutorials</li>
+          <li><strong>Matt Wolfe</strong> (@mreflow) - 785K subs - AI tools & FutureTools.io</li>
+          <li><strong>DeepLearning.AI</strong> (@Deeplearningai) - 429K subs - Andrew Ng's educational content</li>
+          <li><strong>Sentdex</strong> (@sentdex) - 273K subs - Python ML programming</li>
+          <li><strong>MattVidPro AI</strong> (@MattVidPro) - 245K subs - AI video production</li>
+          <li><strong>Andrej Karpathy</strong> (@karpathy) - 220K subs - Deep learning expert tutorials</li>
+        </ul>
+        
+        <h3>Individual RSS Feeds:</h3>
+        <ul>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg">Two Minute Papers RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCjWY5hREA6FFYrthD0rZNIw">Krish Naik RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCuK2Mf5As9OKfWU7XV6yzCg">Matt Wolfe RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCcIXc5mJsHVYTZR1maL5l9w">DeepLearning.AI RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCQALLeQPoZdZC4JNUboVEUg">Sentdex RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UC06GdmaEdCdCFwR3NvszloQ">MattVidPro AI RSS</a></li>
+          <li><a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCe4jUOmQPKMDvOkzJpDfMRQ">Andrej Karpathy RSS</a></li>
+        </ul>
+        
+        <h3>Content Categories:</h3>
+        <ul>
+          <li><strong>Research Analysis:</strong> Two Minute Papers</li>
+          <li><strong>Education/Tutorials:</strong> Krish Naik, DeepLearning.AI</li>
+          <li><strong>AI Tools:</strong> Matt Wolfe</li>
+          <li><strong>Programming:</strong> Sentdex</li>
+          <li><strong>Video Production:</strong> MattVidPro AI</li>
+          <li><strong>Deep Learning:</strong> Andrej Karpathy</li>
+        </ul>
+        
+        <p><em>Generated on: 2025-01-27</em></p>
+        <p><em>Status: All channels marked as PENDING_EVALUATION for operator review</em></p>
+      ]]></description>
+      <link>https://github.com/your-repo/hypefeed/blob/main/ai-youtube-channels-rss.json</link>
+      <guid isPermaLink="false">ai-channels-sources-2025-01-27</guid>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 GMT</pubDate>
+      <category>Reference</category>
+    </item>
+    
+    <!-- Instructions for RSS aggregation -->
+    <item>
+      <title>🔧 RSS Feed Aggregation Instructions</title>
+      <description><![CDATA[
+        <h2>How to Use These RSS Feeds</h2>
+        
+        <h3>For RSS Readers:</h3>
+        <ol>
+          <li>Add each individual channel RSS URL to your RSS reader</li>
+          <li>Create folders/categories by content type</li>
+          <li>Set refresh intervals to 30-60 minutes for optimal performance</li>
+        </ol>
+        
+        <h3>For Automated Systems:</h3>
+        <p>Use the JSON data file for programmatic access:</p>
+        <pre><code>
+{
+  "channels": [
+    {
+      "name": "Two Minute Papers",
+      "rss_feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg",
+      "category": "research_analysis",
+      "status": "PENDING_EVALUATION"
+    }
+    // ... more channels
+  ]
+}
+        </code></pre>
+        
+        <h3>Evaluation Workflow:</h3>
+        <ol>
+          <li><strong>PENDING_EVALUATION:</strong> Operator reviews channel quality and recent content</li>
+          <li><strong>TRYOUT:</strong> Content flows to "tryout" feed stream for evaluation</li>
+          <li><strong>CANDIDATE:</strong> Content flows to "candidate" stream with entity analysis</li>
+          <li><strong>LIVE:</strong> Full integration into main feed</li>
+        </ol>
+        
+        <h3>Next Steps:</h3>
+        <ul>
+          <li>Review each channel's recent content quality</li>
+          <li>Assess alignment with AI pioneer criteria</li>
+          <li>Move promising channels to TRYOUT phase</li>
+          <li>Set up automated content evaluation pipeline</li>
+        </ul>
+      ]]></description>
+      <link>https://github.com/your-repo/hypefeed</link>
+      <guid isPermaLink="false">rss-aggregation-instructions-2025-01-27</guid>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 GMT</pubDate>
+      <category>Instructions</category>
+    </item>
+    
+  </channel>
+</rss>

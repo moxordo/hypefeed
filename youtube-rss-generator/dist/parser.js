@@ -1,3 +1,5 @@
+import https from 'https';
+import http from 'http';
 export class YouTubeURLParser {
     static CHANNEL_ID_REGEX = /^UC[\w-]{22}$/;
     static PLAYLIST_ID_REGEX = /^(PL|UU|LL|RD|OL)[\w-]{32,}$/;
@@ -131,7 +133,7 @@ export class YouTubeURLParser {
     /**
      * Generate RSS feed URL from parsed YouTube URL
      */
-    static generateRSSUrl(parsed) {
+    static async generateRSSUrl(parsed) {
         if (!parsed.id) {
             return null;
         }
@@ -141,9 +143,11 @@ export class YouTubeURLParser {
                 if (parsed.sourceType === 'channel_id') {
                     return `${baseUrl}?channel_id=${parsed.id}`;
                 }
-                // For handles and custom names, we need to resolve to channel ID
-                // This would require an API call or web scraping
-                // For now, return null as we can't generate directly
+                // For handles and custom names, try to resolve to channel ID
+                const resolvedChannelId = await this.resolveChannelId(parsed);
+                if (resolvedChannelId) {
+                    return `${baseUrl}?channel_id=${resolvedChannelId}`;
+                }
                 return null;
             case 'user':
                 return `${baseUrl}?user=${parsed.id}`;
@@ -154,10 +158,136 @@ export class YouTubeURLParser {
                     const channelId = 'UC' + parsed.id.slice(2);
                     return `${baseUrl}?channel_id=${channelId}`;
                 }
+                // For other playlists, try to get the channel that owns it
+                const playlistChannelId = await this.getChannelFromPlaylist(parsed.id);
+                if (playlistChannelId) {
+                    return `${baseUrl}?channel_id=${playlistChannelId}`;
+                }
+                // Fall back to playlist RSS if we can't get the channel
                 return `${baseUrl}?playlist_id=${parsed.id}`;
             default:
+                // For videos, shorts, and live streams, extract the channel
+                if (parsed.sourceType === 'video' || parsed.sourceType === 'short' || parsed.sourceType === 'live') {
+                    const videoChannelId = await this.getChannelFromVideo(parsed.id);
+                    if (videoChannelId) {
+                        return `${baseUrl}?channel_id=${videoChannelId}`;
+                    }
+                }
                 return null;
         }
+    }
+    /**
+     * Extract channel ID from a video page
+     */
+    static async getChannelFromVideo(videoId) {
+        if (!videoId)
+            return null;
+        try {
+            const html = await this.fetchPage(`https://www.youtube.com/watch?v=${videoId}`);
+            // Look for channel ID in various places
+            // Pattern 1: "channelId":"UC..."
+            const channelIdMatch = html.match(/"channelId"\s*:\s*"(UC[\w-]{22})"/);
+            ;
+            if (channelIdMatch) {
+                return channelIdMatch[1];
+            }
+            // Pattern 2: /channel/UC... in links
+            const channelLinkMatch = html.match(/\/channel\/(UC[\w-]{22})/);
+            if (channelLinkMatch) {
+                return channelLinkMatch[1];
+            }
+            // Pattern 3: browseId for channel
+            const browseIdMatch = html.match(/"browseId"\s*:\s*"(UC[\w-]{22})"/);
+            if (browseIdMatch) {
+                return browseIdMatch[1];
+            }
+        }
+        catch (error) {
+            // Failed to fetch or parse
+        }
+        return null;
+    }
+    /**
+     * Extract channel ID from a playlist page
+     */
+    static async getChannelFromPlaylist(playlistId) {
+        if (!playlistId)
+            return null;
+        try {
+            const html = await this.fetchPage(`https://www.youtube.com/playlist?list=${playlistId}`);
+            // Look for the channel that created the playlist
+            // Pattern 1: "ownerText":{..."url":"/channel/UC..."
+            const ownerMatch = html.match(/"ownerText"[^}]*\/channel\/(UC[\w-]{22})/);
+            if (ownerMatch) {
+                return ownerMatch[1];
+            }
+            // Pattern 2: videoOwnerRenderer with channelId
+            const videoOwnerMatch = html.match(/"videoOwnerRenderer"[^}]*"channelId"\s*:\s*"(UC[\w-]{22})"/);
+            if (videoOwnerMatch) {
+                return videoOwnerMatch[1];
+            }
+        }
+        catch (error) {
+            // Failed to fetch or parse
+        }
+        return null;
+    }
+    /**
+     * Try to resolve a handle or custom name to a channel ID
+     */
+    static async resolveChannelId(parsed) {
+        if (parsed.sourceType === 'handle' || parsed.sourceType === 'custom_name') {
+            try {
+                const url = parsed.sourceType === 'handle'
+                    ? `https://www.youtube.com/@${parsed.id}`
+                    : `https://www.youtube.com/c/${parsed.id}`;
+                const html = await this.fetchPage(url);
+                // Look for channel ID in the page
+                const channelIdMatch = html.match(/"channelId"\s*:\s*"(UC[\w-]{22})"/);
+                if (channelIdMatch) {
+                    return channelIdMatch[1];
+                }
+                // Alternative pattern
+                const browseIdMatch = html.match(/"browseId"\s*:\s*"(UC[\w-]{22})"/);
+                if (browseIdMatch) {
+                    return browseIdMatch[1];
+                }
+            }
+            catch (error) {
+                // Failed to resolve
+            }
+        }
+        return null;
+    }
+    /**
+     * Fetch a web page
+     */
+    static fetchPage(url) {
+        return new Promise((resolve, reject) => {
+            const client = url.startsWith('https') ? https : http;
+            const options = {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+                },
+                timeout: 10000
+            };
+            const req = client.get(url, options, (res) => {
+                if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+                    reject(new Error(`HTTP ${res.statusCode}`));
+                    return;
+                }
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => resolve(data));
+            });
+            req.on('error', reject);
+            req.on('timeout', () => {
+                req.destroy();
+                reject(new Error('Request timeout'));
+            });
+        });
     }
 }
 //# sourceMappingURL=parser.js.map

@@ -18,6 +18,22 @@ export declare class YouTubeURLParser {
     /**
      * Generate RSS feed URL from parsed YouTube URL
      */
-    static generateRSSUrl(parsed: ParsedYouTubeURL): string | null;
+    static generateRSSUrl(parsed: ParsedYouTubeURL): Promise<string | null>;
+    /**
+     * Extract channel ID from a video page
+     */
+    private static getChannelFromVideo;
+    /**
+     * Extract channel ID from a playlist page
+     */
+    private static getChannelFromPlaylist;
+    /**
+     * Try to resolve a handle or custom name to a channel ID
+     */
+    private static resolveChannelId;
+    /**
+     * Fetch a web page
+     */
+    private static fetchPage;
 }
 //# sourceMappingURL=parser.d.ts.map

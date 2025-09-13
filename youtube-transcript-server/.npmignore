@@ -1,0 +1,53 @@
+# Source files (only publish compiled JS)
+src/
+*.ts
+!dist/**/*.d.ts
+
+# Config files
+tsconfig.json
+.gitignore
+
+# Test files
+*.test.ts
+*.test.js
+test-*.ts
+test-*.js
+*-test.ts
+*-test.js
+debug-*.ts
+debug-*.js
+standalone-*.ts
+standalone-*.js
+TESTING.md
+TEST_SUMMARY.md
+
+# Development files
+node_modules/
+bun.lockb
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Claude Desktop config example
+claude-desktop-config.json
+
+# Build artifacts
+*.map
+*.log
+
+# Git
+.git/
+.github/
+
+# Other
+.env
+.env.*
+tmp/
+temp/
