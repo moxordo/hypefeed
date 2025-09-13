@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+      "linear": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"]
+      },
+      "youtube-transcript": {
+        "command": "npx",
+        "args": ["youtube-transcript-mcp-server@latest"]
+      },
+      "youtube-rss": {
+        "command": "npx",
+        "args": ["youtube-rss-mcp-server@latest"]
+      },
+      "neon": {
+        "command": "npx",
+        "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+      }
+    }
+  }
