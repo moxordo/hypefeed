@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "youtube-transcript": {
+      "command": "node",
+      "args": ["/Users/andy/moxordo/hypefeed/youtube-transcript-server/dist/index.js"],
+      "env": {}
+    }
+  }
+}
