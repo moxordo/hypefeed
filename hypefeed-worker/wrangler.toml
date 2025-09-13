@@ -1,0 +1,49 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "hypefeed-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Worker configuration
+[build]
+command = "bun run build:worker"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+FEED_TITLE = "AI Pioneer YouTube Channels - HypeFeed"
+FEED_DESCRIPTION = "Curated RSS feed from top AI pioneer YouTube channels"
+FEED_LANGUAGE = "en-US"
+MAX_FEED_ITEMS = "50"
+
+# R2 bucket binding for storing RSS feeds
+[[r2_buckets]]
+binding = "HYPEFEED_BUCKET"
+bucket_name = "hypefeed-rss-storage"
+
+# Cron trigger - every 10 minutes
+[triggers]
+crons = ["*/10 * * * *"]
+
+# KV namespace for metadata and caching (optional)
+[[kv_namespaces]]
+binding = "HYPEFEED_KV"
+id = "" # Will be populated after deployment
+preview_id = ""
+
+# Development environment overrides
+[env.development]
+[env.development.vars]
+ENVIRONMENT = "development"
+MAX_FEED_ITEMS = "10"
+
+# Development KV
+[[env.development.kv_namespaces]]
+binding = "HYPEFEED_KV"
+id = ""
+preview_id = ""
+
+# Development R2
+[[env.development.r2_buckets]]
+binding = "HYPEFEED_BUCKET"
+bucket_name = "hypefeed-rss-storage-dev"
