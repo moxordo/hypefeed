@@ -31,28 +31,72 @@ export async function handleScheduledEvent(
       // Don't return here, still generate a feed with error info
     }
 
-    // Step 2: Generate feed metadata
+    // Step 2: Get previous feed metadata to check for changes
+    const previousMetadata = await storage.getMetadata();
+    const previousContentHash = previousMetadata?.contentHash;
+    
+    // Step 3: Calculate content hash (excluding timestamps from the stats item)
+    const contentIdentifier = items.map(item => `${item.guid}|${item.title}`).sort().join('\n');
+    const encoder = new TextEncoder();
+    const data = encoder.encode(contentIdentifier);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const currentContentHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    
+    // Step 4: Determine if content has actually changed
+    const hasContentChanged = previousContentHash !== currentContentHash;
+    
+    // Step 5: Use appropriate dates based on whether content changed
+    let lastBuildDate: string;
+    let feedGeneratedAt: string;
+    
+    if (hasContentChanged) {
+      // Content changed - update dates
+      lastBuildDate = new Date().toUTCString();
+      feedGeneratedAt = new Date().toISOString();
+      console.log('✨ Feed content has changed - updating timestamps');
+    } else {
+      // No content change - preserve previous dates
+      lastBuildDate = previousMetadata?.lastBuildDate || new Date().toUTCString();
+      feedGeneratedAt = previousMetadata?.generated_at || new Date().toISOString();
+      console.log('📌 Feed content unchanged - preserving timestamps');
+    }
+
+    // Step 6: Generate feed metadata
     const metadata = generateFeedMetadata();
-    metadata.generated_at = new Date().toISOString();
+    metadata.generated_at = feedGeneratedAt;
     metadata.failure_count = errors.length;
     metadata.success_count = Math.max(0, metadata.total_channels - errors.length);
+    metadata.contentHash = currentContentHash;
+    metadata.lastBuildDate = lastBuildDate;
+    metadata.hasContentChanged = hasContentChanged;
 
-    // Step 3: Render XML feed
+    // Step 7: Render XML feed with stable dates
     console.log('🎨 Rendering RSS XML feed...');
     const xmlContent = renderer.renderFeed(items, {
-      lastBuildDate: new Date().toUTCString(),
+      lastBuildDate,
       totalItems: items.length,
-      errors: errors.length
+      errors: errors.length,
+      preserveStatsDate: !hasContentChanged  // Pass flag to preserve stats item date
     });
 
-    // Step 4: Store in R2 and cache in KV
-    console.log('💾 Storing RSS feed in R2 and KV...');
-    const storePromise = storage.storeCurrentFeed(xmlContent, metadata);
-    const cachePromise = storage.cacheFeedInKV(xmlContent, 300);
+    // Step 8: Store in R2 and cache in KV (only if content changed)
+    // Force update on manual trigger (when cron is 'manual')
+    const forceUpdate = event.cron === 'manual';
     
-    await Promise.all([storePromise, cachePromise]);
+    if (hasContentChanged || forceUpdate) {
+      console.log(forceUpdate ? '🔄 Force storing RSS feed (manual refresh)...' : '💾 Storing updated RSS feed in R2 and KV...');
+      const storePromise = storage.storeCurrentFeed(xmlContent, metadata);
+      const cachePromise = storage.cacheFeedInKV(xmlContent, 300);
+      
+      await Promise.all([storePromise, cachePromise]);
+    } else {
+      console.log('♻️ Content unchanged - updating cache only');
+      // Just refresh the KV cache to extend TTL
+      await storage.cacheFeedInKV(xmlContent, 300);
+    }
 
-    // Step 5: Cleanup old versions (run periodically)
+    // Step 9: Cleanup old versions (run periodically)
     const shouldCleanup = Math.random() < 0.1; // 10% chance each run
     if (shouldCleanup) {
       console.log('🧹 Cleaning up old feed versions...');
@@ -83,15 +127,18 @@ export async function handleScheduledEvent(
     
     // Try to store error information for monitoring
     try {
+      const previousMetadata = await new StorageService(env).getMetadata();
       const errorMetadata = generateFeedMetadata();
-      errorMetadata.generated_at = new Date().toISOString();
+      errorMetadata.generated_at = previousMetadata?.generated_at || new Date().toISOString();
       errorMetadata.failure_count = errorMetadata.total_channels;
       errorMetadata.success_count = 0;
+      errorMetadata.lastBuildDate = previousMetadata?.lastBuildDate || new Date().toUTCString();
       
       const errorXml = new RSSRenderer(env).renderFeed([], {
-        lastBuildDate: new Date().toUTCString(),
+        lastBuildDate: errorMetadata.lastBuildDate,
         totalItems: 0,
-        errors: 1
+        errors: 1,
+        preserveStatsDate: true
       });
       
       const storage = new StorageService(env);
