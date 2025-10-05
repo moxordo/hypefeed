@@ -5,7 +5,7 @@ A Cloudflare Workers application that aggregates RSS feeds from top AI pioneer Y
 ## Features
 
 - **🤖 AI-focused content**: Curated channels from top AI pioneers and educators
-- **⚡ High performance**: Built on Cloudflare Workers with global edge distribution  
+- **⚡ High performance**: Built on Cloudflare Workers with global edge distribution
 - **🔄 Automatic updates**: RSS feeds refreshed every 10 minutes via cron triggers
 - **💾 Reliable storage**: R2 for feed storage with versioning and KV for caching
 - **📊 Rich metadata**: Detailed channel information, statistics, and feed analytics
@@ -24,7 +24,7 @@ Single Cloudflare Worker handling:
 ### RSS Feed
 - `GET /feed.xml` - Latest combined RSS feed
 - `GET /feed/{timestamp}.xml` - Historical feed version
-- `GET /feed/versions` - List available feed versions  
+- `GET /feed/versions` - List available feed versions
 - `GET /feed/stats` - Feed statistics and metadata
 
 ### Management
@@ -37,7 +37,7 @@ Single Cloudflare Worker handling:
 
 ### Prerequisites
 - [Bun](https://bun.sh/) package manager
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) 
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 - Cloudflare account with Workers and R2 enabled
 
 ### Installation
@@ -52,8 +52,8 @@ Single Cloudflare Worker handling:
    ```bash
    # Create R2 bucket
    wrangler r2 bucket create hypefeed-rss-storage
-   
-   # Create KV namespace  
+
+   # Create KV namespace
    wrangler kv:namespace create "HYPEFEED_KV"
    wrangler kv:namespace create "HYPEFEED_KV" --preview
    ```
@@ -82,7 +82,7 @@ bun run build
 
 ### Environment Variables (wrangler.toml)
 - `FEED_TITLE` - RSS feed title
-- `FEED_DESCRIPTION` - RSS feed description  
+- `FEED_DESCRIPTION` - RSS feed description
 - `FEED_LANGUAGE` - RSS feed language (default: en-US)
 - `MAX_FEED_ITEMS` - Maximum items per feed (default: 50)
 
@@ -127,7 +127,7 @@ data/
 
 RSS aggregation runs every 10 minutes:
 - Fetches all channel RSS feeds in parallel
-- Parses and merges content chronologically  
+- Parses and merges content chronologically
 - Generates rich XML with metadata
 - Stores in R2 with versioning
 - Updates KV cache for fast access
@@ -156,16 +156,8 @@ Health endpoints provide:
 4. Test locally with `bun run dev`
 5. Submit a pull request
 
-## License
-
-MIT License - see LICENSE file for details
-
 ## Support
 
 - 📖 [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
 - 🌐 [Hono Framework](https://hono.dev/)
 - 💾 [R2 Storage Docs](https://developers.cloudflare.com/r2/)
-
----
-
-Built with ❤️ using Cloudflare Workers, Hono, and TypeScript

@@ -1,0 +1,60 @@
+// This is your Prisma schema file for Cloudflare D1
+// Learn more: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Channel {
+  id               String   @id @default(uuid())
+  name             String
+  handle           String   @unique
+  channelId        String   @unique @map("channel_id")
+  youtubeUrl       String   @map("youtube_url")
+  rssFeedUrl       String   @map("rss_feed_url")
+  subscribers      String
+  description      String
+  postingFrequency String   @map("posting_frequency")
+  category         String
+  status           String   @default("PENDING_EVALUATION")
+  
+  // Tracking fields
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  lastFetchedAt    DateTime? @map("last_fetched_at")
+  lastSuccessAt    DateTime? @map("last_success_at")
+  
+  // Statistics (optional)
+  monthlyViews     Int?     @map("monthly_views")
+  avgEngagement    Float?   @map("avg_engagement")
+  
+  @@map("channels")
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  @@map("categories")
+}
+
+model FetchLog {
+  id        String   @id @default(uuid())
+  channelId String   @map("channel_id")
+  success   Boolean
+  itemCount Int?     @map("item_count")
+  error     String?
+  fetchedAt DateTime @default(now()) @map("fetched_at")
+  duration  Int?     // milliseconds
+  
+  @@map("fetch_logs")
+  @@index([channelId])
+}

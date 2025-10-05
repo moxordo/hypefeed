@@ -12,16 +12,19 @@
     "test": "bun test"
   },
   "dependencies": {
-    "hono": "^4.6.8",
-    "fast-xml-parser": "^4.5.0",
-    "date-fns": "^4.1.0"
+    "@prisma/adapter-d1": "^6.16.2",
+    "@prisma/client": "^6.16.2",
+    "date-fns": "^4.1.0",
+    "fast-xml-parser": "^4.5.3",
+    "hono": "^4.9.7"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241218.0",
-    "wrangler": "^3.95.0",
-    "typescript": "^5.7.2",
+    "@cloudflare/workers-types": "^4.20250913.0",
+    "@types/node": "^22.18.3",
     "esbuild": "^0.24.2",
-    "@types/node": "^22.10.2"
+    "prisma": "^6.16.2",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.36.0"
   },
   "keywords": [
     "cloudflare-workers",

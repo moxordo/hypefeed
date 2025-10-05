@@ -1,7 +1,7 @@
 ---
 command: "/scrape"
 category: "Analysis & Investigation"
-purpose: "AI YouTube channel discovery and evaluation workflow"
+purpose: "AI YouTube channel discovery and database recruitment workflow"
 wave-enabled: false
 performance-profile: "standard"
 parameters:
@@ -25,52 +25,62 @@ parameters:
     type: "number"
     default: 1000000
     description: "Minimum monthly views (e.g., 1000000 for 1M)"
-  - name: "exclude_existing"
-    type: "boolean"
-    default: true
-    description: "Filter out channels already in database"
-usage: "/scrape [topic] [--count N] [--min-subscribers N] [--posts-per-month N] [--min-monthly-views N] [--no-exclude-existing]"
+usage: "/scrape [topic] [--count N] [--min-subscribers N] [--posts-per-month N] [--min-monthly-views N]"
 examples:
   - "/scrape \"ML research\" --count 25"
   - "/scrape --min-subscribers 500000 --count 30"
-  - "/scrape \"tech tutorials\" --no-exclude-existing"
+  - "/scrape \"tech tutorials\""
 ---
 
-## Scrape
-Using the Web Search() tool, I want you to search for the top {{count}} {{topic}} youtube channels that meet the criteria below
+## Channel Discovery Workflow
 
-Criteria:
-- They have more than {{min_subscribers}} subscribers
-- They are posting regularly (Posts more than {{posts_per_month}} times a month)
-- They generate more than {{min_monthly_views}} views a month
+**API Base URL**: `https://hypefeed-worker.andy-hypefeed.workers.dev`
 
-Rules:
-{{#if exclude_existing}}
-- Filter out any channels that are already in the database. {{Channel}}
-{{/if}}
+### Step 1: Fetch Existing Channels from Database
+Before searching, retrieve all existing channels from the database to avoid duplicates:
+- **Endpoint**: `GET /api/channels`
+- Store the list of existing channel IDs, handles, and names for comparison
+- This prevents duplicate scraping
 
-## Comparison
-- During this step, your role is to identify new channels that we've not met before.
-- New channels should be indexed into our {{database}} and marked for evaluation as PENDING_EVALUATION
+### Step 2: Search for New Channels
+Using Web Search, find the top {{count}} {{topic}} YouTube channels that meet these criteria:
 
-## Evaluation
-- Currently the responsibility of the {{entity.operator}}
-- The operator will evaluate the channel to see if the recent contents it has been providing is legit enough.
-- We might put the channel into different levels
-    - LIVE
-    - TRYOUT
-    - NEW
-    - REVISIT
-    - DROP
+**Quality Criteria:**
+- More than {{min_subscribers}} subscribers
+- Posts regularly ({{posts_per_month}}+ times per month)
+- Generates more than {{min_monthly_views}} views per month
 
-- TRYOUT
-    - Contents that the channel in TRYOUT phase generates will be sent down to the "tryout" feed stream.
-    - The operator can evaluate the contents in the TRYOUT feed stream and make {{ChannelContentEvaluations}} to provide evaluation and feedback
+### Step 3: Filter & Deduplicate
+- Compare found channels against existing database channels
+- Filter out duplicates by channel ID, handle, or name
+- Keep only genuinely new channels
 
-- CANDIDATE
-    - Gets index into the database into {{ChannelCandidates}}
-    - Contents get streamed into the "candidate" feed stream
-        - the {{evaluator}} taps into the feed stream to evaluate the content
-            - summary, implication, mentioned entities
-                - the mentioned entities will be looked up from the db to "connect the dots"
-    - The operator can decide whether or not to include the candidate in to the TRYOUTs
+### Step 4: Extract Channel Information
+For each new channel, gather:
+- **name**: Channel display name
+- **handle**: Channel handle (e.g., @channelname)
+- **channel_id**: YouTube channel ID (from channel URL)
+- **youtube_url**: Full YouTube channel URL
+- **rss_feed_url**: YouTube RSS feed URL (format: `https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}`)
+- **subscribers**: Subscriber count as string (e.g., "1.2M", "500K")
+- **description**: Brief channel description
+- **posting_frequency**: Posting frequency as string (e.g., "2-3 times/week")
+- **category**: Channel category (e.g., "research_analysis", "education_tutorials", "tools_practical")
+
+### Step 5: Add to Database
+Use the Channel API to add new channels:
+- **Endpoint**: `POST /api/channels`
+- **Status**: All new channels are automatically marked as `PENDING_EVALUATION`
+- Present summary to user with count of channels added
+
+## Channel Status Lifecycle
+
+New channels go through these evaluation stages:
+- **PENDING_EVALUATION**: Newly discovered, awaiting operator review (default for new channels)
+- **CANDIDATE**: Under evaluation, content appears promising
+- **TRYOUT**: Being tested in tryout feed stream
+- **LIVE**: Approved and included in main RSS feed
+- **DUPLICATE**: Duplicate of existing channel
+- **DROP**: Not suitable for feed
+
+**Note**: The operator reviews and updates channel status manually via `PUT /api/channels/:channelId/status` endpoint.

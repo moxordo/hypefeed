@@ -2,7 +2,7 @@ import type { Env, ExecutionContext, ScheduledEvent } from '../types/bindings';
 import { RSSAggregator } from '../services/aggregator';
 import { RSSRenderer } from '../services/renderer';
 import { StorageService } from '../services/storage';
-import { generateFeedMetadata } from '../data/channels';
+import { ChannelService } from '../services/channelService';
 
 /**
  * Cron handler for scheduled RSS feed aggregation
@@ -18,9 +18,10 @@ export async function handleScheduledEvent(
 
   try {
     // Initialize services
-    const aggregator = new RSSAggregator();
+    const aggregator = new RSSAggregator(env);
     const renderer = new RSSRenderer(env);
     const storage = new StorageService(env);
+    const channelService = new ChannelService(env);
 
     // Step 1: Aggregate RSS feeds from all channels
     console.log('📡 Aggregating RSS feeds from all channels...');
@@ -63,13 +64,19 @@ export async function handleScheduledEvent(
     }
 
     // Step 6: Generate feed metadata
-    const metadata = generateFeedMetadata();
-    metadata.generated_at = feedGeneratedAt;
-    metadata.failure_count = errors.length;
-    metadata.success_count = Math.max(0, metadata.total_channels - errors.length);
-    metadata.contentHash = currentContentHash;
-    metadata.lastBuildDate = lastBuildDate;
-    metadata.hasContentChanged = hasContentChanged;
+    const activeChannels = await channelService.getActiveChannels();
+    const metadata = {
+      title: "AI Pioneer YouTube Channels RSS Feeds",
+      description: "RSS feeds for top AI pioneer YouTube channels",
+      generated_at: feedGeneratedAt,
+      total_channels: activeChannels.length,
+      success_count: Math.max(0, activeChannels.length - errors.length),
+      failure_count: errors.length,
+      channels: activeChannels,
+      contentHash: currentContentHash,
+      lastBuildDate: lastBuildDate,
+      hasContentChanged: hasContentChanged
+    };
 
     // Step 7: Render XML feed with stable dates
     console.log('🎨 Rendering RSS XML feed...');
@@ -127,12 +134,25 @@ export async function handleScheduledEvent(
     
     // Try to store error information for monitoring
     try {
-      const previousMetadata = await new StorageService(env).getMetadata();
-      const errorMetadata = generateFeedMetadata();
-      errorMetadata.generated_at = previousMetadata?.generated_at || new Date().toISOString();
-      errorMetadata.failure_count = errorMetadata.total_channels;
-      errorMetadata.success_count = 0;
-      errorMetadata.lastBuildDate = previousMetadata?.lastBuildDate || new Date().toUTCString();
+      const storage = new StorageService(env);
+      const channelService = new ChannelService(env);
+      const [previousMetadata, allChannels] = await Promise.all([
+        storage.getMetadata(),
+        channelService.getActiveChannels()
+      ]);
+
+      const errorMetadata = {
+        title: "AI Pioneer YouTube Channels RSS Feeds",
+        description: "RSS feeds for top AI pioneer YouTube channels",
+        generated_at: previousMetadata?.generated_at || new Date().toISOString(),
+        total_channels: allChannels.length,
+        success_count: 0,
+        failure_count: allChannels.length,
+        channels: allChannels,
+        contentHash: previousMetadata?.contentHash,
+        lastBuildDate: previousMetadata?.lastBuildDate || new Date().toUTCString(),
+        hasContentChanged: false
+      };
       
       const errorXml = new RSSRenderer(env).renderFeed([], {
         lastBuildDate: errorMetadata.lastBuildDate,
@@ -140,8 +160,7 @@ export async function handleScheduledEvent(
         errors: 1,
         preserveStatsDate: true
       });
-      
-      const storage = new StorageService(env);
+
       await storage.storeCurrentFeed(errorXml, errorMetadata);
       
     } catch (storageError) {

@@ -269,50 +269,6 @@ export class StorageService {
   }
 
   /**
-   * Store channel configuration data
-   */
-  async storeChannelConfig(channels: any): Promise<void> {
-    try {
-      await this.env.HYPEFEED_BUCKET.put(
-        StorageKeys.CHANNEL_CONFIG,
-        JSON.stringify(channels, null, 2),
-        {
-          httpMetadata: {
-            contentType: 'application/json',
-          },
-          customMetadata: {
-            type: 'channel_config',
-            updatedAt: new Date().toISOString()
-          }
-        }
-      );
-
-    } catch (error) {
-      console.error('Failed to store channel config:', error);
-    }
-  }
-
-  /**
-   * Get channel configuration data
-   */
-  async getChannelConfig(): Promise<any | null> {
-    try {
-      const object = await this.env.HYPEFEED_BUCKET.get(StorageKeys.CHANNEL_CONFIG);
-      
-      if (!object) {
-        return null;
-      }
-
-      const content = await object.text();
-      return JSON.parse(content);
-
-    } catch (error) {
-      console.error('Failed to retrieve channel config:', error);
-      return null;
-    }
-  }
-
-  /**
    * Cache RSS content in KV for faster access
    */
   async cacheFeedInKV(content: string, ttl: number = 300): Promise<void> {

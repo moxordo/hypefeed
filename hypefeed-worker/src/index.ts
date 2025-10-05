@@ -5,6 +5,7 @@ import { secureHeaders } from 'hono/secure-headers';
 import type { Env, ExecutionContext, ScheduledEvent } from './types/bindings';
 import { createFeedHandlers } from './handlers/feed';
 import { createHealthHandlers } from './handlers/health';
+import { createChannelHandlers } from './handlers/channels';
 import { handleScheduledEvent, handleManualRefresh } from './handlers/cron';
 
 /**
@@ -48,7 +49,13 @@ app.notFound((c) => {
       feed: '/feed.xml',
       channels: '/channels',
       health: '/health',
-      root: '/'
+      root: '/',
+      api: {
+        channels: '/api/channels',
+        channelDetail: '/api/channels/:channelId',
+        channelStatus: '/api/channels/:channelId/status',
+        bulkImport: '/api/channels/bulk'
+      }
     }
   }, 404);
 });
@@ -56,6 +63,7 @@ app.notFound((c) => {
 // Mount route handlers
 const feedHandlers = createFeedHandlers();
 const healthHandlers = createHealthHandlers();
+const channelHandlers = createChannelHandlers();
 
 // Feed routes
 app.route('/', feedHandlers);
@@ -63,12 +71,25 @@ app.route('/', feedHandlers);
 // Health and management routes  
 app.route('/', healthHandlers);
 
+// Channel API routes
+app.route('/api', channelHandlers);
+
 // Manual refresh endpoint (POST /refresh)
 app.post('/refresh', async (c) => {
   try {
-    const result = await handleManualRefresh(c.env, c.executionCtx);
+    // Execute the refresh in the background
+    const refreshPromise = handleManualRefresh(c.env, c.executionCtx);
     
-    return c.json(result, result.success ? 200 : 500);
+    // Use waitUntil to ensure the refresh completes
+    c.executionCtx.waitUntil(refreshPromise);
+    
+    // Return immediate response to avoid timeout
+    return c.json({
+      message: 'Manual refresh triggered',
+      note: 'Feed will be updated within the next few minutes',
+      checkStatus: '/health',
+      feedUrl: '/feed.xml'
+    }, 202);
     
   } catch (error) {
     console.error('Manual refresh endpoint error:', error);
