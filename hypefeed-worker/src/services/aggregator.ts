@@ -1,7 +1,7 @@
 import { XMLParser } from 'fast-xml-parser';
-import type { Channel, FeedItem } from '../types/bindings';
+import type { Channel, FeedItem, Env } from '../types/bindings';
 import { FeedFetchError } from '../types/bindings';
-import { getActiveChannels } from '../data/channels';
+import { ChannelService } from './channelService';
 
 // XML parser configuration for RSS feeds
 const xmlParserOptions = {
@@ -13,21 +13,30 @@ const xmlParserOptions = {
   trimValues: true
 };
 
+// Content normalization configuration
+const CONTENT_LIMITS = {
+  MAX_TITLE_LENGTH: 120,
+  MAX_DESCRIPTION_LENGTH: 300,
+  TRUNCATION_SUFFIX: '...'
+};
+
 // RSS feed aggregation service
 export class RSSAggregator {
   private parser: XMLParser;
   private maxRetries: number = 3;
   private timeout: number = 10000; // 10 seconds
+  private channelService: ChannelService;
 
-  constructor() {
+  constructor(env: Env) {
     this.parser = new XMLParser(xmlParserOptions);
+    this.channelService = new ChannelService(env);
   }
 
   /**
    * Aggregate RSS feeds from all active channels
    */
   async aggregateFeeds(): Promise<{ items: FeedItem[], errors: FeedFetchError[] }> {
-    const channels = getActiveChannels();
+    const channels = await this.channelService.getActiveChannels();
     const errors: FeedFetchError[] = [];
     const allItems: FeedItem[] = [];
 
@@ -73,6 +82,7 @@ export class RSSAggregator {
    */
   private async fetchChannelFeed(channel: Channel): Promise<FeedItem[]> {
     let lastError: Error | null = null;
+    const startTime = Date.now();
 
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
@@ -98,7 +108,20 @@ export class RSSAggregator {
         const xmlText = await response.text();
         const feedData = this.parser.parse(xmlText);
         
-        return this.extractFeedItems(feedData, channel);
+        const items = this.extractFeedItems(feedData, channel);
+        const duration = Date.now() - startTime;
+        
+        // Log successful fetch to database
+        await this.channelService.updateLastFetched(channel.channel_id, true);
+        await this.channelService.logFetchAttempt(
+          channel.channel_id,
+          true,
+          items.length,
+          undefined,
+          duration
+        );
+        
+        return items;
 
       } catch (error) {
         lastError = error as Error;
@@ -111,6 +134,18 @@ export class RSSAggregator {
         }
       }
     }
+    
+    const duration = Date.now() - startTime;
+    
+    // Log failed fetch to database
+    await this.channelService.updateLastFetched(channel.channel_id, false);
+    await this.channelService.logFetchAttempt(
+      channel.channel_id,
+      false,
+      undefined,
+      lastError?.message,
+      duration
+    );
 
     throw new Error(`Failed after ${this.maxRetries} attempts: ${lastError?.message}`);
   }
@@ -140,14 +175,14 @@ export class RSSAggregator {
    */
   private transformToFeedItem(item: any, channel: Channel): FeedItem | null {
     try {
-      // Extract title
-      const title = this.extractText(item.title) || 'Untitled';
-      
-      // Extract description
-      const description = this.extractText(item.description) || 
-                         this.extractText(item['media:group']?.['media:description']) ||
-                         this.extractText(item.summary) ||
-                         '';
+      // Extract raw title
+      const rawTitle = this.extractText(item.title) || 'Untitled';
+
+      // Extract raw description
+      const rawDescription = this.extractText(item.description) ||
+                            this.extractText(item['media:group']?.['media:description']) ||
+                            this.extractText(item.summary) ||
+                            '';
 
       // Extract link
       const link = this.extractLink(item) || channel.youtube_url;
@@ -155,30 +190,42 @@ export class RSSAggregator {
       // Extract publication date
       const pubDate = this.extractDate(item) || new Date().toISOString();
 
-      // Extract GUID
-      const guid = this.extractText(item.guid) || 
-                  this.extractText(item.id) ||
-                  `${channel.channel_id}-${Date.now()}`;
+      // Extract GUID - prefer video ID for consistency
+      let guid = this.extractText(item.guid) || this.extractText(item.id);
+
+      // If GUID is not found or is an object, try to extract from video ID
+      if (!guid || guid === '[object Object]') {
+        const videoId = this.extractVideoId(link);
+        guid = videoId ? `yt:video:${videoId}` : `${channel.channel_id}-${Date.now()}`;
+      }
 
       // Extract thumbnail
       const thumbnailUrl = this.extractThumbnail(item) || undefined;
 
-      // Extract author
-      const author = this.extractText(item.author) || 
-                    this.extractText(item['media:group']?.['media:credit']) ||
-                    channel.name;
+      // Extract and normalize author - always use channel name for consistency
+      // This prevents [object Object] issues
+      const author = channel.name;
+
+      // Clean and normalize content
+      const cleanedTitle = this.cleanText(rawTitle);
+      const cleanedDescription = this.cleanText(rawDescription);
+
+      // Apply normalization
+      const normalizedTitle = this.normalizeTitle(cleanedTitle, channel.name);
+      const normalizedDescription = this.normalizeDescription(cleanedDescription);
 
       return {
         guid,
-        title: this.cleanText(title),
-        description: this.cleanText(description),
+        title: normalizedTitle,
+        description: normalizedDescription,
         link,
         pubDate,
         author,
         category: channel.category,
         channelName: channel.name,
         channelId: channel.channel_id,
-        thumbnailUrl
+        thumbnailUrl,
+        channelSubscribers: channel.subscribers
       };
 
     } catch (error) {
@@ -189,15 +236,32 @@ export class RSSAggregator {
 
   /**
    * Extract text from XML element (handles various formats)
+   * Prevents [object Object] serialization issues
    */
   private extractText(element: any): string | null {
     if (!element) return null;
-    
+
+    // Handle string values
     if (typeof element === 'string') return element;
-    if (element['#text']) return element['#text'];
-    if (element._text) return element._text;
-    if (typeof element === 'object' && element.toString) return element.toString();
-    
+
+    // Handle number values
+    if (typeof element === 'number') return String(element);
+
+    // Handle boolean values
+    if (typeof element === 'boolean') return String(element);
+
+    // Handle object with text properties
+    if (typeof element === 'object') {
+      // Try common text property names
+      if (element['#text']) return String(element['#text']);
+      if (element._text) return String(element._text);
+      if (element.text) return String(element.text);
+
+      // Prevent [object Object] by returning null instead of calling toString()
+      // This ensures we don't serialize objects incorrectly
+      return null;
+    }
+
     return null;
   }
 
@@ -267,6 +331,8 @@ export class RSSAggregator {
    * Clean and sanitize text content
    */
   private cleanText(text: string): string {
+    if (!text) return '';
+
     return text
       .replace(/<[^>]*>/g, '') // Remove HTML tags
       .replace(/&[^;]+;/g, (match) => { // Decode HTML entities
@@ -275,10 +341,16 @@ export class RSSAggregator {
           '&lt;': '<',
           '&gt;': '>',
           '&quot;': '"',
-          '&apos;': "'"
+          '&apos;': "'",
+          '&#39;': "'",
+          '&nbsp;': ' '
         };
         return entities[match] || match;
       })
+      .replace(/\r\n/g, '\n') // Normalize line endings
+      .replace(/\r/g, '\n')   // Normalize line endings
+      .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
+      .replace(/[ \t]+/g, ' ') // Collapse multiple spaces/tabs
       .trim();
   }
 
@@ -298,5 +370,92 @@ export class RSSAggregator {
    */
   private sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  /**
+   * Truncate text at word boundary with ellipsis
+   */
+  private truncateText(text: string, maxLength: number): string {
+    if (!text || text.length <= maxLength) {
+      return text;
+    }
+
+    // Find last word boundary before maxLength
+    const truncated = text.substring(0, maxLength - CONTENT_LIMITS.TRUNCATION_SUFFIX.length);
+    const lastSpace = truncated.lastIndexOf(' ');
+
+    if (lastSpace > 0) {
+      return truncated.substring(0, lastSpace) + CONTENT_LIMITS.TRUNCATION_SUFFIX;
+    }
+
+    return truncated + CONTENT_LIMITS.TRUNCATION_SUFFIX;
+  }
+
+  /**
+   * Normalize title: remove channel name prefixes, excessive emojis, and limit length
+   */
+  private normalizeTitle(title: string, channelName: string): string {
+    if (!title) return 'Untitled';
+
+    let normalized = title;
+
+    // Remove channel name prefix if present (e.g., "Channel Name: Video Title")
+    const channelPrefix = new RegExp(`^${this.escapeRegex(channelName)}\\s*[:-]\\s*`, 'i');
+    normalized = normalized.replace(channelPrefix, '');
+
+    // Remove excessive leading/trailing emojis and whitespace
+    normalized = normalized.trim();
+
+    // Truncate to max length
+    return this.truncateText(normalized, CONTENT_LIMITS.MAX_TITLE_LENGTH);
+  }
+
+  /**
+   * Normalize description: ensure consistent format and length
+   */
+  private normalizeDescription(description: string): string {
+    if (!description) return '';
+
+    let normalized = description;
+
+    // Remove excessive newlines (more than 2 consecutive)
+    normalized = normalized.replace(/\n{3,}/g, '\n\n');
+
+    // Remove excessive spaces
+    normalized = normalized.replace(/[ \t]{2,}/g, ' ');
+
+    // Trim
+    normalized = normalized.trim();
+
+    // Truncate to max length
+    return this.truncateText(normalized, CONTENT_LIMITS.MAX_DESCRIPTION_LENGTH);
+  }
+
+  /**
+   * Extract YouTube video ID from various URL formats
+   */
+  private extractVideoId(url: string): string | null {
+    if (!url) return null;
+
+    // Handle youtube.com/watch?v=VIDEO_ID
+    const watchMatch = url.match(/[?&]v=([^&]+)/);
+    if (watchMatch) return watchMatch[1];
+
+    // Handle youtu.be/VIDEO_ID
+    const shortMatch = url.match(/youtu\.be\/([^?]+)/);
+    if (shortMatch) return shortMatch[1];
+
+    // Handle youtube.com/shorts/VIDEO_ID
+    const shortsMatch = url.match(/\/shorts\/([^?]+)/);
+    if (shortsMatch) return shortsMatch[1];
+
+    return null;
+  }
+
+  /**
+   * Escape special regex characters
+   */
+  private escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 }

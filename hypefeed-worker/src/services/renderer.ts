@@ -87,14 +87,21 @@ export class RSSRenderer {
 
   /**
    * Create rich HTML description for feed item
+   * Uses normalized descriptions from aggregator for consistency
    */
   private createRichDescription(item: FeedItem): string {
     const channelBadge = this.getChannelBadge(item.category || 'unknown');
-    const thumbnail = item.thumbnailUrl ? 
+    const thumbnail = item.thumbnailUrl ?
       `<img src="${this.escapeXml(item.thumbnailUrl || '')}" alt="Video thumbnail" style="max-width: 120px; height: auto; float: left; margin: 0 15px 10px 0; border-radius: 8px;">` : '';
-    
-    const subscriberCount = this.getChannelSubscribers(item.channelName);
-    
+
+    const subscriberCount = item.channelSubscribers;
+
+    // Description is already normalized by aggregator (max 300 chars)
+    // Display it only if it's not empty
+    const descriptionHtml = item.description
+      ? `<div style="margin-bottom: 15px; color: #333;">${this.escapeXml(item.description)}</div>`
+      : '';
+
     return `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
         ${thumbnail}
@@ -103,16 +110,14 @@ export class RSSRenderer {
           ${channelBadge}
           ${subscriberCount ? `<span style="color: #666; font-size: 0.9em;"> • ${subscriberCount} subscribers</span>` : ''}
         </div>
-        
-        <div style="margin-bottom: 15px; color: #333;">
-          ${this.escapeXml(item.description)}
-        </div>
-        
+
+        ${descriptionHtml}
+
         <div style="clear: both; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #666;">
           <span>📅 ${format(new Date(item.pubDate), 'MMM dd, yyyy • h:mm a')}</span>
           <span style="margin-left: 15px;">🏷️ ${this.formatCategory(item.category || 'unknown')}</span>
         </div>
-        
+
         <div style="margin-top: 10px;">
           <a href="${this.escapeXml(item.link)}" style="background: #ff0000; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: 500;">
             ▶️ Watch on YouTube
@@ -183,23 +188,6 @@ export class RSSRenderer {
     };
     
     return badges[category] ? `<span style="margin-left: 8px;">${badges[category]}</span>` : '';
-  }
-
-  /**
-   * Get channel subscriber count (mock implementation)
-   */
-  private getChannelSubscribers(channelName: string): string | null {
-    const subscribers: Record<string, string> = {
-      'Two Minute Papers': '1.66M',
-      'Krish Naik': '1.25M',
-      'Matt Wolfe': '785K',
-      'DeepLearning.AI': '429K',
-      'Sentdex': '273K',
-      'MattVidPro AI': '245K',
-      'Andrej Karpathy': '220K',
-    };
-    
-    return subscribers[channelName] || null;
   }
 
   /**
