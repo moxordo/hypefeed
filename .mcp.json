@@ -5,8 +5,12 @@
           "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"]
       },
       "youtube-transcript": {
-        "command": "npx",
-        "args": ["youtube-transcript-mcp-server@latest"]
+        "command": "uvx",
+        "args": [
+          "--from",
+          "git+https://github.com/jkawamoto/mcp-youtube-transcript",
+          "mcp-youtube-transcript"
+        ]
       },
       "youtube-rss": {
         "command": "npx",
