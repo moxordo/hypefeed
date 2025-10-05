@@ -1,6 +1,9 @@
 // Cloudflare Workers runtime bindings
 
 export interface Env {
+  // D1 database for storing channel data
+  HYPEFEED_DB: D1Database;
+  
   // R2 bucket for storing RSS feeds
   HYPEFEED_BUCKET: R2Bucket;
   
@@ -32,6 +35,7 @@ export interface FeedItem {
   channelName: string;
   channelId: string;
   thumbnailUrl?: string;
+  channelSubscribers?: string; // Subscriber count from database (e.g., "1.2M")
 }
 
 // Channel configuration
@@ -57,13 +61,15 @@ export interface FeedMetadata {
   success_count: number;
   failure_count: number;
   channels: Channel[];
+  contentHash?: string;
+  lastBuildDate?: string;
+  hasContentChanged?: boolean;
 }
 
 // Storage keys
 export const StorageKeys = {
   CURRENT_FEED: 'feeds/current.xml',
   FEED_METADATA: 'meta/last-update.json',
-  CHANNEL_CONFIG: 'data/channels.json',
   feedVersion: (timestamp: string) => `feeds/${timestamp}.xml`,
 } as const;
 

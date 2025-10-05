@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { Env } from '../types/bindings';
 import { StorageService } from '../services/storage';
-import { getActiveChannels } from '../data/channels';
+import { ChannelService } from '../services/channelService';
 
 /**
  * Health check and channel management handlers
@@ -15,8 +15,12 @@ export function createHealthHandlers() {
   app.get('/health', async (c) => {
     try {
       const storage = new StorageService(c.env);
-      const storageHealth = await storage.getStorageHealth();
-      
+      const channelService = new ChannelService(c.env);
+      const [storageHealth, activeChannels] = await Promise.all([
+        storage.getStorageHealth(),
+        channelService.getActiveChannels()
+      ]);
+
       const health = {
         status: 'healthy',
         timestamp: new Date().toISOString(),
@@ -24,8 +28,8 @@ export function createHealthHandlers() {
         environment: c.env.ENVIRONMENT || 'unknown',
         storage: storageHealth,
         channels: {
-          total: getActiveChannels().length,
-          active: getActiveChannels().filter(ch => ch.status === 'LIVE').length,
+          total: activeChannels.length,
+          active: activeChannels.filter(ch => ch.status === 'LIVE').length,
         },
         services: {
           aggregator: 'operational',
@@ -59,9 +63,12 @@ export function createHealthHandlers() {
    */
   app.get('/channels', async (c) => {
     try {
-      const channels = getActiveChannels();
+      const channelService = new ChannelService(c.env);
       const storage = new StorageService(c.env);
-      const metadata = await storage.getMetadata();
+      const [channels, metadata] = await Promise.all([
+        channelService.getActiveChannels(),
+        storage.getMetadata()
+      ]);
 
       const response = {
         channels: channels.map(channel => ({
@@ -111,8 +118,8 @@ export function createHealthHandlers() {
   app.get('/channels/:channelId', async (c) => {
     try {
       const channelId = c.req.param('channelId');
-      const channels = getActiveChannels();
-      const channel = channels.find(ch => ch.channel_id === channelId);
+      const channelService = new ChannelService(c.env);
+      const channel = await channelService.getChannelById(channelId);
 
       if (!channel) {
         return c.json({ error: 'Channel not found' }, 404);
