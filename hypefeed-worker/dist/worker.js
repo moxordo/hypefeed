@@ -24,6 +24,1153 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
+// node_modules/@prisma/client/runtime/index-browser.js
+var require_index_browser = __commonJS({
+  "node_modules/@prisma/client/runtime/index-browser.js"(exports, module) {
+    "use strict";
+    var pe = Object.defineProperty;
+    var Xe = Object.getOwnPropertyDescriptor;
+    var Ke = Object.getOwnPropertyNames;
+    var Qe = Object.prototype.hasOwnProperty;
+    var Ye = (e) => {
+      throw TypeError(e);
+    };
+    var Oe = (e, n) => {
+      for (var i in n) pe(e, i, { get: n[i], enumerable: true });
+    };
+    var xe = (e, n, i, t) => {
+      if (n && typeof n == "object" || typeof n == "function") for (let r of Ke(n)) !Qe.call(e, r) && r !== i && pe(e, r, { get: () => n[r], enumerable: !(t = Xe(n, r)) || t.enumerable });
+      return e;
+    };
+    var ze = (e) => xe(pe({}, "__esModule", { value: true }), e);
+    var ne = (e, n, i) => n.has(e) ? Ye("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(e) : n.set(e, i);
+    var ii = {};
+    Oe(ii, { Decimal: () => Je, Public: () => ge, getRuntime: () => _e, makeStrictEnum: () => qe, objectEnumValues: () => Ae });
+    module.exports = ze(ii);
+    var ge = {};
+    Oe(ge, { validator: () => Re });
+    function Re(...e) {
+      return (n) => n;
+    }
+    var ie = Symbol();
+    var me = /* @__PURE__ */ new WeakMap();
+    var we = class {
+      constructor(n) {
+        n === ie ? me.set(this, "Prisma.".concat(this._getName())) : me.set(this, "new Prisma.".concat(this._getNamespace(), ".").concat(this._getName(), "()"));
+      }
+      _getName() {
+        return this.constructor.name;
+      }
+      toString() {
+        return me.get(this);
+      }
+    };
+    var G = class extends we {
+      _getNamespace() {
+        return "NullTypes";
+      }
+    };
+    var Ne;
+    var J = class extends G {
+      constructor() {
+        super(...arguments);
+        ne(this, Ne);
+      }
+    };
+    Ne = /* @__PURE__ */ new WeakMap();
+    ke(J, "DbNull");
+    var ve;
+    var X = class extends G {
+      constructor() {
+        super(...arguments);
+        ne(this, ve);
+      }
+    };
+    ve = /* @__PURE__ */ new WeakMap();
+    ke(X, "JsonNull");
+    var Ee;
+    var K = class extends G {
+      constructor() {
+        super(...arguments);
+        ne(this, Ee);
+      }
+    };
+    Ee = /* @__PURE__ */ new WeakMap();
+    ke(K, "AnyNull");
+    var Ae = { classes: { DbNull: J, JsonNull: X, AnyNull: K }, instances: { DbNull: new J(ie), JsonNull: new X(ie), AnyNull: new K(ie) } };
+    function ke(e, n) {
+      Object.defineProperty(e, "name", { value: n, configurable: true });
+    }
+    var ye = /* @__PURE__ */ new Set(["toJSON", "$$typeof", "asymmetricMatch", Symbol.iterator, Symbol.toStringTag, Symbol.isConcatSpreadable, Symbol.toPrimitive]);
+    function qe(e) {
+      return new Proxy(e, { get(n, i) {
+        if (i in n) return n[i];
+        if (!ye.has(i)) throw new TypeError("Invalid enum value: ".concat(String(i)));
+      } });
+    }
+    var en = () => {
+      var e, n;
+      return ((n = (e = globalThis.process) == null ? void 0 : e.release) == null ? void 0 : n.name) === "node";
+    };
+    var nn = () => {
+      var e, n;
+      return !!globalThis.Bun || !!((n = (e = globalThis.process) == null ? void 0 : e.versions) != null && n.bun);
+    };
+    var tn = () => !!globalThis.Deno;
+    var rn = () => typeof globalThis.Netlify == "object";
+    var sn = () => typeof globalThis.EdgeRuntime == "object";
+    var on = () => {
+      var e;
+      return ((e = globalThis.navigator) == null ? void 0 : e.userAgent) === "Cloudflare-Workers";
+    };
+    function un() {
+      var i;
+      return (i = [[rn, "netlify"], [sn, "edge-light"], [on, "workerd"], [tn, "deno"], [nn, "bun"], [en, "node"]].flatMap((t) => t[0]() ? [t[1]] : []).at(0)) != null ? i : "";
+    }
+    var fn = { node: "Node.js", workerd: "Cloudflare Workers", deno: "Deno and Deno Deploy", netlify: "Netlify Edge Functions", "edge-light": "Edge Runtime (Vercel Edge Functions, Vercel Edge Middleware, Next.js (Pages Router) Edge API Routes, Next.js (App Router) Edge Route Handlers or Next.js Middleware)" };
+    function _e() {
+      let e = un();
+      return { id: e, prettyName: fn[e] || e, isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e) };
+    }
+    var V = 9e15;
+    var H = 1e9;
+    var Se = "0123456789abcdef";
+    var se = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058";
+    var oe = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789";
+    var Me = { precision: 20, rounding: 4, modulo: 1, toExpNeg: -7, toExpPos: 21, minE: -V, maxE: V, crypto: false };
+    var Le;
+    var Z;
+    var w = true;
+    var fe = "[DecimalError] ";
+    var $3 = fe + "Invalid argument: ";
+    var Ie = fe + "Precision limit exceeded";
+    var Ze = fe + "crypto unavailable";
+    var Ue = "[object Decimal]";
+    var R = Math.floor;
+    var C = Math.pow;
+    var cn = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
+    var ln = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i;
+    var an = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i;
+    var Be = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i;
+    var D = 1e7;
+    var m = 7;
+    var dn = 9007199254740991;
+    var hn = se.length - 1;
+    var Ce = oe.length - 1;
+    var h = { toStringTag: Ue };
+    h.absoluteValue = h.abs = function() {
+      var e = new this.constructor(this);
+      return e.s < 0 && (e.s = 1), p(e);
+    };
+    h.ceil = function() {
+      return p(new this.constructor(this), this.e + 1, 2);
+    };
+    h.clampedTo = h.clamp = function(e, n) {
+      var i, t = this, r = t.constructor;
+      if (e = new r(e), n = new r(n), !e.s || !n.s) return new r(NaN);
+      if (e.gt(n)) throw Error($3 + n);
+      return i = t.cmp(e), i < 0 ? e : t.cmp(n) > 0 ? n : new r(t);
+    };
+    h.comparedTo = h.cmp = function(e) {
+      var n, i, t, r, s = this, o = s.d, u = (e = new s.constructor(e)).d, c = s.s, f = e.s;
+      if (!o || !u) return !c || !f ? NaN : c !== f ? c : o === u ? 0 : !o ^ c < 0 ? 1 : -1;
+      if (!o[0] || !u[0]) return o[0] ? c : u[0] ? -f : 0;
+      if (c !== f) return c;
+      if (s.e !== e.e) return s.e > e.e ^ c < 0 ? 1 : -1;
+      for (t = o.length, r = u.length, n = 0, i = t < r ? t : r; n < i; ++n) if (o[n] !== u[n]) return o[n] > u[n] ^ c < 0 ? 1 : -1;
+      return t === r ? 0 : t > r ^ c < 0 ? 1 : -1;
+    };
+    h.cosine = h.cos = function() {
+      var e, n, i = this, t = i.constructor;
+      return i.d ? i.d[0] ? (e = t.precision, n = t.rounding, t.precision = e + Math.max(i.e, i.sd()) + m, t.rounding = 1, i = pn(t, We(t, i)), t.precision = e, t.rounding = n, p(Z == 2 || Z == 3 ? i.neg() : i, e, n, true)) : new t(1) : new t(NaN);
+    };
+    h.cubeRoot = h.cbrt = function() {
+      var e, n, i, t, r, s, o, u, c, f, l = this, a = l.constructor;
+      if (!l.isFinite() || l.isZero()) return new a(l);
+      for (w = false, s = l.s * C(l.s * l, 1 / 3), !s || Math.abs(s) == 1 / 0 ? (i = b(l.d), e = l.e, (s = (e - i.length + 1) % 3) && (i += s == 1 || s == -2 ? "0" : "00"), s = C(i, 1 / 3), e = R((e + 1) / 3) - (e % 3 == (e < 0 ? -1 : 2)), s == 1 / 0 ? i = "5e" + e : (i = s.toExponential(), i = i.slice(0, i.indexOf("e") + 1) + e), t = new a(i), t.s = l.s) : t = new a(s.toString()), o = (e = a.precision) + 3; ; ) if (u = t, c = u.times(u).times(u), f = c.plus(l), t = k(f.plus(l).times(u), f.plus(c), o + 2, 1), b(u.d).slice(0, o) === (i = b(t.d)).slice(0, o)) if (i = i.slice(o - 3, o + 1), i == "9999" || !r && i == "4999") {
+        if (!r && (p(u, e + 1, 0), u.times(u).times(u).eq(l))) {
+          t = u;
+          break;
+        }
+        o += 4, r = 1;
+      } else {
+        (!+i || !+i.slice(1) && i.charAt(0) == "5") && (p(t, e + 1, 1), n = !t.times(t).times(t).eq(l));
+        break;
+      }
+      return w = true, p(t, e, a.rounding, n);
+    };
+    h.decimalPlaces = h.dp = function() {
+      var e, n = this.d, i = NaN;
+      if (n) {
+        if (e = n.length - 1, i = (e - R(this.e / m)) * m, e = n[e], e) for (; e % 10 == 0; e /= 10) i--;
+        i < 0 && (i = 0);
+      }
+      return i;
+    };
+    h.dividedBy = h.div = function(e) {
+      return k(this, new this.constructor(e));
+    };
+    h.dividedToIntegerBy = h.divToInt = function(e) {
+      var n = this, i = n.constructor;
+      return p(k(n, new i(e), 0, 1, 1), i.precision, i.rounding);
+    };
+    h.equals = h.eq = function(e) {
+      return this.cmp(e) === 0;
+    };
+    h.floor = function() {
+      return p(new this.constructor(this), this.e + 1, 3);
+    };
+    h.greaterThan = h.gt = function(e) {
+      return this.cmp(e) > 0;
+    };
+    h.greaterThanOrEqualTo = h.gte = function(e) {
+      var n = this.cmp(e);
+      return n == 1 || n === 0;
+    };
+    h.hyperbolicCosine = h.cosh = function() {
+      var e, n, i, t, r, s = this, o = s.constructor, u = new o(1);
+      if (!s.isFinite()) return new o(s.s ? 1 / 0 : NaN);
+      if (s.isZero()) return u;
+      i = o.precision, t = o.rounding, o.precision = i + Math.max(s.e, s.sd()) + 4, o.rounding = 1, r = s.d.length, r < 32 ? (e = Math.ceil(r / 3), n = (1 / le(4, e)).toString()) : (e = 16, n = "2.3283064365386962890625e-10"), s = j(o, 1, s.times(n), new o(1), true);
+      for (var c, f = e, l = new o(8); f--; ) c = s.times(s), s = u.minus(c.times(l.minus(c.times(l))));
+      return p(s, o.precision = i, o.rounding = t, true);
+    };
+    h.hyperbolicSine = h.sinh = function() {
+      var e, n, i, t, r = this, s = r.constructor;
+      if (!r.isFinite() || r.isZero()) return new s(r);
+      if (n = s.precision, i = s.rounding, s.precision = n + Math.max(r.e, r.sd()) + 4, s.rounding = 1, t = r.d.length, t < 3) r = j(s, 2, r, r, true);
+      else {
+        e = 1.4 * Math.sqrt(t), e = e > 16 ? 16 : e | 0, r = r.times(1 / le(5, e)), r = j(s, 2, r, r, true);
+        for (var o, u = new s(5), c = new s(16), f = new s(20); e--; ) o = r.times(r), r = r.times(u.plus(o.times(c.times(o).plus(f))));
+      }
+      return s.precision = n, s.rounding = i, p(r, n, i, true);
+    };
+    h.hyperbolicTangent = h.tanh = function() {
+      var e, n, i = this, t = i.constructor;
+      return i.isFinite() ? i.isZero() ? new t(i) : (e = t.precision, n = t.rounding, t.precision = e + 7, t.rounding = 1, k(i.sinh(), i.cosh(), t.precision = e, t.rounding = n)) : new t(i.s);
+    };
+    h.inverseCosine = h.acos = function() {
+      var e = this, n = e.constructor, i = e.abs().cmp(1), t = n.precision, r = n.rounding;
+      return i !== -1 ? i === 0 ? e.isNeg() ? F(n, t, r) : new n(0) : new n(NaN) : e.isZero() ? F(n, t + 4, r).times(0.5) : (n.precision = t + 6, n.rounding = 1, e = new n(1).minus(e).div(e.plus(1)).sqrt().atan(), n.precision = t, n.rounding = r, e.times(2));
+    };
+    h.inverseHyperbolicCosine = h.acosh = function() {
+      var e, n, i = this, t = i.constructor;
+      return i.lte(1) ? new t(i.eq(1) ? 0 : NaN) : i.isFinite() ? (e = t.precision, n = t.rounding, t.precision = e + Math.max(Math.abs(i.e), i.sd()) + 4, t.rounding = 1, w = false, i = i.times(i).minus(1).sqrt().plus(i), w = true, t.precision = e, t.rounding = n, i.ln()) : new t(i);
+    };
+    h.inverseHyperbolicSine = h.asinh = function() {
+      var e, n, i = this, t = i.constructor;
+      return !i.isFinite() || i.isZero() ? new t(i) : (e = t.precision, n = t.rounding, t.precision = e + 2 * Math.max(Math.abs(i.e), i.sd()) + 6, t.rounding = 1, w = false, i = i.times(i).plus(1).sqrt().plus(i), w = true, t.precision = e, t.rounding = n, i.ln());
+    };
+    h.inverseHyperbolicTangent = h.atanh = function() {
+      var e, n, i, t, r = this, s = r.constructor;
+      return r.isFinite() ? r.e >= 0 ? new s(r.abs().eq(1) ? r.s / 0 : r.isZero() ? r : NaN) : (e = s.precision, n = s.rounding, t = r.sd(), Math.max(t, e) < 2 * -r.e - 1 ? p(new s(r), e, n, true) : (s.precision = i = t - r.e, r = k(r.plus(1), new s(1).minus(r), i + e, 1), s.precision = e + 4, s.rounding = 1, r = r.ln(), s.precision = e, s.rounding = n, r.times(0.5))) : new s(NaN);
+    };
+    h.inverseSine = h.asin = function() {
+      var e, n, i, t, r = this, s = r.constructor;
+      return r.isZero() ? new s(r) : (n = r.abs().cmp(1), i = s.precision, t = s.rounding, n !== -1 ? n === 0 ? (e = F(s, i + 4, t).times(0.5), e.s = r.s, e) : new s(NaN) : (s.precision = i + 6, s.rounding = 1, r = r.div(new s(1).minus(r.times(r)).sqrt().plus(1)).atan(), s.precision = i, s.rounding = t, r.times(2)));
+    };
+    h.inverseTangent = h.atan = function() {
+      var e, n, i, t, r, s, o, u, c, f = this, l = f.constructor, a = l.precision, d = l.rounding;
+      if (f.isFinite()) {
+        if (f.isZero()) return new l(f);
+        if (f.abs().eq(1) && a + 4 <= Ce) return o = F(l, a + 4, d).times(0.25), o.s = f.s, o;
+      } else {
+        if (!f.s) return new l(NaN);
+        if (a + 4 <= Ce) return o = F(l, a + 4, d).times(0.5), o.s = f.s, o;
+      }
+      for (l.precision = u = a + 10, l.rounding = 1, i = Math.min(28, u / m + 2 | 0), e = i; e; --e) f = f.div(f.times(f).plus(1).sqrt().plus(1));
+      for (w = false, n = Math.ceil(u / m), t = 1, c = f.times(f), o = new l(f), r = f; e !== -1; ) if (r = r.times(c), s = o.minus(r.div(t += 2)), r = r.times(c), o = s.plus(r.div(t += 2)), o.d[n] !== void 0) for (e = n; o.d[e] === s.d[e] && e--; ) ;
+      return i && (o = o.times(2 << i - 1)), w = true, p(o, l.precision = a, l.rounding = d, true);
+    };
+    h.isFinite = function() {
+      return !!this.d;
+    };
+    h.isInteger = h.isInt = function() {
+      return !!this.d && R(this.e / m) > this.d.length - 2;
+    };
+    h.isNaN = function() {
+      return !this.s;
+    };
+    h.isNegative = h.isNeg = function() {
+      return this.s < 0;
+    };
+    h.isPositive = h.isPos = function() {
+      return this.s > 0;
+    };
+    h.isZero = function() {
+      return !!this.d && this.d[0] === 0;
+    };
+    h.lessThan = h.lt = function(e) {
+      return this.cmp(e) < 0;
+    };
+    h.lessThanOrEqualTo = h.lte = function(e) {
+      return this.cmp(e) < 1;
+    };
+    h.logarithm = h.log = function(e) {
+      var n, i, t, r, s, o, u, c, f = this, l = f.constructor, a = l.precision, d = l.rounding, g = 5;
+      if (e == null) e = new l(10), n = true;
+      else {
+        if (e = new l(e), i = e.d, e.s < 0 || !i || !i[0] || e.eq(1)) return new l(NaN);
+        n = e.eq(10);
+      }
+      if (i = f.d, f.s < 0 || !i || !i[0] || f.eq(1)) return new l(i && !i[0] ? -1 / 0 : f.s != 1 ? NaN : i ? 0 : 1 / 0);
+      if (n) if (i.length > 1) s = true;
+      else {
+        for (r = i[0]; r % 10 === 0; ) r /= 10;
+        s = r !== 1;
+      }
+      if (w = false, u = a + g, o = B(f, u), t = n ? ue(l, u + 10) : B(e, u), c = k(o, t, u, 1), Q(c.d, r = a, d)) do
+        if (u += 10, o = B(f, u), t = n ? ue(l, u + 10) : B(e, u), c = k(o, t, u, 1), !s) {
+          +b(c.d).slice(r + 1, r + 15) + 1 == 1e14 && (c = p(c, a + 1, 0));
+          break;
+        }
+      while (Q(c.d, r += 10, d));
+      return w = true, p(c, a, d);
+    };
+    h.minus = h.sub = function(e) {
+      var n, i, t, r, s, o, u, c, f, l, a, d, g = this, v = g.constructor;
+      if (e = new v(e), !g.d || !e.d) return !g.s || !e.s ? e = new v(NaN) : g.d ? e.s = -e.s : e = new v(e.d || g.s !== e.s ? g : NaN), e;
+      if (g.s != e.s) return e.s = -e.s, g.plus(e);
+      if (f = g.d, d = e.d, u = v.precision, c = v.rounding, !f[0] || !d[0]) {
+        if (d[0]) e.s = -e.s;
+        else if (f[0]) e = new v(g);
+        else return new v(c === 3 ? -0 : 0);
+        return w ? p(e, u, c) : e;
+      }
+      if (i = R(e.e / m), l = R(g.e / m), f = f.slice(), s = l - i, s) {
+        for (a = s < 0, a ? (n = f, s = -s, o = d.length) : (n = d, i = l, o = f.length), t = Math.max(Math.ceil(u / m), o) + 2, s > t && (s = t, n.length = 1), n.reverse(), t = s; t--; ) n.push(0);
+        n.reverse();
+      } else {
+        for (t = f.length, o = d.length, a = t < o, a && (o = t), t = 0; t < o; t++) if (f[t] != d[t]) {
+          a = f[t] < d[t];
+          break;
+        }
+        s = 0;
+      }
+      for (a && (n = f, f = d, d = n, e.s = -e.s), o = f.length, t = d.length - o; t > 0; --t) f[o++] = 0;
+      for (t = d.length; t > s; ) {
+        if (f[--t] < d[t]) {
+          for (r = t; r && f[--r] === 0; ) f[r] = D - 1;
+          --f[r], f[t] += D;
+        }
+        f[t] -= d[t];
+      }
+      for (; f[--o] === 0; ) f.pop();
+      for (; f[0] === 0; f.shift()) --i;
+      return f[0] ? (e.d = f, e.e = ce(f, i), w ? p(e, u, c) : e) : new v(c === 3 ? -0 : 0);
+    };
+    h.modulo = h.mod = function(e) {
+      var n, i = this, t = i.constructor;
+      return e = new t(e), !i.d || !e.s || e.d && !e.d[0] ? new t(NaN) : !e.d || i.d && !i.d[0] ? p(new t(i), t.precision, t.rounding) : (w = false, t.modulo == 9 ? (n = k(i, e.abs(), 0, 3, 1), n.s *= e.s) : n = k(i, e, 0, t.modulo, 1), n = n.times(e), w = true, i.minus(n));
+    };
+    h.naturalExponential = h.exp = function() {
+      return be(this);
+    };
+    h.naturalLogarithm = h.ln = function() {
+      return B(this);
+    };
+    h.negated = h.neg = function() {
+      var e = new this.constructor(this);
+      return e.s = -e.s, p(e);
+    };
+    h.plus = h.add = function(e) {
+      var n, i, t, r, s, o, u, c, f, l, a = this, d = a.constructor;
+      if (e = new d(e), !a.d || !e.d) return !a.s || !e.s ? e = new d(NaN) : a.d || (e = new d(e.d || a.s === e.s ? a : NaN)), e;
+      if (a.s != e.s) return e.s = -e.s, a.minus(e);
+      if (f = a.d, l = e.d, u = d.precision, c = d.rounding, !f[0] || !l[0]) return l[0] || (e = new d(a)), w ? p(e, u, c) : e;
+      if (s = R(a.e / m), t = R(e.e / m), f = f.slice(), r = s - t, r) {
+        for (r < 0 ? (i = f, r = -r, o = l.length) : (i = l, t = s, o = f.length), s = Math.ceil(u / m), o = s > o ? s + 1 : o + 1, r > o && (r = o, i.length = 1), i.reverse(); r--; ) i.push(0);
+        i.reverse();
+      }
+      for (o = f.length, r = l.length, o - r < 0 && (r = o, i = l, l = f, f = i), n = 0; r; ) n = (f[--r] = f[r] + l[r] + n) / D | 0, f[r] %= D;
+      for (n && (f.unshift(n), ++t), o = f.length; f[--o] == 0; ) f.pop();
+      return e.d = f, e.e = ce(f, t), w ? p(e, u, c) : e;
+    };
+    h.precision = h.sd = function(e) {
+      var n, i = this;
+      if (e !== void 0 && e !== !!e && e !== 1 && e !== 0) throw Error($3 + e);
+      return i.d ? (n = $e(i.d), e && i.e + 1 > n && (n = i.e + 1)) : n = NaN, n;
+    };
+    h.round = function() {
+      var e = this, n = e.constructor;
+      return p(new n(e), e.e + 1, n.rounding);
+    };
+    h.sine = h.sin = function() {
+      var e, n, i = this, t = i.constructor;
+      return i.isFinite() ? i.isZero() ? new t(i) : (e = t.precision, n = t.rounding, t.precision = e + Math.max(i.e, i.sd()) + m, t.rounding = 1, i = mn(t, We(t, i)), t.precision = e, t.rounding = n, p(Z > 2 ? i.neg() : i, e, n, true)) : new t(NaN);
+    };
+    h.squareRoot = h.sqrt = function() {
+      var e, n, i, t, r, s, o = this, u = o.d, c = o.e, f = o.s, l = o.constructor;
+      if (f !== 1 || !u || !u[0]) return new l(!f || f < 0 && (!u || u[0]) ? NaN : u ? o : 1 / 0);
+      for (w = false, f = Math.sqrt(+o), f == 0 || f == 1 / 0 ? (n = b(u), (n.length + c) % 2 == 0 && (n += "0"), f = Math.sqrt(n), c = R((c + 1) / 2) - (c < 0 || c % 2), f == 1 / 0 ? n = "5e" + c : (n = f.toExponential(), n = n.slice(0, n.indexOf("e") + 1) + c), t = new l(n)) : t = new l(f.toString()), i = (c = l.precision) + 3; ; ) if (s = t, t = s.plus(k(o, s, i + 2, 1)).times(0.5), b(s.d).slice(0, i) === (n = b(t.d)).slice(0, i)) if (n = n.slice(i - 3, i + 1), n == "9999" || !r && n == "4999") {
+        if (!r && (p(s, c + 1, 0), s.times(s).eq(o))) {
+          t = s;
+          break;
+        }
+        i += 4, r = 1;
+      } else {
+        (!+n || !+n.slice(1) && n.charAt(0) == "5") && (p(t, c + 1, 1), e = !t.times(t).eq(o));
+        break;
+      }
+      return w = true, p(t, c, l.rounding, e);
+    };
+    h.tangent = h.tan = function() {
+      var e, n, i = this, t = i.constructor;
+      return i.isFinite() ? i.isZero() ? new t(i) : (e = t.precision, n = t.rounding, t.precision = e + 10, t.rounding = 1, i = i.sin(), i.s = 1, i = k(i, new t(1).minus(i.times(i)).sqrt(), e + 10, 0), t.precision = e, t.rounding = n, p(Z == 2 || Z == 4 ? i.neg() : i, e, n, true)) : new t(NaN);
+    };
+    h.times = h.mul = function(e) {
+      var n, i, t, r, s, o, u, c, f, l = this, a = l.constructor, d = l.d, g = (e = new a(e)).d;
+      if (e.s *= l.s, !d || !d[0] || !g || !g[0]) return new a(!e.s || d && !d[0] && !g || g && !g[0] && !d ? NaN : !d || !g ? e.s / 0 : e.s * 0);
+      for (i = R(l.e / m) + R(e.e / m), c = d.length, f = g.length, c < f && (s = d, d = g, g = s, o = c, c = f, f = o), s = [], o = c + f, t = o; t--; ) s.push(0);
+      for (t = f; --t >= 0; ) {
+        for (n = 0, r = c + t; r > t; ) u = s[r] + g[t] * d[r - t - 1] + n, s[r--] = u % D | 0, n = u / D | 0;
+        s[r] = (s[r] + n) % D | 0;
+      }
+      for (; !s[--o]; ) s.pop();
+      return n ? ++i : s.shift(), e.d = s, e.e = ce(s, i), w ? p(e, a.precision, a.rounding) : e;
+    };
+    h.toBinary = function(e, n) {
+      return Pe(this, 2, e, n);
+    };
+    h.toDecimalPlaces = h.toDP = function(e, n) {
+      var i = this, t = i.constructor;
+      return i = new t(i), e === void 0 ? i : (q(e, 0, H), n === void 0 ? n = t.rounding : q(n, 0, 8), p(i, e + i.e + 1, n));
+    };
+    h.toExponential = function(e, n) {
+      var i, t = this, r = t.constructor;
+      return e === void 0 ? i = L(t, true) : (q(e, 0, H), n === void 0 ? n = r.rounding : q(n, 0, 8), t = p(new r(t), e + 1, n), i = L(t, true, e + 1)), t.isNeg() && !t.isZero() ? "-" + i : i;
+    };
+    h.toFixed = function(e, n) {
+      var i, t, r = this, s = r.constructor;
+      return e === void 0 ? i = L(r) : (q(e, 0, H), n === void 0 ? n = s.rounding : q(n, 0, 8), t = p(new s(r), e + r.e + 1, n), i = L(t, false, e + t.e + 1)), r.isNeg() && !r.isZero() ? "-" + i : i;
+    };
+    h.toFraction = function(e) {
+      var n, i, t, r, s, o, u, c, f, l, a, d, g = this, v = g.d, N = g.constructor;
+      if (!v) return new N(g);
+      if (f = i = new N(1), t = c = new N(0), n = new N(t), s = n.e = $e(v) - g.e - 1, o = s % m, n.d[0] = C(10, o < 0 ? m + o : o), e == null) e = s > 0 ? n : f;
+      else {
+        if (u = new N(e), !u.isInt() || u.lt(f)) throw Error($3 + u);
+        e = u.gt(n) ? s > 0 ? n : f : u;
+      }
+      for (w = false, u = new N(b(v)), l = N.precision, N.precision = s = v.length * m * 2; a = k(u, n, 0, 1, 1), r = i.plus(a.times(t)), r.cmp(e) != 1; ) i = t, t = r, r = f, f = c.plus(a.times(r)), c = r, r = n, n = u.minus(a.times(r)), u = r;
+      return r = k(e.minus(i), t, 0, 1, 1), c = c.plus(r.times(f)), i = i.plus(r.times(t)), c.s = f.s = g.s, d = k(f, t, s, 1).minus(g).abs().cmp(k(c, i, s, 1).minus(g).abs()) < 1 ? [f, t] : [c, i], N.precision = l, w = true, d;
+    };
+    h.toHexadecimal = h.toHex = function(e, n) {
+      return Pe(this, 16, e, n);
+    };
+    h.toNearest = function(e, n) {
+      var i = this, t = i.constructor;
+      if (i = new t(i), e == null) {
+        if (!i.d) return i;
+        e = new t(1), n = t.rounding;
+      } else {
+        if (e = new t(e), n === void 0 ? n = t.rounding : q(n, 0, 8), !i.d) return e.s ? i : e;
+        if (!e.d) return e.s && (e.s = i.s), e;
+      }
+      return e.d[0] ? (w = false, i = k(i, e, 0, n, 1).times(e), w = true, p(i)) : (e.s = i.s, i = e), i;
+    };
+    h.toNumber = function() {
+      return +this;
+    };
+    h.toOctal = function(e, n) {
+      return Pe(this, 8, e, n);
+    };
+    h.toPower = h.pow = function(e) {
+      var n, i, t, r, s, o, u = this, c = u.constructor, f = +(e = new c(e));
+      if (!u.d || !e.d || !u.d[0] || !e.d[0]) return new c(C(+u, f));
+      if (u = new c(u), u.eq(1)) return u;
+      if (t = c.precision, s = c.rounding, e.eq(1)) return p(u, t, s);
+      if (n = R(e.e / m), n >= e.d.length - 1 && (i = f < 0 ? -f : f) <= dn) return r = He(c, u, i, t), e.s < 0 ? new c(1).div(r) : p(r, t, s);
+      if (o = u.s, o < 0) {
+        if (n < e.d.length - 1) return new c(NaN);
+        if ((e.d[n] & 1) == 0 && (o = 1), u.e == 0 && u.d[0] == 1 && u.d.length == 1) return u.s = o, u;
+      }
+      return i = C(+u, f), n = i == 0 || !isFinite(i) ? R(f * (Math.log("0." + b(u.d)) / Math.LN10 + u.e + 1)) : new c(i + "").e, n > c.maxE + 1 || n < c.minE - 1 ? new c(n > 0 ? o / 0 : 0) : (w = false, c.rounding = u.s = 1, i = Math.min(12, (n + "").length), r = be(e.times(B(u, t + i)), t), r.d && (r = p(r, t + 5, 1), Q(r.d, t, s) && (n = t + 10, r = p(be(e.times(B(u, n + i)), n), n + 5, 1), +b(r.d).slice(t + 1, t + 15) + 1 == 1e14 && (r = p(r, t + 1, 0)))), r.s = o, w = true, c.rounding = s, p(r, t, s));
+    };
+    h.toPrecision = function(e, n) {
+      var i, t = this, r = t.constructor;
+      return e === void 0 ? i = L(t, t.e <= r.toExpNeg || t.e >= r.toExpPos) : (q(e, 1, H), n === void 0 ? n = r.rounding : q(n, 0, 8), t = p(new r(t), e, n), i = L(t, e <= t.e || t.e <= r.toExpNeg, e)), t.isNeg() && !t.isZero() ? "-" + i : i;
+    };
+    h.toSignificantDigits = h.toSD = function(e, n) {
+      var i = this, t = i.constructor;
+      return e === void 0 ? (e = t.precision, n = t.rounding) : (q(e, 1, H), n === void 0 ? n = t.rounding : q(n, 0, 8)), p(new t(i), e, n);
+    };
+    h.toString = function() {
+      var e = this, n = e.constructor, i = L(e, e.e <= n.toExpNeg || e.e >= n.toExpPos);
+      return e.isNeg() && !e.isZero() ? "-" + i : i;
+    };
+    h.truncated = h.trunc = function() {
+      return p(new this.constructor(this), this.e + 1, 1);
+    };
+    h.valueOf = h.toJSON = function() {
+      var e = this, n = e.constructor, i = L(e, e.e <= n.toExpNeg || e.e >= n.toExpPos);
+      return e.isNeg() ? "-" + i : i;
+    };
+    function b(e) {
+      var n, i, t, r = e.length - 1, s = "", o = e[0];
+      if (r > 0) {
+        for (s += o, n = 1; n < r; n++) t = e[n] + "", i = m - t.length, i && (s += U(i)), s += t;
+        o = e[n], t = o + "", i = m - t.length, i && (s += U(i));
+      } else if (o === 0) return "0";
+      for (; o % 10 === 0; ) o /= 10;
+      return s + o;
+    }
+    function q(e, n, i) {
+      if (e !== ~~e || e < n || e > i) throw Error($3 + e);
+    }
+    function Q(e, n, i, t) {
+      var r, s, o, u;
+      for (s = e[0]; s >= 10; s /= 10) --n;
+      return --n < 0 ? (n += m, r = 0) : (r = Math.ceil((n + 1) / m), n %= m), s = C(10, m - n), u = e[r] % s | 0, t == null ? n < 3 ? (n == 0 ? u = u / 100 | 0 : n == 1 && (u = u / 10 | 0), o = i < 4 && u == 99999 || i > 3 && u == 49999 || u == 5e4 || u == 0) : o = (i < 4 && u + 1 == s || i > 3 && u + 1 == s / 2) && (e[r + 1] / s / 100 | 0) == C(10, n - 2) - 1 || (u == s / 2 || u == 0) && (e[r + 1] / s / 100 | 0) == 0 : n < 4 ? (n == 0 ? u = u / 1e3 | 0 : n == 1 ? u = u / 100 | 0 : n == 2 && (u = u / 10 | 0), o = (t || i < 4) && u == 9999 || !t && i > 3 && u == 4999) : o = ((t || i < 4) && u + 1 == s || !t && i > 3 && u + 1 == s / 2) && (e[r + 1] / s / 1e3 | 0) == C(10, n - 3) - 1, o;
+    }
+    function te(e, n, i) {
+      for (var t, r = [0], s, o = 0, u = e.length; o < u; ) {
+        for (s = r.length; s--; ) r[s] *= n;
+        for (r[0] += Se.indexOf(e.charAt(o++)), t = 0; t < r.length; t++) r[t] > i - 1 && (r[t + 1] === void 0 && (r[t + 1] = 0), r[t + 1] += r[t] / i | 0, r[t] %= i);
+      }
+      return r.reverse();
+    }
+    function pn(e, n) {
+      var i, t, r;
+      if (n.isZero()) return n;
+      t = n.d.length, t < 32 ? (i = Math.ceil(t / 3), r = (1 / le(4, i)).toString()) : (i = 16, r = "2.3283064365386962890625e-10"), e.precision += i, n = j(e, 1, n.times(r), new e(1));
+      for (var s = i; s--; ) {
+        var o = n.times(n);
+        n = o.times(o).minus(o).times(8).plus(1);
+      }
+      return e.precision -= i, n;
+    }
+    var k = /* @__PURE__ */ function() {
+      function e(t, r, s) {
+        var o, u = 0, c = t.length;
+        for (t = t.slice(); c--; ) o = t[c] * r + u, t[c] = o % s | 0, u = o / s | 0;
+        return u && t.unshift(u), t;
+      }
+      function n(t, r, s, o) {
+        var u, c;
+        if (s != o) c = s > o ? 1 : -1;
+        else for (u = c = 0; u < s; u++) if (t[u] != r[u]) {
+          c = t[u] > r[u] ? 1 : -1;
+          break;
+        }
+        return c;
+      }
+      function i(t, r, s, o) {
+        for (var u = 0; s--; ) t[s] -= u, u = t[s] < r[s] ? 1 : 0, t[s] = u * o + t[s] - r[s];
+        for (; !t[0] && t.length > 1; ) t.shift();
+      }
+      return function(t, r, s, o, u, c) {
+        var f, l, a, d, g, v, N, A, M, _, E, P, x, I, ae, z, W, de, T, y, ee = t.constructor, he = t.s == r.s ? 1 : -1, O = t.d, S = r.d;
+        if (!O || !O[0] || !S || !S[0]) return new ee(!t.s || !r.s || (O ? S && O[0] == S[0] : !S) ? NaN : O && O[0] == 0 || !S ? he * 0 : he / 0);
+        for (c ? (g = 1, l = t.e - r.e) : (c = D, g = m, l = R(t.e / g) - R(r.e / g)), T = S.length, W = O.length, M = new ee(he), _ = M.d = [], a = 0; S[a] == (O[a] || 0); a++) ;
+        if (S[a] > (O[a] || 0) && l--, s == null ? (I = s = ee.precision, o = ee.rounding) : u ? I = s + (t.e - r.e) + 1 : I = s, I < 0) _.push(1), v = true;
+        else {
+          if (I = I / g + 2 | 0, a = 0, T == 1) {
+            for (d = 0, S = S[0], I++; (a < W || d) && I--; a++) ae = d * c + (O[a] || 0), _[a] = ae / S | 0, d = ae % S | 0;
+            v = d || a < W;
+          } else {
+            for (d = c / (S[0] + 1) | 0, d > 1 && (S = e(S, d, c), O = e(O, d, c), T = S.length, W = O.length), z = T, E = O.slice(0, T), P = E.length; P < T; ) E[P++] = 0;
+            y = S.slice(), y.unshift(0), de = S[0], S[1] >= c / 2 && ++de;
+            do
+              d = 0, f = n(S, E, T, P), f < 0 ? (x = E[0], T != P && (x = x * c + (E[1] || 0)), d = x / de | 0, d > 1 ? (d >= c && (d = c - 1), N = e(S, d, c), A = N.length, P = E.length, f = n(N, E, A, P), f == 1 && (d--, i(N, T < A ? y : S, A, c))) : (d == 0 && (f = d = 1), N = S.slice()), A = N.length, A < P && N.unshift(0), i(E, N, P, c), f == -1 && (P = E.length, f = n(S, E, T, P), f < 1 && (d++, i(E, T < P ? y : S, P, c))), P = E.length) : f === 0 && (d++, E = [0]), _[a++] = d, f && E[0] ? E[P++] = O[z] || 0 : (E = [O[z]], P = 1);
+            while ((z++ < W || E[0] !== void 0) && I--);
+            v = E[0] !== void 0;
+          }
+          _[0] || _.shift();
+        }
+        if (g == 1) M.e = l, Le = v;
+        else {
+          for (a = 1, d = _[0]; d >= 10; d /= 10) a++;
+          M.e = a + l * g - 1, p(M, u ? s + M.e + 1 : s, o, v);
+        }
+        return M;
+      };
+    }();
+    function p(e, n, i, t) {
+      var r, s, o, u, c, f, l, a, d, g = e.constructor;
+      e: if (n != null) {
+        if (a = e.d, !a) return e;
+        for (r = 1, u = a[0]; u >= 10; u /= 10) r++;
+        if (s = n - r, s < 0) s += m, o = n, l = a[d = 0], c = l / C(10, r - o - 1) % 10 | 0;
+        else if (d = Math.ceil((s + 1) / m), u = a.length, d >= u) if (t) {
+          for (; u++ <= d; ) a.push(0);
+          l = c = 0, r = 1, s %= m, o = s - m + 1;
+        } else break e;
+        else {
+          for (l = u = a[d], r = 1; u >= 10; u /= 10) r++;
+          s %= m, o = s - m + r, c = o < 0 ? 0 : l / C(10, r - o - 1) % 10 | 0;
+        }
+        if (t = t || n < 0 || a[d + 1] !== void 0 || (o < 0 ? l : l % C(10, r - o - 1)), f = i < 4 ? (c || t) && (i == 0 || i == (e.s < 0 ? 3 : 2)) : c > 5 || c == 5 && (i == 4 || t || i == 6 && (s > 0 ? o > 0 ? l / C(10, r - o) : 0 : a[d - 1]) % 10 & 1 || i == (e.s < 0 ? 8 : 7)), n < 1 || !a[0]) return a.length = 0, f ? (n -= e.e + 1, a[0] = C(10, (m - n % m) % m), e.e = -n || 0) : a[0] = e.e = 0, e;
+        if (s == 0 ? (a.length = d, u = 1, d--) : (a.length = d + 1, u = C(10, m - s), a[d] = o > 0 ? (l / C(10, r - o) % C(10, o) | 0) * u : 0), f) for (; ; ) if (d == 0) {
+          for (s = 1, o = a[0]; o >= 10; o /= 10) s++;
+          for (o = a[0] += u, u = 1; o >= 10; o /= 10) u++;
+          s != u && (e.e++, a[0] == D && (a[0] = 1));
+          break;
+        } else {
+          if (a[d] += u, a[d] != D) break;
+          a[d--] = 0, u = 1;
+        }
+        for (s = a.length; a[--s] === 0; ) a.pop();
+      }
+      return w && (e.e > g.maxE ? (e.d = null, e.e = NaN) : e.e < g.minE && (e.e = 0, e.d = [0])), e;
+    }
+    function L(e, n, i) {
+      if (!e.isFinite()) return je(e);
+      var t, r = e.e, s = b(e.d), o = s.length;
+      return n ? (i && (t = i - o) > 0 ? s = s.charAt(0) + "." + s.slice(1) + U(t) : o > 1 && (s = s.charAt(0) + "." + s.slice(1)), s = s + (e.e < 0 ? "e" : "e+") + e.e) : r < 0 ? (s = "0." + U(-r - 1) + s, i && (t = i - o) > 0 && (s += U(t))) : r >= o ? (s += U(r + 1 - o), i && (t = i - r - 1) > 0 && (s = s + "." + U(t))) : ((t = r + 1) < o && (s = s.slice(0, t) + "." + s.slice(t)), i && (t = i - o) > 0 && (r + 1 === o && (s += "."), s += U(t))), s;
+    }
+    function ce(e, n) {
+      var i = e[0];
+      for (n *= m; i >= 10; i /= 10) n++;
+      return n;
+    }
+    function ue(e, n, i) {
+      if (n > hn) throw w = true, i && (e.precision = i), Error(Ie);
+      return p(new e(se), n, 1, true);
+    }
+    function F(e, n, i) {
+      if (n > Ce) throw Error(Ie);
+      return p(new e(oe), n, i, true);
+    }
+    function $e(e) {
+      var n = e.length - 1, i = n * m + 1;
+      if (n = e[n], n) {
+        for (; n % 10 == 0; n /= 10) i--;
+        for (n = e[0]; n >= 10; n /= 10) i++;
+      }
+      return i;
+    }
+    function U(e) {
+      for (var n = ""; e--; ) n += "0";
+      return n;
+    }
+    function He(e, n, i, t) {
+      var r, s = new e(1), o = Math.ceil(t / m + 4);
+      for (w = false; ; ) {
+        if (i % 2 && (s = s.times(n), De(s.d, o) && (r = true)), i = R(i / 2), i === 0) {
+          i = s.d.length - 1, r && s.d[i] === 0 && ++s.d[i];
+          break;
+        }
+        n = n.times(n), De(n.d, o);
+      }
+      return w = true, s;
+    }
+    function Te(e) {
+      return e.d[e.d.length - 1] & 1;
+    }
+    function Ve(e, n, i) {
+      for (var t, r, s = new e(n[0]), o = 0; ++o < n.length; ) {
+        if (r = new e(n[o]), !r.s) {
+          s = r;
+          break;
+        }
+        t = s.cmp(r), (t === i || t === 0 && s.s === i) && (s = r);
+      }
+      return s;
+    }
+    function be(e, n) {
+      var i, t, r, s, o, u, c, f = 0, l = 0, a = 0, d = e.constructor, g = d.rounding, v = d.precision;
+      if (!e.d || !e.d[0] || e.e > 17) return new d(e.d ? e.d[0] ? e.s < 0 ? 0 : 1 / 0 : 1 : e.s ? e.s < 0 ? 0 : e : NaN);
+      for (n == null ? (w = false, c = v) : c = n, u = new d(0.03125); e.e > -2; ) e = e.times(u), a += 5;
+      for (t = Math.log(C(2, a)) / Math.LN10 * 2 + 5 | 0, c += t, i = s = o = new d(1), d.precision = c; ; ) {
+        if (s = p(s.times(e), c, 1), i = i.times(++l), u = o.plus(k(s, i, c, 1)), b(u.d).slice(0, c) === b(o.d).slice(0, c)) {
+          for (r = a; r--; ) o = p(o.times(o), c, 1);
+          if (n == null) if (f < 3 && Q(o.d, c - t, g, f)) d.precision = c += 10, i = s = u = new d(1), l = 0, f++;
+          else return p(o, d.precision = v, g, w = true);
+          else return d.precision = v, o;
+        }
+        o = u;
+      }
+    }
+    function B(e, n) {
+      var i, t, r, s, o, u, c, f, l, a, d, g = 1, v = 10, N = e, A = N.d, M = N.constructor, _ = M.rounding, E = M.precision;
+      if (N.s < 0 || !A || !A[0] || !N.e && A[0] == 1 && A.length == 1) return new M(A && !A[0] ? -1 / 0 : N.s != 1 ? NaN : A ? 0 : N);
+      if (n == null ? (w = false, l = E) : l = n, M.precision = l += v, i = b(A), t = i.charAt(0), Math.abs(s = N.e) < 15e14) {
+        for (; t < 7 && t != 1 || t == 1 && i.charAt(1) > 3; ) N = N.times(e), i = b(N.d), t = i.charAt(0), g++;
+        s = N.e, t > 1 ? (N = new M("0." + i), s++) : N = new M(t + "." + i.slice(1));
+      } else return f = ue(M, l + 2, E).times(s + ""), N = B(new M(t + "." + i.slice(1)), l - v).plus(f), M.precision = E, n == null ? p(N, E, _, w = true) : N;
+      for (a = N, c = o = N = k(N.minus(1), N.plus(1), l, 1), d = p(N.times(N), l, 1), r = 3; ; ) {
+        if (o = p(o.times(d), l, 1), f = c.plus(k(o, new M(r), l, 1)), b(f.d).slice(0, l) === b(c.d).slice(0, l)) if (c = c.times(2), s !== 0 && (c = c.plus(ue(M, l + 2, E).times(s + ""))), c = k(c, new M(g), l, 1), n == null) if (Q(c.d, l - v, _, u)) M.precision = l += v, f = o = N = k(a.minus(1), a.plus(1), l, 1), d = p(N.times(N), l, 1), r = u = 1;
+        else return p(c, M.precision = E, _, w = true);
+        else return M.precision = E, c;
+        c = f, r += 2;
+      }
+    }
+    function je(e) {
+      return String(e.s * e.s / 0);
+    }
+    function re(e, n) {
+      var i, t, r;
+      for ((i = n.indexOf(".")) > -1 && (n = n.replace(".", "")), (t = n.search(/e/i)) > 0 ? (i < 0 && (i = t), i += +n.slice(t + 1), n = n.substring(0, t)) : i < 0 && (i = n.length), t = 0; n.charCodeAt(t) === 48; t++) ;
+      for (r = n.length; n.charCodeAt(r - 1) === 48; --r) ;
+      if (n = n.slice(t, r), n) {
+        if (r -= t, e.e = i = i - t - 1, e.d = [], t = (i + 1) % m, i < 0 && (t += m), t < r) {
+          for (t && e.d.push(+n.slice(0, t)), r -= m; t < r; ) e.d.push(+n.slice(t, t += m));
+          n = n.slice(t), t = m - n.length;
+        } else t -= r;
+        for (; t--; ) n += "0";
+        e.d.push(+n), w && (e.e > e.constructor.maxE ? (e.d = null, e.e = NaN) : e.e < e.constructor.minE && (e.e = 0, e.d = [0]));
+      } else e.e = 0, e.d = [0];
+      return e;
+    }
+    function gn(e, n) {
+      var i, t, r, s, o, u, c, f, l;
+      if (n.indexOf("_") > -1) {
+        if (n = n.replace(/(\d)_(?=\d)/g, "$1"), Be.test(n)) return re(e, n);
+      } else if (n === "Infinity" || n === "NaN") return +n || (e.s = NaN), e.e = NaN, e.d = null, e;
+      if (ln.test(n)) i = 16, n = n.toLowerCase();
+      else if (cn.test(n)) i = 2;
+      else if (an.test(n)) i = 8;
+      else throw Error($3 + n);
+      for (s = n.search(/p/i), s > 0 ? (c = +n.slice(s + 1), n = n.substring(2, s)) : n = n.slice(2), s = n.indexOf("."), o = s >= 0, t = e.constructor, o && (n = n.replace(".", ""), u = n.length, s = u - s, r = He(t, new t(i), s, s * 2)), f = te(n, i, D), l = f.length - 1, s = l; f[s] === 0; --s) f.pop();
+      return s < 0 ? new t(e.s * 0) : (e.e = ce(f, l), e.d = f, w = false, o && (e = k(e, r, u * 4)), c && (e = e.times(Math.abs(c) < 54 ? C(2, c) : Y.pow(2, c))), w = true, e);
+    }
+    function mn(e, n) {
+      var i, t = n.d.length;
+      if (t < 3) return n.isZero() ? n : j(e, 2, n, n);
+      i = 1.4 * Math.sqrt(t), i = i > 16 ? 16 : i | 0, n = n.times(1 / le(5, i)), n = j(e, 2, n, n);
+      for (var r, s = new e(5), o = new e(16), u = new e(20); i--; ) r = n.times(n), n = n.times(s.plus(r.times(o.times(r).minus(u))));
+      return n;
+    }
+    function j(e, n, i, t, r) {
+      var s, o, u, c, f = 1, l = e.precision, a = Math.ceil(l / m);
+      for (w = false, c = i.times(i), u = new e(t); ; ) {
+        if (o = k(u.times(c), new e(n++ * n++), l, 1), u = r ? t.plus(o) : t.minus(o), t = k(o.times(c), new e(n++ * n++), l, 1), o = u.plus(t), o.d[a] !== void 0) {
+          for (s = a; o.d[s] === u.d[s] && s--; ) ;
+          if (s == -1) break;
+        }
+        s = u, u = t, t = o, o = s, f++;
+      }
+      return w = true, o.d.length = a + 1, o;
+    }
+    function le(e, n) {
+      for (var i = e; --n; ) i *= e;
+      return i;
+    }
+    function We(e, n) {
+      var i, t = n.s < 0, r = F(e, e.precision, 1), s = r.times(0.5);
+      if (n = n.abs(), n.lte(s)) return Z = t ? 4 : 1, n;
+      if (i = n.divToInt(r), i.isZero()) Z = t ? 3 : 2;
+      else {
+        if (n = n.minus(i.times(r)), n.lte(s)) return Z = Te(i) ? t ? 2 : 3 : t ? 4 : 1, n;
+        Z = Te(i) ? t ? 1 : 4 : t ? 3 : 2;
+      }
+      return n.minus(r).abs();
+    }
+    function Pe(e, n, i, t) {
+      var r, s, o, u, c, f, l, a, d, g = e.constructor, v = i !== void 0;
+      if (v ? (q(i, 1, H), t === void 0 ? t = g.rounding : q(t, 0, 8)) : (i = g.precision, t = g.rounding), !e.isFinite()) l = je(e);
+      else {
+        for (l = L(e), o = l.indexOf("."), v ? (r = 2, n == 16 ? i = i * 4 - 3 : n == 8 && (i = i * 3 - 2)) : r = n, o >= 0 && (l = l.replace(".", ""), d = new g(1), d.e = l.length - o, d.d = te(L(d), 10, r), d.e = d.d.length), a = te(l, 10, r), s = c = a.length; a[--c] == 0; ) a.pop();
+        if (!a[0]) l = v ? "0p+0" : "0";
+        else {
+          if (o < 0 ? s-- : (e = new g(e), e.d = a, e.e = s, e = k(e, d, i, t, 0, r), a = e.d, s = e.e, f = Le), o = a[i], u = r / 2, f = f || a[i + 1] !== void 0, f = t < 4 ? (o !== void 0 || f) && (t === 0 || t === (e.s < 0 ? 3 : 2)) : o > u || o === u && (t === 4 || f || t === 6 && a[i - 1] & 1 || t === (e.s < 0 ? 8 : 7)), a.length = i, f) for (; ++a[--i] > r - 1; ) a[i] = 0, i || (++s, a.unshift(1));
+          for (c = a.length; !a[c - 1]; --c) ;
+          for (o = 0, l = ""; o < c; o++) l += Se.charAt(a[o]);
+          if (v) {
+            if (c > 1) if (n == 16 || n == 8) {
+              for (o = n == 16 ? 4 : 3, --c; c % o; c++) l += "0";
+              for (a = te(l, r, n), c = a.length; !a[c - 1]; --c) ;
+              for (o = 1, l = "1."; o < c; o++) l += Se.charAt(a[o]);
+            } else l = l.charAt(0) + "." + l.slice(1);
+            l = l + (s < 0 ? "p" : "p+") + s;
+          } else if (s < 0) {
+            for (; ++s; ) l = "0" + l;
+            l = "0." + l;
+          } else if (++s > c) for (s -= c; s--; ) l += "0";
+          else s < c && (l = l.slice(0, s) + "." + l.slice(s));
+        }
+        l = (n == 16 ? "0x" : n == 2 ? "0b" : n == 8 ? "0o" : "") + l;
+      }
+      return e.s < 0 ? "-" + l : l;
+    }
+    function De(e, n) {
+      if (e.length > n) return e.length = n, true;
+    }
+    function wn(e) {
+      return new this(e).abs();
+    }
+    function Nn(e) {
+      return new this(e).acos();
+    }
+    function vn(e) {
+      return new this(e).acosh();
+    }
+    function En(e, n) {
+      return new this(e).plus(n);
+    }
+    function kn(e) {
+      return new this(e).asin();
+    }
+    function Sn(e) {
+      return new this(e).asinh();
+    }
+    function Mn(e) {
+      return new this(e).atan();
+    }
+    function Cn(e) {
+      return new this(e).atanh();
+    }
+    function bn(e, n) {
+      e = new this(e), n = new this(n);
+      var i, t = this.precision, r = this.rounding, s = t + 4;
+      return !e.s || !n.s ? i = new this(NaN) : !e.d && !n.d ? (i = F(this, s, 1).times(n.s > 0 ? 0.25 : 0.75), i.s = e.s) : !n.d || e.isZero() ? (i = n.s < 0 ? F(this, t, r) : new this(0), i.s = e.s) : !e.d || n.isZero() ? (i = F(this, s, 1).times(0.5), i.s = e.s) : n.s < 0 ? (this.precision = s, this.rounding = 1, i = this.atan(k(e, n, s, 1)), n = F(this, s, 1), this.precision = t, this.rounding = r, i = e.s < 0 ? i.minus(n) : i.plus(n)) : i = this.atan(k(e, n, s, 1)), i;
+    }
+    function Pn(e) {
+      return new this(e).cbrt();
+    }
+    function On(e) {
+      return p(e = new this(e), e.e + 1, 2);
+    }
+    function Rn(e, n, i) {
+      return new this(e).clamp(n, i);
+    }
+    function An(e) {
+      if (!e || typeof e != "object") throw Error(fe + "Object expected");
+      var n, i, t, r = e.defaults === true, s = ["precision", 1, H, "rounding", 0, 8, "toExpNeg", -V, 0, "toExpPos", 0, V, "maxE", 0, V, "minE", -V, 0, "modulo", 0, 9];
+      for (n = 0; n < s.length; n += 3) if (i = s[n], r && (this[i] = Me[i]), (t = e[i]) !== void 0) if (R(t) === t && t >= s[n + 1] && t <= s[n + 2]) this[i] = t;
+      else throw Error($3 + i + ": " + t);
+      if (i = "crypto", r && (this[i] = Me[i]), (t = e[i]) !== void 0) if (t === true || t === false || t === 0 || t === 1) if (t) if (typeof crypto < "u" && crypto && (crypto.getRandomValues || crypto.randomBytes)) this[i] = true;
+      else throw Error(Ze);
+      else this[i] = false;
+      else throw Error($3 + i + ": " + t);
+      return this;
+    }
+    function qn(e) {
+      return new this(e).cos();
+    }
+    function _n(e) {
+      return new this(e).cosh();
+    }
+    function Ge(e) {
+      var n, i, t;
+      function r(s) {
+        var o, u, c, f = this;
+        if (!(f instanceof r)) return new r(s);
+        if (f.constructor = r, Fe(s)) {
+          f.s = s.s, w ? !s.d || s.e > r.maxE ? (f.e = NaN, f.d = null) : s.e < r.minE ? (f.e = 0, f.d = [0]) : (f.e = s.e, f.d = s.d.slice()) : (f.e = s.e, f.d = s.d ? s.d.slice() : s.d);
+          return;
+        }
+        if (c = typeof s, c === "number") {
+          if (s === 0) {
+            f.s = 1 / s < 0 ? -1 : 1, f.e = 0, f.d = [0];
+            return;
+          }
+          if (s < 0 ? (s = -s, f.s = -1) : f.s = 1, s === ~~s && s < 1e7) {
+            for (o = 0, u = s; u >= 10; u /= 10) o++;
+            w ? o > r.maxE ? (f.e = NaN, f.d = null) : o < r.minE ? (f.e = 0, f.d = [0]) : (f.e = o, f.d = [s]) : (f.e = o, f.d = [s]);
+            return;
+          }
+          if (s * 0 !== 0) {
+            s || (f.s = NaN), f.e = NaN, f.d = null;
+            return;
+          }
+          return re(f, s.toString());
+        }
+        if (c === "string") return (u = s.charCodeAt(0)) === 45 ? (s = s.slice(1), f.s = -1) : (u === 43 && (s = s.slice(1)), f.s = 1), Be.test(s) ? re(f, s) : gn(f, s);
+        if (c === "bigint") return s < 0 ? (s = -s, f.s = -1) : f.s = 1, re(f, s.toString());
+        throw Error($3 + s);
+      }
+      if (r.prototype = h, r.ROUND_UP = 0, r.ROUND_DOWN = 1, r.ROUND_CEIL = 2, r.ROUND_FLOOR = 3, r.ROUND_HALF_UP = 4, r.ROUND_HALF_DOWN = 5, r.ROUND_HALF_EVEN = 6, r.ROUND_HALF_CEIL = 7, r.ROUND_HALF_FLOOR = 8, r.EUCLID = 9, r.config = r.set = An, r.clone = Ge, r.isDecimal = Fe, r.abs = wn, r.acos = Nn, r.acosh = vn, r.add = En, r.asin = kn, r.asinh = Sn, r.atan = Mn, r.atanh = Cn, r.atan2 = bn, r.cbrt = Pn, r.ceil = On, r.clamp = Rn, r.cos = qn, r.cosh = _n, r.div = Tn, r.exp = Dn, r.floor = Fn, r.hypot = Ln, r.ln = In, r.log = Zn, r.log10 = Bn, r.log2 = Un, r.max = $n, r.min = Hn, r.mod = Vn, r.mul = jn, r.pow = Wn, r.random = Gn, r.round = Jn, r.sign = Xn, r.sin = Kn, r.sinh = Qn, r.sqrt = Yn, r.sub = xn, r.sum = zn, r.tan = yn, r.tanh = ei, r.trunc = ni, e === void 0 && (e = {}), e && e.defaults !== true) for (t = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"], n = 0; n < t.length; ) e.hasOwnProperty(i = t[n++]) || (e[i] = this[i]);
+      return r.config(e), r;
+    }
+    function Tn(e, n) {
+      return new this(e).div(n);
+    }
+    function Dn(e) {
+      return new this(e).exp();
+    }
+    function Fn(e) {
+      return p(e = new this(e), e.e + 1, 3);
+    }
+    function Ln() {
+      var e, n, i = new this(0);
+      for (w = false, e = 0; e < arguments.length; ) if (n = new this(arguments[e++]), n.d) i.d && (i = i.plus(n.times(n)));
+      else {
+        if (n.s) return w = true, new this(1 / 0);
+        i = n;
+      }
+      return w = true, i.sqrt();
+    }
+    function Fe(e) {
+      return e instanceof Y || e && e.toStringTag === Ue || false;
+    }
+    function In(e) {
+      return new this(e).ln();
+    }
+    function Zn(e, n) {
+      return new this(e).log(n);
+    }
+    function Un(e) {
+      return new this(e).log(2);
+    }
+    function Bn(e) {
+      return new this(e).log(10);
+    }
+    function $n() {
+      return Ve(this, arguments, -1);
+    }
+    function Hn() {
+      return Ve(this, arguments, 1);
+    }
+    function Vn(e, n) {
+      return new this(e).mod(n);
+    }
+    function jn(e, n) {
+      return new this(e).mul(n);
+    }
+    function Wn(e, n) {
+      return new this(e).pow(n);
+    }
+    function Gn(e) {
+      var n, i, t, r, s = 0, o = new this(1), u = [];
+      if (e === void 0 ? e = this.precision : q(e, 1, H), t = Math.ceil(e / m), this.crypto) if (crypto.getRandomValues) for (n = crypto.getRandomValues(new Uint32Array(t)); s < t; ) r = n[s], r >= 429e7 ? n[s] = crypto.getRandomValues(new Uint32Array(1))[0] : u[s++] = r % 1e7;
+      else if (crypto.randomBytes) {
+        for (n = crypto.randomBytes(t *= 4); s < t; ) r = n[s] + (n[s + 1] << 8) + (n[s + 2] << 16) + ((n[s + 3] & 127) << 24), r >= 214e7 ? crypto.randomBytes(4).copy(n, s) : (u.push(r % 1e7), s += 4);
+        s = t / 4;
+      } else throw Error(Ze);
+      else for (; s < t; ) u[s++] = Math.random() * 1e7 | 0;
+      for (t = u[--s], e %= m, t && e && (r = C(10, m - e), u[s] = (t / r | 0) * r); u[s] === 0; s--) u.pop();
+      if (s < 0) i = 0, u = [0];
+      else {
+        for (i = -1; u[0] === 0; i -= m) u.shift();
+        for (t = 1, r = u[0]; r >= 10; r /= 10) t++;
+        t < m && (i -= m - t);
+      }
+      return o.e = i, o.d = u, o;
+    }
+    function Jn(e) {
+      return p(e = new this(e), e.e + 1, this.rounding);
+    }
+    function Xn(e) {
+      return e = new this(e), e.d ? e.d[0] ? e.s : 0 * e.s : e.s || NaN;
+    }
+    function Kn(e) {
+      return new this(e).sin();
+    }
+    function Qn(e) {
+      return new this(e).sinh();
+    }
+    function Yn(e) {
+      return new this(e).sqrt();
+    }
+    function xn(e, n) {
+      return new this(e).sub(n);
+    }
+    function zn() {
+      var e = 0, n = arguments, i = new this(n[e]);
+      for (w = false; i.s && ++e < n.length; ) i = i.plus(n[e]);
+      return w = true, p(i, this.precision, this.rounding);
+    }
+    function yn(e) {
+      return new this(e).tan();
+    }
+    function ei(e) {
+      return new this(e).tanh();
+    }
+    function ni(e) {
+      return p(e = new this(e), e.e + 1, 1);
+    }
+    h[Symbol.for("nodejs.util.inspect.custom")] = h.toString;
+    h[Symbol.toStringTag] = "Decimal";
+    var Y = h.constructor = Ge(Me);
+    se = new Y(se);
+    oe = new Y(oe);
+    var Je = Y;
+  }
+});
+
+// node_modules/.prisma/client/index-browser.js
+var require_index_browser2 = __commonJS({
+  "node_modules/.prisma/client/index-browser.js"(exports) {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var {
+      Decimal: Decimal2,
+      objectEnumValues: objectEnumValues2,
+      makeStrictEnum: makeStrictEnum2,
+      Public: Public2,
+      getRuntime: getRuntime2,
+      skip
+    } = require_index_browser();
+    var Prisma = {};
+    exports.Prisma = Prisma;
+    exports.$Enums = {};
+    Prisma.prismaVersion = {
+      client: "6.16.2",
+      engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+    };
+    Prisma.PrismaClientKnownRequestError = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.PrismaClientUnknownRequestError = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.PrismaClientRustPanicError = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.PrismaClientInitializationError = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.PrismaClientValidationError = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.Decimal = Decimal2;
+    Prisma.sql = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.empty = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.join = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.raw = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.validator = Public2.validator;
+    Prisma.getExtensionContext = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.defineExtension = () => {
+      const runtimeName = getRuntime2().prettyName;
+      throw new Error(
+        `Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`
+      );
+    };
+    Prisma.DbNull = objectEnumValues2.instances.DbNull;
+    Prisma.JsonNull = objectEnumValues2.instances.JsonNull;
+    Prisma.AnyNull = objectEnumValues2.instances.AnyNull;
+    Prisma.NullTypes = {
+      DbNull: objectEnumValues2.classes.DbNull,
+      JsonNull: objectEnumValues2.classes.JsonNull,
+      AnyNull: objectEnumValues2.classes.AnyNull
+    };
+    exports.Prisma.TransactionIsolationLevel = makeStrictEnum2({
+      Serializable: "Serializable"
+    });
+    exports.Prisma.ChannelScalarFieldEnum = {
+      id: "id",
+      name: "name",
+      handle: "handle",
+      channelId: "channelId",
+      youtubeUrl: "youtubeUrl",
+      rssFeedUrl: "rssFeedUrl",
+      subscribers: "subscribers",
+      description: "description",
+      postingFrequency: "postingFrequency",
+      category: "category",
+      status: "status",
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+      lastFetchedAt: "lastFetchedAt",
+      lastSuccessAt: "lastSuccessAt",
+      monthlyViews: "monthlyViews",
+      avgEngagement: "avgEngagement"
+    };
+    exports.Prisma.CategoryScalarFieldEnum = {
+      id: "id",
+      code: "code",
+      name: "name",
+      description: "description",
+      createdAt: "createdAt"
+    };
+    exports.Prisma.FetchLogScalarFieldEnum = {
+      id: "id",
+      channelId: "channelId",
+      success: "success",
+      itemCount: "itemCount",
+      error: "error",
+      fetchedAt: "fetchedAt",
+      duration: "duration"
+    };
+    exports.Prisma.SortOrder = {
+      asc: "asc",
+      desc: "desc"
+    };
+    exports.Prisma.NullsOrder = {
+      first: "first",
+      last: "last"
+    };
+    exports.Prisma.ModelName = {
+      Channel: "Channel",
+      Category: "Category",
+      FetchLog: "FetchLog"
+    };
+    var PrismaClient2 = class {
+      constructor() {
+        return new Proxy(this, {
+          get(target, prop) {
+            let message2;
+            const runtime = getRuntime2();
+            if (runtime.isEdge) {
+              message2 = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
+- Use Prisma Accelerate: https://pris.ly/d/accelerate
+- Use Driver Adapters: https://pris.ly/d/driver-adapters
+`;
+            } else {
+              message2 = "PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `" + runtime.prettyName + "`).";
+            }
+            message2 += `
+If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`;
+            throw new Error(message2);
+          }
+        });
+      }
+    };
+    exports.PrismaClient = PrismaClient2;
+    Object.assign(exports, Prisma);
+  }
+});
+
+// node_modules/@prisma/client/index-browser.js
+var require_index_browser3 = __commonJS({
+  "node_modules/@prisma/client/index-browser.js"(exports, module) {
+    var prisma = require_index_browser2();
+    module.exports = prisma;
+  }
+});
+
 // node_modules/fast-xml-parser/src/util.js
 var require_util = __commonJS({
   "node_modules/fast-xml-parser/src/util.js"(exports) {
@@ -566,11 +1713,11 @@ var require_DocTypeReader = __commonJS({
       if (xmlData[i + 1] === "!" && xmlData[i + 2] === "N" && xmlData[i + 3] === "O" && xmlData[i + 4] === "T" && xmlData[i + 5] === "A" && xmlData[i + 6] === "T" && xmlData[i + 7] === "I" && xmlData[i + 8] === "O" && xmlData[i + 9] === "N") return true;
       return false;
     }
-    function validateEntityName(name) {
-      if (util.isName(name))
-        return name;
+    function validateEntityName(name2) {
+      if (util.isName(name2))
+        return name2;
       else
-        throw new Error(`Invalid entity name ${name}`);
+        throw new Error(`Invalid entity name ${name2}`);
     }
     module.exports = readDocType;
   }
@@ -1689,9 +2836,9 @@ var require_json2xml = __commonJS({
     function indentate(level) {
       return this.options.indentBy.repeat(level);
     }
-    function isAttribute(name) {
-      if (name.startsWith(this.options.attributeNamePrefix) && name !== this.options.textNodeName) {
-        return name.substr(this.attrPrefixLen);
+    function isAttribute(name2) {
+      if (name2.startsWith(this.options.attributeNamePrefix) && name2 !== this.options.textNodeName) {
+        return name2.substr(this.attrPrefixLen);
       } else {
         return false;
       }
@@ -1716,7 +2863,7 @@ var require_fxp = __commonJS({
 });
 
 // node_modules/hono/dist/compose.js
-var compose = (middleware, onError, onNotFound) => {
+var compose = (middleware, onError3, onNotFound) => {
   return (context, next) => {
     let index = -1;
     return dispatch(0);
@@ -1738,9 +2885,9 @@ var compose = (middleware, onError, onNotFound) => {
         try {
           res = await handler(context, () => dispatch(i + 1));
         } catch (err) {
-          if (err instanceof Error && onError) {
+          if (err instanceof Error && onError3) {
             context.error = err;
-            res = await onError(err, context);
+            res = await onError3(err, context);
             isError = true;
           } else {
             throw err;
@@ -1992,15 +3139,15 @@ var _getQueryParam = (url, key, multiple) => {
     if (valueIndex > nextKeyIndex && nextKeyIndex !== -1) {
       valueIndex = -1;
     }
-    let name = url.slice(
+    let name2 = url.slice(
       keyIndex + 1,
       valueIndex === -1 ? nextKeyIndex === -1 ? void 0 : nextKeyIndex : valueIndex
     );
     if (encoded) {
-      name = _decodeURI(name);
+      name2 = _decodeURI(name2);
     }
     keyIndex = nextKeyIndex;
-    if (name === "") {
+    if (name2 === "") {
       continue;
     }
     let value;
@@ -2013,13 +3160,13 @@ var _getQueryParam = (url, key, multiple) => {
       }
     }
     if (multiple) {
-      if (!(results[name] && Array.isArray(results[name]))) {
-        results[name] = [];
+      if (!(results[name2] && Array.isArray(results[name2]))) {
+        results[name2] = [];
       }
       ;
-      results[name].push(value);
+      results[name2].push(value);
     } else {
-      results[name] ??= value;
+      results[name2] ??= value;
     }
   }
   return key ? results[key] : results;
@@ -2073,9 +3220,9 @@ var HonoRequest = class {
   queries(key) {
     return getQueryParams(this.url, key);
   }
-  header(name) {
-    if (name) {
-      return this.raw.headers.get(name) ?? void 0;
+  header(name2) {
+    if (name2) {
+      return this.raw.headers.get(name2) ?? void 0;
     }
     const headerData = {};
     this.raw.headers.forEach((value, key) => {
@@ -2270,17 +3417,17 @@ var Context = class {
   setRenderer = (renderer) => {
     this.#renderer = renderer;
   };
-  header = (name, value, options) => {
+  header = (name2, value, options) => {
     if (this.finalized) {
       this.#res = new Response(this.#res.body, this.#res);
     }
     const headers = this.#res ? this.#res.headers : this.#preparedHeaders ??= new Headers();
     if (value === void 0) {
-      headers.delete(name);
+      headers.delete(name2);
     } else if (options?.append) {
-      headers.append(name, value);
+      headers.append(name2, value);
     } else {
-      headers.set(name, value);
+      headers.set(name2, value);
     }
   };
   status = (status) => {
@@ -2646,9 +3793,9 @@ var Node = class {
     const pattern = token === "*" ? restTokens.length === 0 ? ["", "", ONLY_WILDCARD_REG_EXP_STR] : ["", "", LABEL_REG_EXP_STR] : token === "/*" ? ["", "", TAIL_WILDCARD_REG_EXP_STR] : token.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
     let node;
     if (pattern) {
-      const name = pattern[1];
+      const name2 = pattern[1];
       let regexpStr = pattern[2] || LABEL_REG_EXP_STR;
-      if (name && pattern[2]) {
+      if (name2 && pattern[2]) {
         if (regexpStr === ".*") {
           throw PATH_ERROR;
         }
@@ -2668,12 +3815,12 @@ var Node = class {
           return;
         }
         node = this.#children[regexpStr] = new Node();
-        if (name !== "") {
+        if (name2 !== "") {
           node.#varIndex = context.varIndex++;
         }
       }
-      if (!pathErrorCheckOnly && name !== "") {
-        paramMap.push([name, node.#varIndex]);
+      if (!pathErrorCheckOnly && name2 !== "") {
+        paramMap.push([name2, node.#varIndex]);
       }
     } else {
       node = this.#children[token];
@@ -2967,8 +4114,8 @@ var SmartRouter = class {
   name = "SmartRouter";
   #routers = [];
   #routes = [];
-  constructor(init) {
-    this.#routers = init.routers;
+  constructor(init3) {
+    this.#routers = init3.routers;
   }
   add(method, path, handler) {
     if (!this.#routes) {
@@ -3128,7 +4275,7 @@ var Node2 = class {
             }
             continue;
           }
-          const [key, name, matcher] = pattern;
+          const [key, name2, matcher] = pattern;
           if (!part && !(matcher instanceof RegExp)) {
             continue;
           }
@@ -3137,7 +4284,7 @@ var Node2 = class {
           if (matcher instanceof RegExp) {
             const m = matcher.exec(restPathString);
             if (m) {
-              params[name] = m[0];
+              params[name2] = m[0];
               handlerSets.push(...this.#getHandlerSets(child, method, node.#params, params));
               if (Object.keys(child.#children).length) {
                 child.#params = params;
@@ -3149,7 +4296,7 @@ var Node2 = class {
             }
           }
           if (matcher === true || matcher.test(part)) {
-            params[name] = part;
+            params[name2] = part;
             if (isLast) {
               handlerSets.push(...this.#getHandlerSets(child, method, params, node.#params));
               if (child.#children["*"]) {
@@ -3209,8 +4356,8 @@ var Hono2 = class extends Hono {
 
 // node_modules/hono/dist/utils/color.js
 function getColorEnabled() {
-  const { process, Deno } = globalThis;
-  const isNoColor = typeof Deno?.noColor === "boolean" ? Deno.noColor : process !== void 0 ? "NO_COLOR" in process?.env : false;
+  const { process: process2, Deno } = globalThis;
+  const isNoColor = typeof Deno?.noColor === "boolean" ? Deno.noColor : process2 !== void 0 ? "NO_COLOR" in process2?.env : false;
   return !isNoColor;
 }
 async function getColorEnabledAsync() {
@@ -3624,10 +4771,10 @@ var cache = (options) => {
     if (cacheControlDirectives) {
       const existingDirectives = c.res.headers.get("Cache-Control")?.split(",").map((d) => d.trim().split("=", 1)[0]) ?? [];
       for (const directive of cacheControlDirectives) {
-        let [name, value] = directive.trim().split("=", 2);
-        name = name.toLowerCase();
-        if (!existingDirectives.includes(name)) {
-          c.header("Cache-Control", `${name}${value ? `=${value}` : ""}`, { append: true });
+        let [name2, value] = directive.trim().split("=", 2);
+        name2 = name2.toLowerCase();
+        if (!existingDirectives.includes(name2)) {
+          c.header("Cache-Control", `${name2}${value ? `=${value}` : ""}`, { append: true });
         }
       }
     }
@@ -3674,7 +4821,6 @@ var cache = (options) => {
 var StorageKeys = {
   CURRENT_FEED: "feeds/current.xml",
   FEED_METADATA: "meta/last-update.json",
-  CHANNEL_CONFIG: "data/channels.json",
   feedVersion: (timestamp) => `feeds/${timestamp}.xml`
 };
 var HypeFeedError = class extends Error {
@@ -3907,44 +5053,6 @@ var StorageService = class {
     }
   }
   /**
-   * Store channel configuration data
-   */
-  async storeChannelConfig(channels) {
-    try {
-      await this.env.HYPEFEED_BUCKET.put(
-        StorageKeys.CHANNEL_CONFIG,
-        JSON.stringify(channels, null, 2),
-        {
-          httpMetadata: {
-            contentType: "application/json"
-          },
-          customMetadata: {
-            type: "channel_config",
-            updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-          }
-        }
-      );
-    } catch (error) {
-      console.error("Failed to store channel config:", error);
-    }
-  }
-  /**
-   * Get channel configuration data
-   */
-  async getChannelConfig() {
-    try {
-      const object = await this.env.HYPEFEED_BUCKET.get(StorageKeys.CHANNEL_CONFIG);
-      if (!object) {
-        return null;
-      }
-      const content = await object.text();
-      return JSON.parse(content);
-    } catch (error) {
-      console.error("Failed to retrieve channel config:", error);
-      return null;
-    }
-  }
-  /**
    * Cache RSS content in KV for faster access
    */
   async cacheFeedInKV(content, ttl = 300) {
@@ -4134,110 +5242,1631 @@ function createFeedHandlers() {
   return app2;
 }
 
-// src/data/channels.ts
-var AI_CHANNELS = [
-  {
-    name: "Two Minute Papers",
-    handle: "@TwoMinutePapers",
-    channel_id: "UCbfYPyITQ-7l4upoX8nvctg",
-    youtube_url: "https://youtube.com/@TwoMinutePapers",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg",
-    subscribers: "1.66M",
-    description: "Research paper summaries and AI breakthroughs explained by K\xE1roly Zsolnai-Feh\xE9r",
-    posting_frequency: "13 videos/month",
-    category: "research_analysis",
-    status: "LIVE"
-  },
-  {
-    name: "Krish Naik",
-    handle: "@krishnaik06",
-    channel_id: "UCjWY5hREA6FFYrthD0rZNIw",
-    youtube_url: "https://youtube.com/@krishnaik06",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCjWY5hREA6FFYrthD0rZNIw",
-    subscribers: "1.25M",
-    description: "Machine learning, data science, and AI tutorials with practical projects",
-    posting_frequency: "Regular uploads",
-    category: "education_tutorials",
-    status: "LIVE"
-  },
-  {
-    name: "Matt Wolfe",
-    handle: "@mreflow",
-    channel_id: "UCuK2Mf5As9OKfWU7XV6yzCg",
-    youtube_url: "https://youtube.com/@mreflow",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCuK2Mf5As9OKfWU7XV6yzCg",
-    subscribers: "785K",
-    description: "AI tools exploration and practical applications, creator of FutureTools.io",
-    posting_frequency: "Weekly uploads",
-    category: "tools_practical",
-    status: "LIVE"
-  },
-  {
-    name: "DeepLearning.AI",
-    handle: "@Deeplearningai",
-    channel_id: "UCcIXc5mJsHVYTZR1maL5l9w",
-    youtube_url: "https://youtube.com/@Deeplearningai",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCcIXc5mJsHVYTZR1maL5l9w",
-    subscribers: "429K",
-    description: "Educational AI content by Andrew Ng and DeepLearning.AI team",
-    posting_frequency: "Regular uploads",
-    category: "education_academic",
-    status: "LIVE"
-  },
-  {
-    name: "Sentdex",
-    handle: "@sentdex",
-    channel_id: "UCQALLeQPoZdZC4JNUboVEUg",
-    youtube_url: "https://youtube.com/@sentdex",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCQALLeQPoZdZC4JNUboVEUg",
-    subscribers: "273K",
-    description: "Python programming for ML, data analysis, and AI by Harrison Kinsley",
-    posting_frequency: "3 videos/week",
-    category: "programming_tutorials",
-    status: "LIVE"
-  },
-  {
-    name: "MattVidPro AI",
-    handle: "@MattVidPro",
-    channel_id: "UC06GdmaEdCdCFwR3NvszloQ",
-    youtube_url: "https://youtube.com/@MattVidPro",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UC06GdmaEdCdCFwR3NvszloQ",
-    subscribers: "245K",
-    description: "AI for video production and filmmaking by Matthew Pierce",
-    posting_frequency: "Regular uploads",
-    category: "ai_video_production",
-    status: "LIVE"
-  },
-  {
-    name: "Andrej Karpathy",
-    handle: "@karpathy",
-    channel_id: "UCe4jUOmQPKMDvOkzJpDfMRQ",
-    youtube_url: "https://youtube.com/@karpathy",
-    rss_feed_url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCe4jUOmQPKMDvOkzJpDfMRQ",
-    subscribers: "220K",
-    description: "Deep learning and LLM tutorials from ex-OpenAI/Tesla AI director",
-    posting_frequency: "Educational series",
-    category: "deep_learning_expert",
-    status: "LIVE"
-  }
-];
-function getActiveChannels() {
-  return AI_CHANNELS.filter(
-    (channel) => channel.status === "LIVE" || channel.status === "TRYOUT" || channel.status === "CANDIDATE"
-  );
+// src/db/client.ts
+var import_client = __toESM(require_index_browser3());
+
+// node_modules/@prisma/debug/dist/index.mjs
+var __defProp2 = Object.defineProperty;
+var __export = (target, all) => {
+  for (var name2 in all)
+    __defProp2(target, name2, { get: all[name2], enumerable: true });
+};
+var colors_exports = {};
+__export(colors_exports, {
+  $: () => $,
+  bgBlack: () => bgBlack,
+  bgBlue: () => bgBlue,
+  bgCyan: () => bgCyan,
+  bgGreen: () => bgGreen,
+  bgMagenta: () => bgMagenta,
+  bgRed: () => bgRed,
+  bgWhite: () => bgWhite,
+  bgYellow: () => bgYellow,
+  black: () => black,
+  blue: () => blue,
+  bold: () => bold,
+  cyan: () => cyan,
+  dim: () => dim,
+  gray: () => gray,
+  green: () => green,
+  grey: () => grey,
+  hidden: () => hidden,
+  inverse: () => inverse,
+  italic: () => italic,
+  magenta: () => magenta,
+  red: () => red,
+  reset: () => reset,
+  strikethrough: () => strikethrough,
+  underline: () => underline,
+  white: () => white,
+  yellow: () => yellow
+});
+var FORCE_COLOR;
+var NODE_DISABLE_COLORS;
+var NO_COLOR;
+var TERM;
+var isTTY = true;
+if (typeof process !== "undefined") {
+  ({ FORCE_COLOR, NODE_DISABLE_COLORS, NO_COLOR, TERM } = process.env || {});
+  isTTY = process.stdout && process.stdout.isTTY;
 }
-function generateFeedMetadata() {
-  const activeChannels = getActiveChannels();
-  return {
-    title: "AI Pioneer YouTube Channels RSS Feeds",
-    description: "RSS feeds for top AI pioneer YouTube channels meeting criteria: 100K+ subscribers, 2+ posts/month, 1M+ monthly views",
-    generated_at: (/* @__PURE__ */ new Date()).toISOString(),
-    total_channels: activeChannels.length,
-    success_count: activeChannels.length,
-    failure_count: 0,
-    channels: activeChannels
+var $ = {
+  enabled: !NODE_DISABLE_COLORS && NO_COLOR == null && TERM !== "dumb" && (FORCE_COLOR != null && FORCE_COLOR !== "0" || isTTY)
+};
+function init(x, y) {
+  let rgx = new RegExp(`\\x1b\\[${y}m`, "g");
+  let open = `\x1B[${x}m`, close = `\x1B[${y}m`;
+  return function(txt) {
+    if (!$.enabled || txt == null) return txt;
+    return open + (!!~("" + txt).indexOf(close) ? txt.replace(rgx, close + open) : txt) + close;
   };
 }
+var reset = init(0, 0);
+var bold = init(1, 22);
+var dim = init(2, 22);
+var italic = init(3, 23);
+var underline = init(4, 24);
+var inverse = init(7, 27);
+var hidden = init(8, 28);
+var strikethrough = init(9, 29);
+var black = init(30, 39);
+var red = init(31, 39);
+var green = init(32, 39);
+var yellow = init(33, 39);
+var blue = init(34, 39);
+var magenta = init(35, 39);
+var cyan = init(36, 39);
+var white = init(37, 39);
+var gray = init(90, 39);
+var grey = init(90, 39);
+var bgBlack = init(40, 49);
+var bgRed = init(41, 49);
+var bgGreen = init(42, 49);
+var bgYellow = init(43, 49);
+var bgBlue = init(44, 49);
+var bgMagenta = init(45, 49);
+var bgCyan = init(46, 49);
+var bgWhite = init(47, 49);
+var MAX_ARGS_HISTORY = 100;
+var COLORS = ["green", "yellow", "blue", "magenta", "cyan", "red"];
+var argsHistory = [];
+var lastTimestamp = Date.now();
+var lastColor = 0;
+var processEnv = typeof process !== "undefined" ? process.env : {};
+globalThis.DEBUG ??= processEnv.DEBUG ?? "";
+globalThis.DEBUG_COLORS ??= processEnv.DEBUG_COLORS ? processEnv.DEBUG_COLORS === "true" : true;
+var topProps = {
+  enable(namespace) {
+    if (typeof namespace === "string") {
+      globalThis.DEBUG = namespace;
+    }
+  },
+  disable() {
+    const prev = globalThis.DEBUG;
+    globalThis.DEBUG = "";
+    return prev;
+  },
+  // this is the core logic to check if logging should happen or not
+  enabled(namespace) {
+    const listenedNamespaces = globalThis.DEBUG.split(",").map((s) => {
+      return s.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+    });
+    const isListened = listenedNamespaces.some((listenedNamespace) => {
+      if (listenedNamespace === "" || listenedNamespace[0] === "-") return false;
+      return namespace.match(RegExp(listenedNamespace.split("*").join(".*") + "$"));
+    });
+    const isExcluded = listenedNamespaces.some((listenedNamespace) => {
+      if (listenedNamespace === "" || listenedNamespace[0] !== "-") return false;
+      return namespace.match(RegExp(listenedNamespace.slice(1).split("*").join(".*") + "$"));
+    });
+    return isListened && !isExcluded;
+  },
+  log: (...args) => {
+    const [namespace, format2, ...rest] = args;
+    const logWithFormatting = console.warn ?? console.log;
+    logWithFormatting(`${namespace} ${format2}`, ...rest);
+  },
+  formatters: {}
+  // not implemented
+};
+function debugCreate(namespace) {
+  const instanceProps = {
+    color: COLORS[lastColor++ % COLORS.length],
+    enabled: topProps.enabled(namespace),
+    namespace,
+    log: topProps.log,
+    extend: () => {
+    }
+    // not implemented
+  };
+  const debugCall = (...args) => {
+    const { enabled, namespace: namespace2, color, log: log2 } = instanceProps;
+    if (args.length !== 0) {
+      argsHistory.push([namespace2, ...args]);
+    }
+    if (argsHistory.length > MAX_ARGS_HISTORY) {
+      argsHistory.shift();
+    }
+    if (topProps.enabled(namespace2) || enabled) {
+      const stringArgs = args.map((arg) => {
+        if (typeof arg === "string") {
+          return arg;
+        }
+        return safeStringify(arg);
+      });
+      const ms = `+${Date.now() - lastTimestamp}ms`;
+      lastTimestamp = Date.now();
+      if (globalThis.DEBUG_COLORS) {
+        log2(colors_exports[color](bold(namespace2)), ...stringArgs, colors_exports[color](ms));
+      } else {
+        log2(namespace2, ...stringArgs, ms);
+      }
+    }
+  };
+  return new Proxy(debugCall, {
+    get: (_, prop) => instanceProps[prop],
+    set: (_, prop, value) => instanceProps[prop] = value
+  });
+}
+var Debug = new Proxy(debugCreate, {
+  get: (_, prop) => topProps[prop],
+  set: (_, prop, value) => topProps[prop] = value
+});
+function safeStringify(value, indent = 2) {
+  const cache2 = /* @__PURE__ */ new Set();
+  return JSON.stringify(
+    value,
+    (key, value2) => {
+      if (typeof value2 === "object" && value2 !== null) {
+        if (cache2.has(value2)) {
+          return `[Circular *]`;
+        }
+        cache2.add(value2);
+      } else if (typeof value2 === "bigint") {
+        return value2.toString();
+      }
+      return value2;
+    },
+    indent
+  );
+}
+
+// node_modules/@prisma/driver-adapter-utils/dist/index.mjs
+var DriverAdapterError = class extends Error {
+  name = "DriverAdapterError";
+  cause;
+  constructor(payload) {
+    super(typeof payload["message"] === "string" ? payload["message"] : payload.kind);
+    this.cause = payload;
+  }
+};
+var debug = Debug("driver-adapter-utils");
+var ColumnTypeEnum = {
+  // Scalars
+  Int32: 0,
+  Int64: 1,
+  Float: 2,
+  Double: 3,
+  Numeric: 4,
+  Boolean: 5,
+  Character: 6,
+  Text: 7,
+  Date: 8,
+  Time: 9,
+  DateTime: 10,
+  Json: 11,
+  Enum: 12,
+  Bytes: 13,
+  Set: 14,
+  Uuid: 15,
+  // Arrays
+  Int32Array: 64,
+  Int64Array: 65,
+  FloatArray: 66,
+  DoubleArray: 67,
+  NumericArray: 68,
+  BooleanArray: 69,
+  CharacterArray: 70,
+  TextArray: 71,
+  DateArray: 72,
+  TimeArray: 73,
+  DateTimeArray: 74,
+  JsonArray: 75,
+  EnumArray: 76,
+  BytesArray: 77,
+  UuidArray: 78,
+  // Custom
+  UnknownNumber: 128
+};
+var mockAdapterErrors = {
+  queryRaw: new Error("Not implemented: queryRaw"),
+  executeRaw: new Error("Not implemented: executeRaw"),
+  startTransaction: new Error("Not implemented: startTransaction"),
+  executeScript: new Error("Not implemented: executeScript"),
+  dispose: new Error("Not implemented: dispose")
+};
+
+// node_modules/ky/distribution/errors/HTTPError.js
+var HTTPError = class extends Error {
+  response;
+  request;
+  options;
+  constructor(response, request, options) {
+    const code = response.status || response.status === 0 ? response.status : "";
+    const title = response.statusText || "";
+    const status = `${code} ${title}`.trim();
+    const reason = status ? `status code ${status}` : "an unknown error";
+    super(`Request failed with ${reason}: ${request.method} ${request.url}`);
+    this.name = "HTTPError";
+    this.response = response;
+    this.request = request;
+    this.options = options;
+  }
+};
+
+// node_modules/ky/distribution/errors/TimeoutError.js
+var TimeoutError = class extends Error {
+  request;
+  constructor(request) {
+    super(`Request timed out: ${request.method} ${request.url}`);
+    this.name = "TimeoutError";
+    this.request = request;
+  }
+};
+
+// node_modules/ky/distribution/utils/is.js
+var isObject = (value) => value !== null && typeof value === "object";
+
+// node_modules/ky/distribution/utils/merge.js
+var validateAndMerge = (...sources) => {
+  for (const source of sources) {
+    if ((!isObject(source) || Array.isArray(source)) && source !== void 0) {
+      throw new TypeError("The `options` argument must be an object");
+    }
+  }
+  return deepMerge({}, ...sources);
+};
+var mergeHeaders = (source1 = {}, source2 = {}) => {
+  const result = new globalThis.Headers(source1);
+  const isHeadersInstance = source2 instanceof globalThis.Headers;
+  const source = new globalThis.Headers(source2);
+  for (const [key, value] of source.entries()) {
+    if (isHeadersInstance && value === "undefined" || value === void 0) {
+      result.delete(key);
+    } else {
+      result.set(key, value);
+    }
+  }
+  return result;
+};
+function newHookValue(original, incoming, property) {
+  return Object.hasOwn(incoming, property) && incoming[property] === void 0 ? [] : deepMerge(original[property] ?? [], incoming[property] ?? []);
+}
+var mergeHooks = (original = {}, incoming = {}) => ({
+  beforeRequest: newHookValue(original, incoming, "beforeRequest"),
+  beforeRetry: newHookValue(original, incoming, "beforeRetry"),
+  afterResponse: newHookValue(original, incoming, "afterResponse"),
+  beforeError: newHookValue(original, incoming, "beforeError")
+});
+var deepMerge = (...sources) => {
+  let returnValue = {};
+  let headers = {};
+  let hooks = {};
+  for (const source of sources) {
+    if (Array.isArray(source)) {
+      if (!Array.isArray(returnValue)) {
+        returnValue = [];
+      }
+      returnValue = [...returnValue, ...source];
+    } else if (isObject(source)) {
+      for (let [key, value] of Object.entries(source)) {
+        if (isObject(value) && key in returnValue) {
+          value = deepMerge(returnValue[key], value);
+        }
+        returnValue = { ...returnValue, [key]: value };
+      }
+      if (isObject(source.hooks)) {
+        hooks = mergeHooks(hooks, source.hooks);
+        returnValue.hooks = hooks;
+      }
+      if (isObject(source.headers)) {
+        headers = mergeHeaders(headers, source.headers);
+        returnValue.headers = headers;
+      }
+    }
+  }
+  return returnValue;
+};
+
+// node_modules/ky/distribution/core/constants.js
+var supportsRequestStreams = (() => {
+  let duplexAccessed = false;
+  let hasContentType = false;
+  const supportsReadableStream = typeof globalThis.ReadableStream === "function";
+  const supportsRequest = typeof globalThis.Request === "function";
+  if (supportsReadableStream && supportsRequest) {
+    try {
+      hasContentType = new globalThis.Request("https://empty.invalid", {
+        body: new globalThis.ReadableStream(),
+        method: "POST",
+        // @ts-expect-error - Types are outdated.
+        get duplex() {
+          duplexAccessed = true;
+          return "half";
+        }
+      }).headers.has("Content-Type");
+    } catch (error) {
+      if (error instanceof Error && error.message === "unsupported BodyInit type") {
+        return false;
+      }
+      throw error;
+    }
+  }
+  return duplexAccessed && !hasContentType;
+})();
+var supportsAbortController = typeof globalThis.AbortController === "function";
+var supportsResponseStreams = typeof globalThis.ReadableStream === "function";
+var supportsFormData = typeof globalThis.FormData === "function";
+var requestMethods = ["get", "post", "put", "patch", "head", "delete"];
+var validate = () => void 0;
+validate();
+var responseTypes = {
+  json: "application/json",
+  text: "text/*",
+  formData: "multipart/form-data",
+  arrayBuffer: "*/*",
+  blob: "*/*"
+};
+var maxSafeTimeout = 2147483647;
+var stop = Symbol("stop");
+var kyOptionKeys = {
+  json: true,
+  parseJson: true,
+  stringifyJson: true,
+  searchParams: true,
+  prefixUrl: true,
+  retry: true,
+  timeout: true,
+  hooks: true,
+  throwHttpErrors: true,
+  onDownloadProgress: true,
+  fetch: true
+};
+var requestOptionsRegistry = {
+  method: true,
+  headers: true,
+  body: true,
+  mode: true,
+  credentials: true,
+  cache: true,
+  redirect: true,
+  referrer: true,
+  referrerPolicy: true,
+  integrity: true,
+  keepalive: true,
+  signal: true,
+  window: true,
+  dispatcher: true,
+  duplex: true,
+  priority: true
+};
+
+// node_modules/ky/distribution/utils/normalize.js
+var normalizeRequestMethod = (input) => requestMethods.includes(input) ? input.toUpperCase() : input;
+var retryMethods = ["get", "put", "head", "delete", "options", "trace"];
+var retryStatusCodes = [408, 413, 429, 500, 502, 503, 504];
+var retryAfterStatusCodes = [413, 429, 503];
+var defaultRetryOptions = {
+  limit: 2,
+  methods: retryMethods,
+  statusCodes: retryStatusCodes,
+  afterStatusCodes: retryAfterStatusCodes,
+  maxRetryAfter: Number.POSITIVE_INFINITY,
+  backoffLimit: Number.POSITIVE_INFINITY,
+  delay: (attemptCount) => 0.3 * 2 ** (attemptCount - 1) * 1e3
+};
+var normalizeRetryOptions = (retry = {}) => {
+  if (typeof retry === "number") {
+    return {
+      ...defaultRetryOptions,
+      limit: retry
+    };
+  }
+  if (retry.methods && !Array.isArray(retry.methods)) {
+    throw new Error("retry.methods must be an array");
+  }
+  if (retry.statusCodes && !Array.isArray(retry.statusCodes)) {
+    throw new Error("retry.statusCodes must be an array");
+  }
+  return {
+    ...defaultRetryOptions,
+    ...retry
+  };
+};
+
+// node_modules/ky/distribution/utils/timeout.js
+async function timeout(request, init3, abortController, options) {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      if (abortController) {
+        abortController.abort();
+      }
+      reject(new TimeoutError(request));
+    }, options.timeout);
+    void options.fetch(request, init3).then(resolve).catch(reject).then(() => {
+      clearTimeout(timeoutId);
+    });
+  });
+}
+
+// node_modules/ky/distribution/utils/delay.js
+async function delay(ms, { signal }) {
+  return new Promise((resolve, reject) => {
+    if (signal) {
+      signal.throwIfAborted();
+      signal.addEventListener("abort", abortHandler, { once: true });
+    }
+    function abortHandler() {
+      clearTimeout(timeoutId);
+      reject(signal.reason);
+    }
+    const timeoutId = setTimeout(() => {
+      signal?.removeEventListener("abort", abortHandler);
+      resolve();
+    }, ms);
+  });
+}
+
+// node_modules/ky/distribution/utils/options.js
+var findUnknownOptions = (request, options) => {
+  const unknownOptions = {};
+  for (const key in options) {
+    if (!(key in requestOptionsRegistry) && !(key in kyOptionKeys) && !(key in request)) {
+      unknownOptions[key] = options[key];
+    }
+  }
+  return unknownOptions;
+};
+
+// node_modules/ky/distribution/core/Ky.js
+var Ky = class _Ky {
+  static create(input, options) {
+    const ky2 = new _Ky(input, options);
+    const function_ = async () => {
+      if (typeof ky2._options.timeout === "number" && ky2._options.timeout > maxSafeTimeout) {
+        throw new RangeError(`The \`timeout\` option cannot be greater than ${maxSafeTimeout}`);
+      }
+      await Promise.resolve();
+      let response = await ky2._fetch();
+      for (const hook of ky2._options.hooks.afterResponse) {
+        const modifiedResponse = await hook(ky2.request, ky2._options, ky2._decorateResponse(response.clone()));
+        if (modifiedResponse instanceof globalThis.Response) {
+          response = modifiedResponse;
+        }
+      }
+      ky2._decorateResponse(response);
+      if (!response.ok && ky2._options.throwHttpErrors) {
+        let error = new HTTPError(response, ky2.request, ky2._options);
+        for (const hook of ky2._options.hooks.beforeError) {
+          error = await hook(error);
+        }
+        throw error;
+      }
+      if (ky2._options.onDownloadProgress) {
+        if (typeof ky2._options.onDownloadProgress !== "function") {
+          throw new TypeError("The `onDownloadProgress` option must be a function");
+        }
+        if (!supportsResponseStreams) {
+          throw new Error("Streams are not supported in your environment. `ReadableStream` is missing.");
+        }
+        return ky2._stream(response.clone(), ky2._options.onDownloadProgress);
+      }
+      return response;
+    };
+    const isRetriableMethod = ky2._options.retry.methods.includes(ky2.request.method.toLowerCase());
+    const result = isRetriableMethod ? ky2._retry(function_) : function_();
+    for (const [type, mimeType] of Object.entries(responseTypes)) {
+      result[type] = async () => {
+        ky2.request.headers.set("accept", ky2.request.headers.get("accept") || mimeType);
+        const response = await result;
+        if (type === "json") {
+          if (response.status === 204) {
+            return "";
+          }
+          const arrayBuffer = await response.clone().arrayBuffer();
+          const responseSize = arrayBuffer.byteLength;
+          if (responseSize === 0) {
+            return "";
+          }
+          if (options.parseJson) {
+            return options.parseJson(await response.text());
+          }
+        }
+        return response[type]();
+      };
+    }
+    return result;
+  }
+  request;
+  abortController;
+  _retryCount = 0;
+  _input;
+  _options;
+  // eslint-disable-next-line complexity
+  constructor(input, options = {}) {
+    this._input = input;
+    this._options = {
+      ...options,
+      headers: mergeHeaders(this._input.headers, options.headers),
+      hooks: mergeHooks({
+        beforeRequest: [],
+        beforeRetry: [],
+        beforeError: [],
+        afterResponse: []
+      }, options.hooks),
+      method: normalizeRequestMethod(options.method ?? this._input.method ?? "GET"),
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+      prefixUrl: String(options.prefixUrl || ""),
+      retry: normalizeRetryOptions(options.retry),
+      throwHttpErrors: options.throwHttpErrors !== false,
+      timeout: options.timeout ?? 1e4,
+      fetch: options.fetch ?? globalThis.fetch.bind(globalThis)
+    };
+    if (typeof this._input !== "string" && !(this._input instanceof URL || this._input instanceof globalThis.Request)) {
+      throw new TypeError("`input` must be a string, URL, or Request");
+    }
+    if (this._options.prefixUrl && typeof this._input === "string") {
+      if (this._input.startsWith("/")) {
+        throw new Error("`input` must not begin with a slash when using `prefixUrl`");
+      }
+      if (!this._options.prefixUrl.endsWith("/")) {
+        this._options.prefixUrl += "/";
+      }
+      this._input = this._options.prefixUrl + this._input;
+    }
+    if (supportsAbortController) {
+      this.abortController = new globalThis.AbortController();
+      const originalSignal = this._options.signal ?? this._input.signal;
+      if (originalSignal?.aborted) {
+        this.abortController.abort(originalSignal?.reason);
+      }
+      originalSignal?.addEventListener("abort", () => {
+        this.abortController.abort(originalSignal.reason);
+      });
+      this._options.signal = this.abortController.signal;
+    }
+    if (supportsRequestStreams) {
+      this._options.duplex = "half";
+    }
+    if (this._options.json !== void 0) {
+      this._options.body = this._options.stringifyJson?.(this._options.json) ?? JSON.stringify(this._options.json);
+      this._options.headers.set("content-type", this._options.headers.get("content-type") ?? "application/json");
+    }
+    this.request = new globalThis.Request(this._input, this._options);
+    if (this._options.searchParams) {
+      const textSearchParams = typeof this._options.searchParams === "string" ? this._options.searchParams.replace(/^\?/, "") : new URLSearchParams(this._options.searchParams).toString();
+      const searchParams = "?" + textSearchParams;
+      const url = this.request.url.replace(/(?:\?.*?)?(?=#|$)/, searchParams);
+      if ((supportsFormData && this._options.body instanceof globalThis.FormData || this._options.body instanceof URLSearchParams) && !(this._options.headers && this._options.headers["content-type"])) {
+        this.request.headers.delete("content-type");
+      }
+      this.request = new globalThis.Request(new globalThis.Request(url, { ...this.request }), this._options);
+    }
+  }
+  _calculateRetryDelay(error) {
+    this._retryCount++;
+    if (this._retryCount > this._options.retry.limit || error instanceof TimeoutError) {
+      throw error;
+    }
+    if (error instanceof HTTPError) {
+      if (!this._options.retry.statusCodes.includes(error.response.status)) {
+        throw error;
+      }
+      const retryAfter = error.response.headers.get("Retry-After") ?? error.response.headers.get("RateLimit-Reset") ?? error.response.headers.get("X-RateLimit-Reset") ?? error.response.headers.get("X-Rate-Limit-Reset");
+      if (retryAfter && this._options.retry.afterStatusCodes.includes(error.response.status)) {
+        let after = Number(retryAfter) * 1e3;
+        if (Number.isNaN(after)) {
+          after = Date.parse(retryAfter) - Date.now();
+        } else if (after >= Date.parse("2024-01-01")) {
+          after -= Date.now();
+        }
+        const max = this._options.retry.maxRetryAfter ?? after;
+        return after < max ? after : max;
+      }
+      if (error.response.status === 413) {
+        throw error;
+      }
+    }
+    const retryDelay = this._options.retry.delay(this._retryCount);
+    return Math.min(this._options.retry.backoffLimit, retryDelay);
+  }
+  _decorateResponse(response) {
+    if (this._options.parseJson) {
+      response.json = async () => this._options.parseJson(await response.text());
+    }
+    return response;
+  }
+  async _retry(function_) {
+    try {
+      return await function_();
+    } catch (error) {
+      const ms = Math.min(this._calculateRetryDelay(error), maxSafeTimeout);
+      if (this._retryCount < 1) {
+        throw error;
+      }
+      await delay(ms, { signal: this._options.signal });
+      for (const hook of this._options.hooks.beforeRetry) {
+        const hookResult = await hook({
+          request: this.request,
+          options: this._options,
+          error,
+          retryCount: this._retryCount
+        });
+        if (hookResult === stop) {
+          return;
+        }
+      }
+      return this._retry(function_);
+    }
+  }
+  async _fetch() {
+    for (const hook of this._options.hooks.beforeRequest) {
+      const result = await hook(this.request, this._options);
+      if (result instanceof Request) {
+        this.request = result;
+        break;
+      }
+      if (result instanceof Response) {
+        return result;
+      }
+    }
+    const nonRequestOptions = findUnknownOptions(this.request, this._options);
+    const mainRequest = this.request;
+    this.request = mainRequest.clone();
+    if (this._options.timeout === false) {
+      return this._options.fetch(mainRequest, nonRequestOptions);
+    }
+    return timeout(mainRequest, nonRequestOptions, this.abortController, this._options);
+  }
+  /* istanbul ignore next */
+  _stream(response, onDownloadProgress) {
+    const totalBytes = Number(response.headers.get("content-length")) || 0;
+    let transferredBytes = 0;
+    if (response.status === 204) {
+      if (onDownloadProgress) {
+        onDownloadProgress({ percent: 1, totalBytes, transferredBytes }, new Uint8Array());
+      }
+      return new globalThis.Response(null, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers
+      });
+    }
+    return new globalThis.Response(new globalThis.ReadableStream({
+      async start(controller) {
+        const reader = response.body.getReader();
+        if (onDownloadProgress) {
+          onDownloadProgress({ percent: 0, transferredBytes: 0, totalBytes }, new Uint8Array());
+        }
+        async function read() {
+          const { done, value } = await reader.read();
+          if (done) {
+            controller.close();
+            return;
+          }
+          if (onDownloadProgress) {
+            transferredBytes += value.byteLength;
+            const percent = totalBytes === 0 ? 0 : transferredBytes / totalBytes;
+            onDownloadProgress({ percent, transferredBytes, totalBytes }, value);
+          }
+          controller.enqueue(value);
+          await read();
+        }
+        await read();
+      }
+    }), {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers
+    });
+  }
+};
+
+// node_modules/ky/distribution/index.js
+var createInstance = (defaults) => {
+  const ky2 = (input, options) => Ky.create(input, validateAndMerge(defaults, options));
+  for (const method of requestMethods) {
+    ky2[method] = (input, options) => Ky.create(input, validateAndMerge(defaults, options, { method }));
+  }
+  ky2.create = (newDefaults) => createInstance(validateAndMerge(newDefaults));
+  ky2.extend = (newDefaults) => {
+    if (typeof newDefaults === "function") {
+      newDefaults = newDefaults(defaults ?? {});
+    }
+    return createInstance(validateAndMerge(defaults, newDefaults));
+  };
+  ky2.stop = stop;
+  return ky2;
+};
+var ky = createInstance();
+var distribution_default = ky;
+
+// node_modules/@prisma/adapter-d1/dist/index.mjs
+var name = "@prisma/adapter-d1";
+var FORCE_COLOR2;
+var NODE_DISABLE_COLORS2;
+var NO_COLOR2;
+var TERM2;
+var isTTY2 = true;
+if (typeof process !== "undefined") {
+  ({ FORCE_COLOR: FORCE_COLOR2, NODE_DISABLE_COLORS: NODE_DISABLE_COLORS2, NO_COLOR: NO_COLOR2, TERM: TERM2 } = process.env || {});
+  isTTY2 = process.stdout && process.stdout.isTTY;
+}
+var $2 = {
+  enabled: !NODE_DISABLE_COLORS2 && NO_COLOR2 == null && TERM2 !== "dumb" && (FORCE_COLOR2 != null && FORCE_COLOR2 !== "0" || isTTY2)
+};
+function init2(x, y) {
+  let rgx = new RegExp(`\\x1b\\[${y}m`, "g");
+  let open = `\x1B[${x}m`, close = `\x1B[${y}m`;
+  return function(txt) {
+    if (!$2.enabled || txt == null) return txt;
+    return open + (!!~("" + txt).indexOf(close) ? txt.replace(rgx, close + open) : txt) + close;
+  };
+}
+var reset2 = init2(0, 0);
+var bold2 = init2(1, 22);
+var dim2 = init2(2, 22);
+var italic2 = init2(3, 23);
+var underline2 = init2(4, 24);
+var inverse2 = init2(7, 27);
+var hidden2 = init2(8, 28);
+var strikethrough2 = init2(9, 29);
+var black2 = init2(30, 39);
+var red2 = init2(31, 39);
+var green2 = init2(32, 39);
+var yellow2 = init2(33, 39);
+var blue2 = init2(34, 39);
+var magenta2 = init2(35, 39);
+var cyan2 = init2(36, 39);
+var white2 = init2(37, 39);
+var gray2 = init2(90, 39);
+var grey2 = init2(90, 39);
+var bgBlack2 = init2(40, 49);
+var bgRed2 = init2(41, 49);
+var bgGreen2 = init2(42, 49);
+var bgYellow2 = init2(43, 49);
+var bgBlue2 = init2(44, 49);
+var bgMagenta2 = init2(45, 49);
+var bgCyan2 = init2(46, 49);
+var bgWhite2 = init2(47, 49);
+var MAX_BIND_VALUES = 98;
+var GENERIC_SQLITE_ERROR = 1;
+function getColumnTypes(columnNames, rows) {
+  const columnTypes = [];
+  columnLoop: for (let columnIndex = 0; columnIndex < columnNames.length; columnIndex++) {
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+      const candidateValue = rows[rowIndex][columnIndex];
+      if (candidateValue !== null) {
+        const inferred = inferColumnType(candidateValue);
+        if (columnTypes[columnIndex] === void 0 || inferred === ColumnTypeEnum.Text) {
+          columnTypes[columnIndex] = inferred;
+        }
+        if (inferred !== ColumnTypeEnum.UnknownNumber) {
+          continue columnLoop;
+        }
+      }
+    }
+    if (columnTypes[columnIndex] === void 0) {
+      columnTypes[columnIndex] = ColumnTypeEnum.Int32;
+    }
+  }
+  return columnTypes;
+}
+function inferColumnType(value) {
+  switch (typeof value) {
+    case "string":
+      return inferStringType(value);
+    case "number":
+      return inferNumberType(value);
+    case "object":
+      return inferObjectType(value);
+    default:
+      throw new UnexpectedTypeError(value);
+  }
+}
+var isoDateRegex = new RegExp(
+  /^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))$|^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$|^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/
+);
+var sqliteDateRegex = /^\d{4}-[0-1]\d-[0-3]\d [0-2]\d:[0-5]\d:[0-5]\d$/;
+function isISODate(str) {
+  return isoDateRegex.test(str) || sqliteDateRegex.test(str);
+}
+function inferStringType(value) {
+  if (isISODate(value)) {
+    return ColumnTypeEnum.DateTime;
+  }
+  return ColumnTypeEnum.Text;
+}
+function inferNumberType(_) {
+  return ColumnTypeEnum.UnknownNumber;
+}
+function inferObjectType(value) {
+  if (value instanceof Array) {
+    return ColumnTypeEnum.Bytes;
+  }
+  throw new UnexpectedTypeError(value);
+}
+var UnexpectedTypeError = class extends Error {
+  name = "UnexpectedTypeError";
+  constructor(value) {
+    const type = typeof value;
+    const repr = type === "object" ? JSON.stringify(value) : String(value);
+    super(`unexpected value of type ${type}: ${repr}`);
+  }
+};
+function mapRow(result, columnTypes) {
+  for (let i = 0; i < result.length; i++) {
+    const value = result[i];
+    if (value instanceof ArrayBuffer) {
+      result[i] = Array.from(new Uint8Array(value));
+      continue;
+    }
+    if (typeof value === "number" && (columnTypes[i] === ColumnTypeEnum.Int32 || columnTypes[i] === ColumnTypeEnum.Int64) && !Number.isInteger(value)) {
+      result[i] = Math.trunc(value);
+      continue;
+    }
+    if (typeof value === "number" && columnTypes[i] === ColumnTypeEnum.Text) {
+      result[i] = value.toString();
+      continue;
+    }
+    if (typeof value === "bigint") {
+      result[i] = value.toString();
+      continue;
+    }
+    if (columnTypes[i] === ColumnTypeEnum.Boolean) {
+      result[i] = JSON.parse(value);
+    }
+  }
+  return result;
+}
+function mapArg(arg, argType) {
+  if (arg === null) {
+    return null;
+  }
+  if (typeof arg === "bigint" || argType.scalarType === "bigint") {
+    const asInt56 = Number.parseInt(`${arg}`);
+    if (!Number.isSafeInteger(asInt56)) {
+      throw new Error(`Invalid Int64-encoded value received: ${arg}`);
+    }
+    return asInt56;
+  }
+  if (typeof arg === "string" && argType.scalarType === "int") {
+    return Number.parseInt(arg);
+  }
+  if (typeof arg === "string" && argType.scalarType === "float") {
+    return Number.parseFloat(arg);
+  }
+  if (typeof arg === "string" && argType.scalarType === "decimal") {
+    return Number.parseFloat(arg);
+  }
+  if (arg === true) {
+    return 1;
+  }
+  if (arg === false) {
+    return 0;
+  }
+  if (typeof arg === "string" && argType.scalarType === "datetime") {
+    arg = new Date(arg);
+  }
+  if (arg instanceof Date) {
+    return arg.toISOString().replace("Z", "+00:00");
+  }
+  if (typeof arg === "string" && argType.scalarType === "bytes") {
+    return Array.from(Buffer.from(arg, "base64"));
+  }
+  if (arg instanceof Uint8Array) {
+    return Array.from(arg);
+  }
+  return arg;
+}
+function convertDriverError(error) {
+  if (isDriverError(error)) {
+    return {
+      originalMessage: error.message,
+      ...mapDriverError(error)
+    };
+  }
+  throw error;
+}
+function mapDriverError(error) {
+  let stripped = error.message.split("D1_ERROR: ").at(1) ?? error.message;
+  stripped = stripped.split("SqliteError: ").at(1) ?? stripped;
+  if (stripped.startsWith("UNIQUE constraint failed") || stripped.startsWith("PRIMARY KEY constraint failed")) {
+    const fields = stripped.split(": ").at(1)?.split(", ").map((field) => field.split(".").pop());
+    return {
+      kind: "UniqueConstraintViolation",
+      constraint: fields !== void 0 ? { fields } : void 0
+    };
+  } else if (stripped.startsWith("NOT NULL constraint failed")) {
+    const fields = stripped.split(": ").at(1)?.split(", ").map((field) => field.split(".").pop());
+    return {
+      kind: "NullConstraintViolation",
+      constraint: fields !== void 0 ? { fields } : void 0
+    };
+  } else if (stripped.startsWith("FOREIGN KEY constraint failed") || stripped.startsWith("CHECK constraint failed")) {
+    return {
+      kind: "ForeignKeyConstraintViolation",
+      constraint: { foreignKey: {} }
+    };
+  } else if (stripped.startsWith("no such table")) {
+    return {
+      kind: "TableDoesNotExist",
+      table: stripped.split(": ").at(1)
+    };
+  } else if (stripped.startsWith("no such column")) {
+    return {
+      kind: "ColumnNotFound",
+      column: stripped.split(": ").at(1)
+    };
+  } else if (stripped.includes("has no column named ")) {
+    return {
+      kind: "ColumnNotFound",
+      column: stripped.split("has no column named ").at(1)
+    };
+  }
+  return {
+    kind: "sqlite",
+    extendedCode: error["code"] ?? error["cause"]?.["code"] ?? 1,
+    message: error.message
+  };
+}
+function isDriverError(error) {
+  return typeof error["message"] === "string";
+}
+var debug2 = Debug("prisma:driver-adapter:d1-http");
+function onUnsuccessfulD1HTTPResponse({ errors }) {
+  debug2("D1 HTTP Errors: %O", errors);
+  const error = errors.at(0) ?? { message: "Unknown error", code: GENERIC_SQLITE_ERROR };
+  throw new DriverAdapterError(convertDriverError(error));
+}
+function onGenericD1HTTPError(error) {
+  debug2("HTTP Error: %O", error);
+  throw new DriverAdapterError(convertDriverError(error));
+}
+function onError(error) {
+  console.error("Error in performIO: %O", error);
+  throw new DriverAdapterError(convertDriverError(error));
+}
+async function performRawQuery(client, options) {
+  try {
+    const response = await client.post("raw", options).json();
+    const tag = "[js::performRawQuery]";
+    debug2(`${tag} %O`, {
+      success: response.success,
+      errors: response.errors,
+      messages: response.messages,
+      result: response.result
+    });
+    if (!response.success) {
+      onUnsuccessfulD1HTTPResponse(response);
+    }
+    return response.result;
+  } catch (e) {
+    onGenericD1HTTPError(e);
+  }
+}
+function isD1HTTPParams(params) {
+  return typeof params === "object" && params !== null && "CLOUDFLARE_D1_TOKEN" in params && "CLOUDFLARE_ACCOUNT_ID" in params && "CLOUDFLARE_DATABASE_ID" in params;
+}
+var D1HTTPQueryable = class {
+  constructor(client) {
+    this.client = client;
+  }
+  provider = "sqlite";
+  adapterName = `${name}-http`;
+  /**
+   * Execute a query given as SQL, interpolating the given parameters.
+   */
+  async queryRaw(query) {
+    const tag = "[js::query_raw]";
+    debug2(`${tag} %O`, query);
+    const data = await this.performIO(query);
+    const convertedData = this.convertData(data);
+    return convertedData;
+  }
+  convertData({ columnNames, rows: results }) {
+    if (results.length === 0) {
+      return {
+        columnNames: [],
+        columnTypes: [],
+        rows: []
+      };
+    }
+    const columnTypes = getColumnTypes(columnNames, results);
+    const rows = results.map((value) => mapRow(value, columnTypes));
+    return {
+      columnNames,
+      columnTypes,
+      rows
+    };
+  }
+  /**
+   * Execute a query given as SQL, interpolating the given parameters and
+   * returning the number of affected rows.
+   * Note: Queryable expects a u64, but napi.rs only supports u32.
+   */
+  async executeRaw(query) {
+    const tag = "[js::execute_raw]";
+    debug2(`${tag} %O`, query);
+    const result = await this.performIO(query);
+    return result.affectedRows ?? 0;
+  }
+  async performIO(query) {
+    try {
+      const body = {
+        json: {
+          sql: query.sql,
+          params: query.args.map((arg, i) => mapArg(arg, query.argTypes[i]))
+        }
+      };
+      const tag = "[js::perform_io]";
+      debug2(`${tag} %O`, body);
+      const results = await performRawQuery(this.client, body);
+      if (results.length !== 1) {
+        throw new Error("Expected exactly one result");
+      }
+      const result = results[0];
+      const { columns: columnNames = [], rows = [] } = result.results ?? {};
+      const affectedRows = result.meta?.changes;
+      return { rows, columnNames, affectedRows };
+    } catch (e) {
+      onError(e);
+    }
+  }
+};
+var D1HTTPTransaction = class extends D1HTTPQueryable {
+  constructor(client, options) {
+    super(client);
+    this.options = options;
+  }
+  async commit() {
+    debug2(`[js::commit]`);
+  }
+  async rollback() {
+    debug2(`[js::rollback]`);
+  }
+};
+var PrismaD1HTTPAdapter = class extends D1HTTPQueryable {
+  constructor(params, release) {
+    const D1_API_BASE_URL = `https://api.cloudflare.com/client/v4/accounts/${params.CLOUDFLARE_ACCOUNT_ID}/d1/database/${params.CLOUDFLARE_DATABASE_ID}`;
+    const client = distribution_default.create({
+      prefixUrl: D1_API_BASE_URL,
+      headers: {
+        Authorization: `Bearer ${params.CLOUDFLARE_D1_TOKEN}`
+      },
+      // Don't automatically throw on non-2xx status codes
+      throwHttpErrors: false
+    });
+    super(client);
+    this.release = release;
+  }
+  tags = {
+    error: red2("prisma:error"),
+    warn: yellow2("prisma:warn"),
+    info: cyan2("prisma:info"),
+    query: blue2("prisma:query")
+  };
+  alreadyWarned = /* @__PURE__ */ new Set();
+  /**
+   * This will warn once per transaction
+   * e.g. the following two explicit transactions
+   * will only trigger _two_ warnings
+   *
+   * ```ts
+   * await prisma.$transaction([ ...queries ])
+   * await prisma.$transaction([ ...moreQueries ])
+   * ```
+   */
+  warnOnce = (key, message2, ...args) => {
+    if (!this.alreadyWarned.has(key)) {
+      this.alreadyWarned.add(key);
+      console.info(`${this.tags.warn} ${message2}`, ...args);
+    }
+  };
+  async executeScript(script) {
+    try {
+      await performRawQuery(this.client, {
+        json: {
+          sql: script
+        }
+      });
+    } catch (error) {
+      onError(error);
+    }
+  }
+  getConnectionInfo() {
+    return {
+      maxBindValues: MAX_BIND_VALUES,
+      supportsRelationJoins: false
+    };
+  }
+  async startTransaction(isolationLevel) {
+    if (isolationLevel && isolationLevel !== "SERIALIZABLE") {
+      throw new DriverAdapterError({
+        kind: "InvalidIsolationLevel",
+        level: isolationLevel
+      });
+    }
+    this.warnOnce(
+      "D1 Transaction",
+      "Cloudflare D1 does not support transactions yet. When using Prisma's D1 adapter, implicit & explicit transactions will be ignored and run as individual queries, which breaks the guarantees of the ACID properties of transactions. For more details see https://pris.ly/d/d1-transactions"
+    );
+    const options = {
+      usePhantomQuery: true
+    };
+    const tag = "[js::startTransaction]";
+    debug2("%s options: %O", tag, options);
+    return new D1HTTPTransaction(this.client, options);
+  }
+  async dispose() {
+    await this.release?.();
+  }
+};
+var PrismaD1HTTPAdapterFactory = class {
+  constructor(params) {
+    this.params = params;
+  }
+  provider = "sqlite";
+  adapterName = `${name}-http`;
+  async connect() {
+    return new PrismaD1HTTPAdapter(this.params, async () => {
+    });
+  }
+  async connectToShadowDb() {
+    const D1_API_BASE_URL = `https://api.cloudflare.com/client/v4/accounts/${this.params.CLOUDFLARE_ACCOUNT_ID}/d1/database`;
+    const client = distribution_default.create({
+      headers: {
+        Authorization: `Bearer ${this.params.CLOUDFLARE_D1_TOKEN}`
+      },
+      // Don't throw on non-2xx status codes
+      throwHttpErrors: false
+    });
+    const createShadowDatabase = async () => {
+      const tag = "[js::connectToShadowDb::createShadowDatabase]";
+      const SHADOW_DATABASE_PREFIX = "_prisma_shadow_";
+      const CLOUDFLARE_SHADOW_DATABASE_NAME = `${SHADOW_DATABASE_PREFIX}${globalThis.crypto.randomUUID()}`;
+      debug2(`${tag} creating database %s`, CLOUDFLARE_SHADOW_DATABASE_NAME);
+      try {
+        const response = await client.post(D1_API_BASE_URL, {
+          json: {
+            name: CLOUDFLARE_SHADOW_DATABASE_NAME
+          }
+        }).json();
+        debug2(`${tag} %O`, response);
+        if (!response.success) {
+          onUnsuccessfulD1HTTPResponse(response);
+        }
+        const { uuid: CLOUDFLARE_SHADOW_DATABASE_ID2 } = response.result;
+        debug2(`${tag} created database %s with ID %s`, CLOUDFLARE_SHADOW_DATABASE_NAME, CLOUDFLARE_SHADOW_DATABASE_ID2);
+        return CLOUDFLARE_SHADOW_DATABASE_ID2;
+      } catch (e) {
+        onGenericD1HTTPError(e);
+      }
+    };
+    const CLOUDFLARE_SHADOW_DATABASE_ID = this.params.CLOUDFLARE_SHADOW_DATABASE_ID ?? await createShadowDatabase();
+    const dispose = async () => {
+      const tag = "[js::connectToShadowDb::dispose]";
+      try {
+        debug2(`${tag} deleting database %s`, CLOUDFLARE_SHADOW_DATABASE_ID);
+        const response = await client.delete(`${D1_API_BASE_URL}/${CLOUDFLARE_SHADOW_DATABASE_ID}`).json();
+        debug2(`${tag} %O`, response);
+        if (!response.success) {
+          onUnsuccessfulD1HTTPResponse(response);
+        }
+      } catch (e) {
+        onGenericD1HTTPError(e);
+      }
+    };
+    return new PrismaD1HTTPAdapter(this.params, dispose);
+  }
+};
+var debug22 = Debug("prisma:driver-adapter:d1");
+var D1WorkerQueryable = class {
+  constructor(client) {
+    this.client = client;
+  }
+  provider = "sqlite";
+  adapterName = name;
+  /**
+   * Execute a query given as SQL, interpolating the given parameters.
+   */
+  async queryRaw(query) {
+    const tag = "[js::query_raw]";
+    debug22(`${tag} %O`, query);
+    const data = await this.performIO(query);
+    const convertedData = this.convertData(data);
+    return convertedData;
+  }
+  convertData(ioResult) {
+    const columnNames = ioResult[0];
+    const results = ioResult[1];
+    if (results.length === 0) {
+      return {
+        columnNames: [],
+        columnTypes: [],
+        rows: []
+      };
+    }
+    const columnTypes = Object.values(getColumnTypes(columnNames, results));
+    const rows = results.map((value) => mapRow(value, columnTypes));
+    return {
+      columnNames,
+      // * Note: without Object.values the array looks like
+      // * columnTypes: [ id: 128 ],
+      // * and errors with:
+      // * ✘ [ERROR] A hanging Promise was canceled. This happens when the worker runtime is waiting for a Promise from JavaScript to resolve, but has detected that the Promise cannot possibly ever resolve because all code and events related to the Promise's I/O context have already finished.
+      columnTypes,
+      rows
+    };
+  }
+  /**
+   * Execute a query given as SQL, interpolating the given parameters and
+   * returning the number of affected rows.
+   * Note: Queryable expects a u64, but napi.rs only supports u32.
+   */
+  async executeRaw(query) {
+    const tag = "[js::execute_raw]";
+    debug22(`${tag} %O`, query);
+    const result = await this.performIO(query, true);
+    return result.meta.changes ?? 0;
+  }
+  async performIO(query, executeRaw = false) {
+    try {
+      const args = query.args.map((arg, i) => mapArg(arg, query.argTypes[i]));
+      const stmt = this.client.prepare(query.sql).bind(...args);
+      if (executeRaw) {
+        return await stmt.run();
+      } else {
+        const [columnNames, ...rows] = await stmt.raw({ columnNames: true });
+        return [columnNames, rows];
+      }
+    } catch (e) {
+      onError2(e);
+    }
+  }
+};
+var D1WorkerTransaction = class extends D1WorkerQueryable {
+  constructor(client, options) {
+    super(client);
+    this.options = options;
+  }
+  async commit() {
+    debug22(`[js::commit]`);
+  }
+  async rollback() {
+    debug22(`[js::rollback]`);
+  }
+};
+var PrismaD1WorkerAdapter = class extends D1WorkerQueryable {
+  constructor(client, release) {
+    super(client);
+    this.release = release;
+  }
+  tags = {
+    error: red2("prisma:error"),
+    warn: yellow2("prisma:warn"),
+    info: cyan2("prisma:info"),
+    query: blue2("prisma:query")
+  };
+  alreadyWarned = /* @__PURE__ */ new Set();
+  /**
+   * This will warn once per transaction
+   * e.g. the following two explicit transactions
+   * will only trigger _two_ warnings
+   *
+   * ```ts
+   * await prisma.$transaction([ ...queries ])
+   * await prisma.$transaction([ ...moreQueries ])
+   * ```
+   */
+  warnOnce = (key, message2, ...args) => {
+    if (!this.alreadyWarned.has(key)) {
+      this.alreadyWarned.add(key);
+      console.info(`${this.tags.warn} ${message2}`, ...args);
+    }
+  };
+  async executeScript(script) {
+    try {
+      await this.client.exec(script);
+    } catch (error) {
+      onError2(error);
+    }
+  }
+  getConnectionInfo() {
+    return {
+      maxBindValues: MAX_BIND_VALUES,
+      supportsRelationJoins: false
+    };
+  }
+  async startTransaction(isolationLevel) {
+    if (isolationLevel && isolationLevel !== "SERIALIZABLE") {
+      throw new DriverAdapterError({
+        kind: "InvalidIsolationLevel",
+        level: isolationLevel
+      });
+    }
+    this.warnOnce(
+      "D1 Transaction",
+      "Cloudflare D1 does not support transactions yet. When using Prisma's D1 adapter, implicit & explicit transactions will be ignored and run as individual queries, which breaks the guarantees of the ACID properties of transactions. For more details see https://pris.ly/d/d1-transactions"
+    );
+    const options = {
+      usePhantomQuery: true
+    };
+    const tag = "[js::startTransaction]";
+    debug22("%s options: %O", tag, options);
+    return new D1WorkerTransaction(this.client, options);
+  }
+  async dispose() {
+    await this.release?.();
+  }
+};
+var PrismaD1WorkerAdapterFactory = class {
+  constructor(client) {
+    this.client = client;
+  }
+  provider = "sqlite";
+  adapterName = name;
+  async connect() {
+    return new PrismaD1WorkerAdapter(this.client, async () => {
+    });
+  }
+};
+function onError2(error) {
+  console.error("Error in performIO: %O", error);
+  throw new DriverAdapterError(convertDriverError(error));
+}
+var PrismaD1 = class {
+  provider = "sqlite";
+  adapterName = name;
+  connect;
+  connectToShadowDb;
+  constructor(params) {
+    if (isD1HTTPParams(params)) {
+      const factory = new PrismaD1HTTPAdapterFactory(params);
+      const self = this;
+      self.connect = factory.connect.bind(factory);
+      self.connectToShadowDb = factory.connectToShadowDb.bind(factory);
+    } else {
+      const factory = new PrismaD1WorkerAdapterFactory(params);
+      const self = this;
+      self.connect = factory.connect.bind(factory);
+    }
+  }
+};
+
+// src/db/client.ts
+if (typeof globalThis.setImmediate === "undefined") {
+  globalThis.setImmediate = (fn) => setTimeout(fn, 0);
+}
+function createPrismaClient(env) {
+  const adapter = new PrismaD1(env.HYPEFEED_DB);
+  return new import_client.PrismaClient({
+    adapter,
+    log: env.ENVIRONMENT === "development" ? ["query", "error", "warn"] : ["error"]
+  });
+}
+async function withPrisma(env, callback) {
+  const prisma = createPrismaClient(env);
+  try {
+    return await callback(prisma);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+// src/services/channelService.ts
+var ChannelService = class {
+  constructor(env) {
+    this.env = env;
+  }
+  /**
+   * Get all active channels (LIVE, TRYOUT, CANDIDATE)
+   */
+  async getActiveChannels() {
+    return withPrisma(this.env, async (prisma) => {
+      const channels = await prisma.channel.findMany({
+        where: {
+          status: {
+            in: ["LIVE", "TRYOUT", "CANDIDATE"]
+          }
+        },
+        orderBy: {
+          name: "asc"
+        }
+      });
+      return channels.map(this.mapToChannelInterface);
+    });
+  }
+  /**
+   * Get all channels
+   */
+  async getAllChannels() {
+    return withPrisma(this.env, async (prisma) => {
+      const channels = await prisma.channel.findMany({
+        orderBy: {
+          name: "asc"
+        }
+      });
+      return channels.map(this.mapToChannelInterface);
+    });
+  }
+  /**
+   * Get channel by channel ID (YouTube channel ID)
+   */
+  async getChannelById(channelId) {
+    return withPrisma(this.env, async (prisma) => {
+      const channel = await prisma.channel.findUnique({
+        where: {
+          channelId
+        }
+      });
+      return channel ? this.mapToChannelInterface(channel) : null;
+    });
+  }
+  /**
+   * Get channels by category
+   */
+  async getChannelsByCategory(category) {
+    return withPrisma(this.env, async (prisma) => {
+      const channels = await prisma.channel.findMany({
+        where: {
+          category
+        },
+        orderBy: {
+          name: "asc"
+        }
+      });
+      return channels.map(this.mapToChannelInterface);
+    });
+  }
+  /**
+   * Create a new channel
+   */
+  async createChannel(data) {
+    return withPrisma(this.env, async (prisma) => {
+      const channel = await prisma.channel.create({
+        data: {
+          name: data.name,
+          handle: data.handle,
+          channelId: data.channel_id,
+          youtubeUrl: data.youtube_url,
+          rssFeedUrl: data.rss_feed_url,
+          subscribers: data.subscribers,
+          description: data.description,
+          postingFrequency: data.posting_frequency,
+          category: data.category,
+          status: data.status
+        }
+      });
+      return this.mapToChannelInterface(channel);
+    });
+  }
+  /**
+   * Update channel status
+   */
+  async updateChannelStatus(channelId, status) {
+    return withPrisma(this.env, async (prisma) => {
+      const channel = await prisma.channel.update({
+        where: {
+          channelId
+        },
+        data: {
+          status
+        }
+      });
+      return this.mapToChannelInterface(channel);
+    });
+  }
+  /**
+   * Update channel details
+   */
+  async updateChannel(channelId, data) {
+    return withPrisma(this.env, async (prisma) => {
+      const updateData = {};
+      if (data.name !== void 0) updateData.name = data.name;
+      if (data.handle !== void 0) updateData.handle = data.handle;
+      if (data.youtube_url !== void 0) updateData.youtubeUrl = data.youtube_url;
+      if (data.rss_feed_url !== void 0) updateData.rssFeedUrl = data.rss_feed_url;
+      if (data.subscribers !== void 0) updateData.subscribers = data.subscribers;
+      if (data.description !== void 0) updateData.description = data.description;
+      if (data.posting_frequency !== void 0) updateData.postingFrequency = data.posting_frequency;
+      if (data.category !== void 0) updateData.category = data.category;
+      if (data.status !== void 0) updateData.status = data.status;
+      const channel = await prisma.channel.update({
+        where: {
+          channelId
+        },
+        data: updateData
+      });
+      return this.mapToChannelInterface(channel);
+    });
+  }
+  /**
+   * Update last fetched timestamp
+   */
+  async updateLastFetched(channelId, success) {
+    await withPrisma(this.env, async (prisma) => {
+      const updateData = {
+        lastFetchedAt: /* @__PURE__ */ new Date()
+      };
+      if (success) {
+        updateData.lastSuccessAt = /* @__PURE__ */ new Date();
+      }
+      await prisma.channel.update({
+        where: {
+          channelId
+        },
+        data: updateData
+      });
+    });
+  }
+  /**
+   * Log fetch attempt
+   */
+  async logFetchAttempt(channelId, success, itemCount, error, duration) {
+    await withPrisma(this.env, async (prisma) => {
+      await prisma.fetchLog.create({
+        data: {
+          channelId,
+          success,
+          itemCount,
+          error,
+          duration
+        }
+      });
+    });
+  }
+  /**
+   * Bulk create channels (for seeding)
+   */
+  async bulkCreateChannels(channels) {
+    return withPrisma(this.env, async (prisma) => {
+      const result = await prisma.channel.createMany({
+        data: channels.map((channel) => ({
+          name: channel.name,
+          handle: channel.handle,
+          channelId: channel.channel_id,
+          youtubeUrl: channel.youtube_url,
+          rssFeedUrl: channel.rss_feed_url,
+          subscribers: channel.subscribers,
+          description: channel.description,
+          postingFrequency: channel.posting_frequency,
+          category: channel.category,
+          status: channel.status
+        })),
+        skipDuplicates: true
+      });
+      return result.count;
+    });
+  }
+  /**
+   * Map Prisma Channel model to Channel interface
+   */
+  mapToChannelInterface(dbChannel) {
+    return {
+      name: dbChannel.name,
+      handle: dbChannel.handle,
+      channel_id: dbChannel.channelId,
+      youtube_url: dbChannel.youtubeUrl,
+      rss_feed_url: dbChannel.rssFeedUrl,
+      subscribers: dbChannel.subscribers,
+      description: dbChannel.description,
+      posting_frequency: dbChannel.postingFrequency,
+      category: dbChannel.category,
+      status: dbChannel.status
+    };
+  }
+};
 
 // src/handlers/health.ts
 function createHealthHandlers() {
@@ -4245,7 +6874,11 @@ function createHealthHandlers() {
   app2.get("/health", async (c) => {
     try {
       const storage = new StorageService(c.env);
-      const storageHealth = await storage.getStorageHealth();
+      const channelService = new ChannelService(c.env);
+      const [storageHealth, activeChannels] = await Promise.all([
+        storage.getStorageHealth(),
+        channelService.getActiveChannels()
+      ]);
       const health = {
         status: "healthy",
         timestamp: (/* @__PURE__ */ new Date()).toISOString(),
@@ -4253,8 +6886,8 @@ function createHealthHandlers() {
         environment: c.env.ENVIRONMENT || "unknown",
         storage: storageHealth,
         channels: {
-          total: getActiveChannels().length,
-          active: getActiveChannels().filter((ch) => ch.status === "LIVE").length
+          total: activeChannels.length,
+          active: activeChannels.filter((ch) => ch.status === "LIVE").length
         },
         services: {
           aggregator: "operational",
@@ -4278,9 +6911,12 @@ function createHealthHandlers() {
   });
   app2.get("/channels", async (c) => {
     try {
-      const channels = getActiveChannels();
+      const channelService = new ChannelService(c.env);
       const storage = new StorageService(c.env);
-      const metadata = await storage.getMetadata();
+      const [channels, metadata] = await Promise.all([
+        channelService.getActiveChannels(),
+        storage.getMetadata()
+      ]);
       const response = {
         channels: channels.map((channel) => ({
           name: channel.name,
@@ -4323,8 +6959,8 @@ function createHealthHandlers() {
   app2.get("/channels/:channelId", async (c) => {
     try {
       const channelId = c.req.param("channelId");
-      const channels = getActiveChannels();
-      const channel = channels.find((ch) => ch.channel_id === channelId);
+      const channelService = new ChannelService(c.env);
+      const channel = await channelService.getChannelById(channelId);
       if (!channel) {
         return c.json({ error: "Channel not found" }, 404);
       }
@@ -4392,6 +7028,167 @@ function createHealthHandlers() {
   return app2;
 }
 
+// src/handlers/channels.ts
+function createChannelHandlers() {
+  const app2 = new Hono2();
+  app2.use("/*", cors({
+    origin: "*",
+    allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowHeaders: ["Content-Type"],
+    maxAge: 3600
+  }));
+  app2.get("/channels", async (c) => {
+    try {
+      const channelService = new ChannelService(c.env);
+      const status = c.req.query("status");
+      const category = c.req.query("category");
+      let channels;
+      if (status === "active") {
+        channels = await channelService.getActiveChannels();
+      } else if (category) {
+        channels = await channelService.getChannelsByCategory(category);
+      } else {
+        channels = await channelService.getAllChannels();
+      }
+      return c.json({
+        channels,
+        count: channels.length
+      });
+    } catch (error) {
+      console.error("Error fetching channels:", error);
+      return c.json(
+        { error: "Failed to fetch channels", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  app2.get("/channels/:channelId", async (c) => {
+    try {
+      const channelId = c.req.param("channelId");
+      const channelService = new ChannelService(c.env);
+      const channel = await channelService.getChannelById(channelId);
+      if (!channel) {
+        return c.json(
+          { error: "Channel not found" },
+          404
+        );
+      }
+      return c.json(channel);
+    } catch (error) {
+      console.error("Error fetching channel:", error);
+      return c.json(
+        { error: "Failed to fetch channel", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  app2.post("/channels", async (c) => {
+    try {
+      const body = await c.req.json();
+      const channelService = new ChannelService(c.env);
+      const requiredFields = ["name", "handle", "channel_id", "youtube_url", "rss_feed_url", "subscribers", "description", "posting_frequency", "category"];
+      for (const field of requiredFields) {
+        if (!body[field]) {
+          return c.json(
+            { error: `Missing required field: ${field}` },
+            400
+          );
+        }
+      }
+      if (!body.status) {
+        body.status = "PENDING_EVALUATION";
+      }
+      const channel = await channelService.createChannel(body);
+      return c.json(channel, 201);
+    } catch (error) {
+      console.error("Error creating channel:", error);
+      return c.json(
+        { error: "Failed to create channel", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  app2.patch("/channels/:channelId", async (c) => {
+    try {
+      const channelId = c.req.param("channelId");
+      const body = await c.req.json();
+      const channelService = new ChannelService(c.env);
+      const channel = await channelService.updateChannel(channelId, body);
+      if (!channel) {
+        return c.json(
+          { error: "Channel not found" },
+          404
+        );
+      }
+      return c.json(channel);
+    } catch (error) {
+      console.error("Error updating channel:", error);
+      return c.json(
+        { error: "Failed to update channel", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  app2.put("/channels/:channelId/status", async (c) => {
+    try {
+      const channelId = c.req.param("channelId");
+      const body = await c.req.json();
+      const channelService = new ChannelService(c.env);
+      if (!body.status) {
+        return c.json(
+          { error: "Status is required" },
+          400
+        );
+      }
+      const validStatuses = ["PENDING_EVALUATION", "TRYOUT", "CANDIDATE", "LIVE", "REVISIT", "DROP", "DUPLICATE"];
+      if (!validStatuses.includes(body.status)) {
+        return c.json(
+          { error: "Invalid status value", validStatuses },
+          400
+        );
+      }
+      const channel = await channelService.updateChannelStatus(channelId, body.status);
+      if (!channel) {
+        return c.json(
+          { error: "Channel not found" },
+          404
+        );
+      }
+      return c.json(channel);
+    } catch (error) {
+      console.error("Error updating channel status:", error);
+      return c.json(
+        { error: "Failed to update channel status", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  app2.post("/channels/bulk", async (c) => {
+    try {
+      const body = await c.req.json();
+      const channelService = new ChannelService(c.env);
+      if (!Array.isArray(body.channels)) {
+        return c.json(
+          { error: "channels array is required" },
+          400
+        );
+      }
+      const count = await channelService.bulkCreateChannels(body.channels);
+      return c.json({
+        message: "Channels imported successfully",
+        count
+      }, 201);
+    } catch (error) {
+      console.error("Error bulk importing channels:", error);
+      return c.json(
+        { error: "Failed to import channels", message: error instanceof Error ? error.message : "Unknown error" },
+        500
+      );
+    }
+  });
+  return app2;
+}
+
 // src/services/aggregator.ts
 var import_fast_xml_parser = __toESM(require_fxp());
 var xmlParserOptions = {
@@ -4402,19 +7199,26 @@ var xmlParserOptions = {
   parseTrueNumberOnly: false,
   trimValues: true
 };
+var CONTENT_LIMITS = {
+  MAX_TITLE_LENGTH: 120,
+  MAX_DESCRIPTION_LENGTH: 300,
+  TRUNCATION_SUFFIX: "..."
+};
 var RSSAggregator = class {
   parser;
   maxRetries = 3;
   timeout = 1e4;
   // 10 seconds
-  constructor() {
+  channelService;
+  constructor(env) {
     this.parser = new import_fast_xml_parser.XMLParser(xmlParserOptions);
+    this.channelService = new ChannelService(env);
   }
   /**
    * Aggregate RSS feeds from all active channels
    */
   async aggregateFeeds() {
-    const channels = getActiveChannels();
+    const channels = await this.channelService.getActiveChannels();
     const errors = [];
     const allItems = [];
     console.log(`Starting RSS aggregation for ${channels.length} channels`);
@@ -4450,6 +7254,7 @@ var RSSAggregator = class {
    */
   async fetchChannelFeed(channel) {
     let lastError = null;
+    const startTime = Date.now();
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
         console.log(`Fetching feed for ${channel.name} (attempt ${attempt}/${this.maxRetries})`);
@@ -4468,16 +7273,35 @@ var RSSAggregator = class {
         }
         const xmlText = await response.text();
         const feedData = this.parser.parse(xmlText);
-        return this.extractFeedItems(feedData, channel);
+        const items = this.extractFeedItems(feedData, channel);
+        const duration2 = Date.now() - startTime;
+        await this.channelService.updateLastFetched(channel.channel_id, true);
+        await this.channelService.logFetchAttempt(
+          channel.channel_id,
+          true,
+          items.length,
+          void 0,
+          duration2
+        );
+        return items;
       } catch (error) {
         lastError = error;
         console.warn(`Attempt ${attempt} failed for ${channel.name}: ${lastError.message}`);
         if (attempt < this.maxRetries) {
-          const delay = Math.min(1e3 * Math.pow(2, attempt - 1), 5e3);
-          await this.sleep(delay);
+          const delay2 = Math.min(1e3 * Math.pow(2, attempt - 1), 5e3);
+          await this.sleep(delay2);
         }
       }
     }
+    const duration = Date.now() - startTime;
+    await this.channelService.updateLastFetched(channel.channel_id, false);
+    await this.channelService.logFetchAttempt(
+      channel.channel_id,
+      false,
+      void 0,
+      lastError?.message,
+      duration
+    );
     throw new Error(`Failed after ${this.maxRetries} attempts: ${lastError?.message}`);
   }
   /**
@@ -4498,24 +7322,33 @@ var RSSAggregator = class {
    */
   transformToFeedItem(item, channel) {
     try {
-      const title = this.extractText(item.title) || "Untitled";
-      const description = this.extractText(item.description) || this.extractText(item["media:group"]?.["media:description"]) || this.extractText(item.summary) || "";
+      const rawTitle = this.extractText(item.title) || "Untitled";
+      const rawDescription = this.extractText(item.description) || this.extractText(item["media:group"]?.["media:description"]) || this.extractText(item.summary) || "";
       const link = this.extractLink(item) || channel.youtube_url;
       const pubDate = this.extractDate(item) || (/* @__PURE__ */ new Date()).toISOString();
-      const guid = this.extractText(item.guid) || this.extractText(item.id) || `${channel.channel_id}-${Date.now()}`;
+      let guid = this.extractText(item.guid) || this.extractText(item.id);
+      if (!guid || guid === "[object Object]") {
+        const videoId = this.extractVideoId(link);
+        guid = videoId ? `yt:video:${videoId}` : `${channel.channel_id}-${Date.now()}`;
+      }
       const thumbnailUrl = this.extractThumbnail(item) || void 0;
-      const author = this.extractText(item.author) || this.extractText(item["media:group"]?.["media:credit"]) || channel.name;
+      const author = channel.name;
+      const cleanedTitle = this.cleanText(rawTitle);
+      const cleanedDescription = this.cleanText(rawDescription);
+      const normalizedTitle = this.normalizeTitle(cleanedTitle, channel.name);
+      const normalizedDescription = this.normalizeDescription(cleanedDescription);
       return {
         guid,
-        title: this.cleanText(title),
-        description: this.cleanText(description),
+        title: normalizedTitle,
+        description: normalizedDescription,
         link,
         pubDate,
         author,
         category: channel.category,
         channelName: channel.name,
         channelId: channel.channel_id,
-        thumbnailUrl
+        thumbnailUrl,
+        channelSubscribers: channel.subscribers
       };
     } catch (error) {
       console.error(`Failed to transform item from ${channel.name}:`, error);
@@ -4524,13 +7357,19 @@ var RSSAggregator = class {
   }
   /**
    * Extract text from XML element (handles various formats)
+   * Prevents [object Object] serialization issues
    */
   extractText(element) {
     if (!element) return null;
     if (typeof element === "string") return element;
-    if (element["#text"]) return element["#text"];
-    if (element._text) return element._text;
-    if (typeof element === "object" && element.toString) return element.toString();
+    if (typeof element === "number") return String(element);
+    if (typeof element === "boolean") return String(element);
+    if (typeof element === "object") {
+      if (element["#text"]) return String(element["#text"]);
+      if (element._text) return String(element._text);
+      if (element.text) return String(element.text);
+      return null;
+    }
     return null;
   }
   /**
@@ -4584,16 +7423,19 @@ var RSSAggregator = class {
    * Clean and sanitize text content
    */
   cleanText(text) {
+    if (!text) return "";
     return text.replace(/<[^>]*>/g, "").replace(/&[^;]+;/g, (match2) => {
       const entities = {
         "&amp;": "&",
         "&lt;": "<",
         "&gt;": ">",
         "&quot;": '"',
-        "&apos;": "'"
+        "&apos;": "'",
+        "&#39;": "'",
+        "&nbsp;": " "
       };
       return entities[match2] || match2;
-    }).trim();
+    }).replace(/\r\n/g, "\n").replace(/\r/g, "\n").replace(/\n{3,}/g, "\n\n").replace(/[ \t]+/g, " ").trim();
   }
   /**
    * Sort feed items by publication date (newest first)
@@ -4610,6 +7452,61 @@ var RSSAggregator = class {
    */
   sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  /**
+   * Truncate text at word boundary with ellipsis
+   */
+  truncateText(text, maxLength) {
+    if (!text || text.length <= maxLength) {
+      return text;
+    }
+    const truncated = text.substring(0, maxLength - CONTENT_LIMITS.TRUNCATION_SUFFIX.length);
+    const lastSpace = truncated.lastIndexOf(" ");
+    if (lastSpace > 0) {
+      return truncated.substring(0, lastSpace) + CONTENT_LIMITS.TRUNCATION_SUFFIX;
+    }
+    return truncated + CONTENT_LIMITS.TRUNCATION_SUFFIX;
+  }
+  /**
+   * Normalize title: remove channel name prefixes, excessive emojis, and limit length
+   */
+  normalizeTitle(title, channelName) {
+    if (!title) return "Untitled";
+    let normalized = title;
+    const channelPrefix = new RegExp(`^${this.escapeRegex(channelName)}\\s*[:-]\\s*`, "i");
+    normalized = normalized.replace(channelPrefix, "");
+    normalized = normalized.trim();
+    return this.truncateText(normalized, CONTENT_LIMITS.MAX_TITLE_LENGTH);
+  }
+  /**
+   * Normalize description: ensure consistent format and length
+   */
+  normalizeDescription(description) {
+    if (!description) return "";
+    let normalized = description;
+    normalized = normalized.replace(/\n{3,}/g, "\n\n");
+    normalized = normalized.replace(/[ \t]{2,}/g, " ");
+    normalized = normalized.trim();
+    return this.truncateText(normalized, CONTENT_LIMITS.MAX_DESCRIPTION_LENGTH);
+  }
+  /**
+   * Extract YouTube video ID from various URL formats
+   */
+  extractVideoId(url) {
+    if (!url) return null;
+    const watchMatch = url.match(/[?&]v=([^&]+)/);
+    if (watchMatch) return watchMatch[1];
+    const shortMatch = url.match(/youtu\.be\/([^?]+)/);
+    if (shortMatch) return shortMatch[1];
+    const shortsMatch = url.match(/\/shorts\/([^?]+)/);
+    if (shortsMatch) return shortsMatch[1];
+    return null;
+  }
+  /**
+   * Escape special regex characters
+   */
+  escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 };
 
@@ -6250,11 +9147,13 @@ var RSSRenderer = class {
   }
   /**
    * Create rich HTML description for feed item
+   * Uses normalized descriptions from aggregator for consistency
    */
   createRichDescription(item) {
     const channelBadge = this.getChannelBadge(item.category || "unknown");
     const thumbnail = item.thumbnailUrl ? `<img src="${this.escapeXml(item.thumbnailUrl || "")}" alt="Video thumbnail" style="max-width: 120px; height: auto; float: left; margin: 0 15px 10px 0; border-radius: 8px;">` : "";
-    const subscriberCount = this.getChannelSubscribers(item.channelName);
+    const subscriberCount = item.channelSubscribers;
+    const descriptionHtml = item.description ? `<div style="margin-bottom: 15px; color: #333;">${this.escapeXml(item.description)}</div>` : "";
     return `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
         ${thumbnail}
@@ -6263,16 +9162,14 @@ var RSSRenderer = class {
           ${channelBadge}
           ${subscriberCount ? `<span style="color: #666; font-size: 0.9em;"> \u2022 ${subscriberCount} subscribers</span>` : ""}
         </div>
-        
-        <div style="margin-bottom: 15px; color: #333;">
-          ${this.escapeXml(item.description)}
-        </div>
-        
+
+        ${descriptionHtml}
+
         <div style="clear: both; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #666;">
           <span>\u{1F4C5} ${format(new Date(item.pubDate), "MMM dd, yyyy \u2022 h:mm a")}</span>
           <span style="margin-left: 15px;">\u{1F3F7}\uFE0F ${this.formatCategory(item.category || "unknown")}</span>
         </div>
-        
+
         <div style="margin-top: 10px;">
           <a href="${this.escapeXml(item.link)}" style="background: #ff0000; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: 500;">
             \u25B6\uFE0F Watch on YouTube
@@ -6289,7 +9186,7 @@ var RSSRenderer = class {
       acc[item.channelName] = (acc[item.channelName] || 0) + 1;
       return acc;
     }, {});
-    const topChannels = Object.entries(channelCounts).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count);
+    const topChannels = Object.entries(channelCounts).map(([name2, count]) => ({ name: name2, count })).sort((a, b) => b.count - a.count);
     return {
       totalChannels: Object.keys(channelCounts).length,
       topChannels
@@ -6326,21 +9223,6 @@ var RSSRenderer = class {
     return badges[category] ? `<span style="margin-left: 8px;">${badges[category]}</span>` : "";
   }
   /**
-   * Get channel subscriber count (mock implementation)
-   */
-  getChannelSubscribers(channelName) {
-    const subscribers = {
-      "Two Minute Papers": "1.66M",
-      "Krish Naik": "1.25M",
-      "Matt Wolfe": "785K",
-      "DeepLearning.AI": "429K",
-      "Sentdex": "273K",
-      "MattVidPro AI": "245K",
-      "Andrej Karpathy": "220K"
-    };
-    return subscribers[channelName] || null;
-  }
-  /**
    * Format category for display
    */
   formatCategory(category) {
@@ -6365,9 +9247,10 @@ async function handleScheduledEvent(event, env, ctx) {
   const startTime = Date.now();
   console.log("\u{1F552} Starting scheduled RSS aggregation at", new Date(event.scheduledTime).toISOString());
   try {
-    const aggregator = new RSSAggregator();
+    const aggregator = new RSSAggregator(env);
     const renderer = new RSSRenderer(env);
     const storage = new StorageService(env);
+    const channelService = new ChannelService(env);
     console.log("\u{1F4E1} Aggregating RSS feeds from all channels...");
     const { items, errors } = await aggregator.aggregateFeeds();
     if (items.length === 0) {
@@ -6393,13 +9276,19 @@ async function handleScheduledEvent(event, env, ctx) {
       feedGeneratedAt = previousMetadata?.generated_at || (/* @__PURE__ */ new Date()).toISOString();
       console.log("\u{1F4CC} Feed content unchanged - preserving timestamps");
     }
-    const metadata = generateFeedMetadata();
-    metadata.generated_at = feedGeneratedAt;
-    metadata.failure_count = errors.length;
-    metadata.success_count = Math.max(0, metadata.total_channels - errors.length);
-    metadata.contentHash = currentContentHash;
-    metadata.lastBuildDate = lastBuildDate;
-    metadata.hasContentChanged = hasContentChanged;
+    const activeChannels = await channelService.getActiveChannels();
+    const metadata = {
+      title: "AI Pioneer YouTube Channels RSS Feeds",
+      description: "RSS feeds for top AI pioneer YouTube channels",
+      generated_at: feedGeneratedAt,
+      total_channels: activeChannels.length,
+      success_count: Math.max(0, activeChannels.length - errors.length),
+      failure_count: errors.length,
+      channels: activeChannels,
+      contentHash: currentContentHash,
+      lastBuildDate,
+      hasContentChanged
+    };
     console.log("\u{1F3A8} Rendering RSS XML feed...");
     const xmlContent = renderer.renderFeed(items, {
       lastBuildDate,
@@ -6441,19 +9330,30 @@ async function handleScheduledEvent(event, env, ctx) {
     const duration = Date.now() - startTime;
     console.error(`\u274C RSS aggregation failed after ${duration}ms:`, error);
     try {
-      const previousMetadata = await new StorageService(env).getMetadata();
-      const errorMetadata = generateFeedMetadata();
-      errorMetadata.generated_at = previousMetadata?.generated_at || (/* @__PURE__ */ new Date()).toISOString();
-      errorMetadata.failure_count = errorMetadata.total_channels;
-      errorMetadata.success_count = 0;
-      errorMetadata.lastBuildDate = previousMetadata?.lastBuildDate || (/* @__PURE__ */ new Date()).toUTCString();
+      const storage = new StorageService(env);
+      const channelService = new ChannelService(env);
+      const [previousMetadata, allChannels] = await Promise.all([
+        storage.getMetadata(),
+        channelService.getActiveChannels()
+      ]);
+      const errorMetadata = {
+        title: "AI Pioneer YouTube Channels RSS Feeds",
+        description: "RSS feeds for top AI pioneer YouTube channels",
+        generated_at: previousMetadata?.generated_at || (/* @__PURE__ */ new Date()).toISOString(),
+        total_channels: allChannels.length,
+        success_count: 0,
+        failure_count: allChannels.length,
+        channels: allChannels,
+        contentHash: previousMetadata?.contentHash,
+        lastBuildDate: previousMetadata?.lastBuildDate || (/* @__PURE__ */ new Date()).toUTCString(),
+        hasContentChanged: false
+      };
       const errorXml = new RSSRenderer(env).renderFeed([], {
         lastBuildDate: errorMetadata.lastBuildDate,
         totalItems: 0,
         errors: 1,
         preserveStatsDate: true
       });
-      const storage = new StorageService(env);
       await storage.storeCurrentFeed(errorXml, errorMetadata);
     } catch (storageError) {
       console.error("Failed to store error feed:", storageError);
@@ -6527,14 +9427,22 @@ app.notFound((c) => {
       feed: "/feed.xml",
       channels: "/channels",
       health: "/health",
-      root: "/"
+      root: "/",
+      api: {
+        channels: "/api/channels",
+        channelDetail: "/api/channels/:channelId",
+        channelStatus: "/api/channels/:channelId/status",
+        bulkImport: "/api/channels/bulk"
+      }
     }
   }, 404);
 });
 var feedHandlers = createFeedHandlers();
 var healthHandlers = createHealthHandlers();
+var channelHandlers = createChannelHandlers();
 app.route("/", feedHandlers);
 app.route("/", healthHandlers);
+app.route("/api", channelHandlers);
 app.post("/refresh", async (c) => {
   try {
     const refreshPromise = handleManualRefresh(c.env, c.executionCtx);
@@ -6594,3 +9502,21 @@ var index_default = {
 export {
   index_default as default
 };
+/*! Bundled license information:
+
+@prisma/client/runtime/index-browser.js:
+  (*! Bundled license information:
+  
+  decimal.js/decimal.mjs:
+    (*!
+     *  decimal.js v10.5.0
+     *  An arbitrary-precision Decimal type for JavaScript.
+     *  https://github.com/MikeMcl/decimal.js
+     *  Copyright (c) 2025 Michael Mclaughlin <M8ch88l@gmail.com>
+     *  MIT Licence
+     *)
+  *)
+
+ky/distribution/index.js:
+  (*! MIT License © Sindre Sorhus *)
+*/

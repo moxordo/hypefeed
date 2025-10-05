@@ -25,11 +25,17 @@ bucket_name = "hypefeed-rss-storage"
 [triggers]
 crons = ["*/10 * * * *"]
 
+# D1 Database for channel storage
+[[d1_databases]]
+binding = "HYPEFEED_DB"
+database_name = "hypefeed-channels"
+database_id = "ad08d557-4a8b-4eb1-a2bd-88731c665282"
+
 # KV namespace for metadata and caching (optional)
-[[kv_namespaces]]
-binding = "HYPEFEED_KV"
-id = "" # Will be populated after deployment
-preview_id = ""
+# [[kv_namespaces]]
+# binding = "HYPEFEED_KV"
+# id = "" # Will be populated after deployment
+# preview_id = ""
 
 # Development environment overrides
 [env.development]
