@@ -12,6 +12,7 @@ export interface Env {
 
   // Secrets
   GITHUB_TOKEN: string;
+  ADMIN_API_KEY: string;  // Bearer token for protected API endpoints
 
   // Environment variables
   ENVIRONMENT: string;
