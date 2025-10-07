@@ -1,0 +1,112 @@
+[
+  {
+    "id": "microsoft/vscode",
+    "name": "vscode",
+    "owner": "microsoft",
+    "full_name": "microsoft/vscode",
+    "description": "Visual Studio Code",
+    "language": "TypeScript",
+    "html_url": "https://github.com/microsoft/vscode",
+    "stars_count": 160000,
+    "forks_count": 28000
+  },
+  {
+    "id": "vercel/next.js",
+    "name": "next.js",
+    "owner": "vercel",
+    "full_name": "vercel/next.js",
+    "description": "The React Framework",
+    "language": "JavaScript",
+    "html_url": "https://github.com/vercel/next.js",
+    "stars_count": 125000,
+    "forks_count": 26000
+  },
+  {
+    "id": "rust-lang/rust",
+    "name": "rust",
+    "owner": "rust-lang",
+    "full_name": "rust-lang/rust",
+    "description": "Empowering everyone to build reliable and efficient software",
+    "language": "Rust",
+    "html_url": "https://github.com/rust-lang/rust",
+    "stars_count": 95000,
+    "forks_count": 12000
+  },
+  {
+    "id": "golang/go",
+    "name": "go",
+    "owner": "golang",
+    "full_name": "golang/go",
+    "description": "The Go programming language",
+    "language": "Go",
+    "html_url": "https://github.com/golang/go",
+    "stars_count": 122000,
+    "forks_count": 17000
+  },
+  {
+    "id": "python/cpython",
+    "name": "cpython",
+    "owner": "python",
+    "full_name": "python/cpython",
+    "description": "The Python programming language",
+    "language": "Python",
+    "html_url": "https://github.com/python/cpython",
+    "stars_count": 61000,
+    "forks_count": 29000
+  },
+  {
+    "id": "tensorflow/tensorflow",
+    "name": "tensorflow",
+    "owner": "tensorflow",
+    "full_name": "tensorflow/tensorflow",
+    "description": "An Open Source Machine Learning Framework for Everyone",
+    "language": "C++",
+    "html_url": "https://github.com/tensorflow/tensorflow",
+    "stars_count": 185000,
+    "forks_count": 74000
+  },
+  {
+    "id": "facebook/react",
+    "name": "react",
+    "owner": "facebook",
+    "full_name": "facebook/react",
+    "description": "The library for web and native user interfaces",
+    "language": "JavaScript",
+    "html_url": "https://github.com/facebook/react",
+    "stars_count": 227000,
+    "forks_count": 46000
+  },
+  {
+    "id": "vuejs/vue",
+    "name": "vue",
+    "owner": "vuejs",
+    "full_name": "vuejs/vue",
+    "description": "Progressive JavaScript Framework",
+    "language": "TypeScript",
+    "html_url": "https://github.com/vuejs/vue",
+    "stars_count": 207000,
+    "forks_count": 33000
+  },
+  {
+    "id": "angular/angular",
+    "name": "angular",
+    "owner": "angular",
+    "full_name": "angular/angular",
+    "description": "Deliver web apps with confidence",
+    "language": "TypeScript",
+    "html_url": "https://github.com/angular/angular",
+    "stars_count": 95000,
+    "forks_count": 25000
+  },
+  {
+    "id": "pytorch/pytorch",
+    "name": "pytorch",
+    "owner": "pytorch",
+    "full_name": "pytorch/pytorch",
+    "description": "Tensors and Dynamic neural networks in Python",
+    "language": "Python",
+    "html_url": "https://github.com/pytorch/pytorch",
+    "stars_count": 81000,
+    "forks_count": 21000
+  }
+]

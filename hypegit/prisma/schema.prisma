@@ -1,0 +1,85 @@
+// Prisma schema for HypeGit - Developer Hype & Mindshare Tracker
+// Database: Cloudflare D1 (SQLite with Prisma adapter)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Core repository metadata
+model Repository {
+  id              String   @id // Format: "owner/name" (e.g., "microsoft/vscode")
+  name            String
+  owner           String
+  full_name       String   // GitHub full_name field
+  description     String?
+  language        String?  // Primary language
+  html_url        String
+  stars_count     Int
+  forks_count     Int
+  created_at      DateTime @map("created_at")
+  updated_at      DateTime @map("updated_at")
+  last_commit_at  DateTime? @map("last_commit_at")
+  first_seen      DateTime @default(now())
+  last_updated    DateTime @updatedAt
+  is_active       Boolean  @default(true)
+  is_archived     Boolean  @default(false) // GitHub archive status
+
+  snapshots         StarSnapshot[]
+  trending_captures TrendingCapture[]
+  topics            RepositoryTopic[]
+}
+
+// Time-series star count tracking
+model StarSnapshot {
+  id            String   @id
+  repo_id       String
+  stars_count   Int
+  forks_count   Int
+  captured_at   DateTime @default(now())
+
+  repository    Repository @relation(fields: [repo_id], references: [id], onDelete: Cascade)
+
+  @@index([repo_id, captured_at])
+}
+
+// Trending page appearance records
+model TrendingCapture {
+  id              String   @id
+  repo_id         String
+  time_range      String   // "daily", "weekly", "monthly"
+  language        String?  // "typescript", "python", etc. (null = all languages)
+  rank            Int      // Position on trending page (1-25)
+  stars_today     Int?     // Stars gained in the time range (if available)
+  captured_at     DateTime @default(now())
+  snapshot_url    String?  // R2 URL: trending/2025-01-15/daily-typescript.html
+
+  repository      Repository @relation(fields: [repo_id], references: [id], onDelete: Cascade)
+
+  @@index([repo_id, captured_at])
+  @@index([time_range, language, captured_at])
+}
+
+// Topics/tags for categorization
+model Topic {
+  id          String   @id
+  name        String   @unique
+  category    String?  // "AI/ML", "Web", "DevOps", etc.
+
+  repositories RepositoryTopic[]
+}
+
+// Many-to-many relationship between repositories and topics
+model RepositoryTopic {
+  repo_id     String
+  topic_id    String
+
+  repository  Repository @relation(fields: [repo_id], references: [id], onDelete: Cascade)
+  topic       Topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
+
+  @@id([repo_id, topic_id])
+}
