@@ -187,7 +187,9 @@ wrangler r2 object list hypegit-snapshots --prefix trending/
 - `GET /api/test-scrape` - Test scraping (debug endpoint)
 
 **Authentication:**
-All protected endpoints require a Bearer token in the Authorization header:
+All protected endpoints require a Bearer token in the Authorization header. You can use either:
+1. **Database API Keys** - Managed keys stored in the database (recommended)
+2. **ADMIN_API_KEY** - Legacy super admin key from environment secrets
 
 ```bash
 curl -X POST "https://hypegit.andrew-kim0810.workers.dev/api/refresh" \
@@ -227,6 +229,74 @@ Invalid token:
   "error": "Unauthorized",
   "message": "Invalid API key"
 }
+```
+
+### Admin Endpoints (Super Admin Only)
+
+**API Key Management:**
+These endpoints require the ADMIN_API_KEY (not regular database keys):
+
+- `POST /admin/keys` - Create a new API key
+- `GET /admin/keys` - List all API keys
+- `DELETE /admin/keys/:id` - Deactivate an API key
+- `POST /admin/keys/:id/reactivate` - Reactivate an API key
+- `DELETE /admin/keys/:id/permanent` - Permanently delete an API key
+
+**Creating an API key:**
+
+```bash
+curl -X POST "https://hypegit.andrew-kim0810.workers.dev/admin/keys" \
+  -H "Authorization: Bearer YOUR_ADMIN_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "CI/CD Pipeline",
+    "description": "Key for automated deployments",
+    "created_by": "admin@example.com"
+  }'
+```
+
+Response:
+```json
+{
+  "success": true,
+  "message": "API key created successfully. Save this key - it will not be shown again!",
+  "key": "rT9kL2mN8pQ5vR7sY3wA4bX6cH1dE0fG...",
+  "info": {
+    "id": "uuid-here",
+    "name": "CI/CD Pipeline",
+    "description": "Key for automated deployments",
+    "created_at": "2025-10-07T15:30:00.000Z",
+    "last_used": null,
+    "is_active": true,
+    "created_by": "admin@example.com"
+  }
+}
+```
+
+**Listing API keys:**
+
+```bash
+# List active keys only
+curl "https://hypegit.andrew-kim0810.workers.dev/admin/keys" \
+  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"
+
+# Include inactive keys
+curl "https://hypegit.andrew-kim0810.workers.dev/admin/keys?include_inactive=true" \
+  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"
+```
+
+**Deactivating a key:**
+
+```bash
+curl -X DELETE "https://hypegit.andrew-kim0810.workers.dev/admin/keys/uuid-here" \
+  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"
+```
+
+**Permanently deleting a key:**
+
+```bash
+curl -X DELETE "https://hypegit.andrew-kim0810.workers.dev/admin/keys/uuid-here/permanent" \
+  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"
 ```
 
 ## Troubleshooting

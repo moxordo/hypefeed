@@ -83,3 +83,18 @@ model RepositoryTopic {
 
   @@id([repo_id, topic_id])
 }
+
+// API Key management for authenticated endpoints
+model ApiKey {
+  id          String   @id
+  key_hash    String   @unique // SHA-256 hash of the API key
+  name        String   // Descriptive name (e.g., "Production CI/CD", "Admin Key")
+  description String?  // Optional description
+  created_at  DateTime @default(now())
+  last_used   DateTime?
+  is_active   Boolean  @default(true)
+  created_by  String?  // Optional: who created this key
+
+  @@index([key_hash])
+  @@index([is_active])
+}
