@@ -1,0 +1,128 @@
+[
+  {
+    "name": "TypeScript",
+    "slug": "typescript",
+    "priority": 1,
+    "github_trending_url": "https://github.com/trending/typescript"
+  },
+  {
+    "name": "Python",
+    "slug": "python",
+    "priority": 1,
+    "github_trending_url": "https://github.com/trending/python"
+  },
+  {
+    "name": "JavaScript",
+    "slug": "javascript",
+    "priority": 1,
+    "github_trending_url": "https://github.com/trending/javascript"
+  },
+  {
+    "name": "Go",
+    "slug": "go",
+    "priority": 1,
+    "github_trending_url": "https://github.com/trending/go"
+  },
+  {
+    "name": "Rust",
+    "slug": "rust",
+    "priority": 1,
+    "github_trending_url": "https://github.com/trending/rust"
+  },
+  {
+    "name": "Java",
+    "slug": "java",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/java"
+  },
+  {
+    "name": "C++",
+    "slug": "c++",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/c++"
+  },
+  {
+    "name": "C#",
+    "slug": "c%23",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/c%23"
+  },
+  {
+    "name": "C",
+    "slug": "c",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/c"
+  },
+  {
+    "name": "Kotlin",
+    "slug": "kotlin",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/kotlin"
+  },
+  {
+    "name": "Swift",
+    "slug": "swift",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/swift"
+  },
+  {
+    "name": "Ruby",
+    "slug": "ruby",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/ruby"
+  },
+  {
+    "name": "PHP",
+    "slug": "php",
+    "priority": 2,
+    "github_trending_url": "https://github.com/trending/php"
+  },
+  {
+    "name": "Dart",
+    "slug": "dart",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/dart"
+  },
+  {
+    "name": "Elixir",
+    "slug": "elixir",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/elixir"
+  },
+  {
+    "name": "Scala",
+    "slug": "scala",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/scala"
+  },
+  {
+    "name": "Zig",
+    "slug": "zig",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/zig"
+  },
+  {
+    "name": "HTML",
+    "slug": "html",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/html"
+  },
+  {
+    "name": "CSS",
+    "slug": "css",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/css"
+  },
+  {
+    "name": "Shell",
+    "slug": "shell",
+    "priority": 3,
+    "github_trending_url": "https://github.com/trending/shell"
+  },
+  {
+    "name": "All Languages",
+    "slug": null,
+    "priority": 0,
+    "github_trending_url": "https://github.com/trending"
+  }
+]

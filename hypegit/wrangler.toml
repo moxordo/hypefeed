@@ -1,0 +1,30 @@
+name = "hypegit"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database
+[[d1_databases]]
+binding = "HYPEGIT_DB"
+database_name = "hypegit-repos"
+database_id = "0ef96cf8-432c-4dee-a0ab-43c560ab3492"
+migrations_dir = "prisma/migrations"
+
+# R2 Bucket
+[[r2_buckets]]
+binding = "HYPEGIT_BUCKET"
+bucket_name = "hypegit-snapshots"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+
+# Cron triggers
+[triggers]
+crons = ["0 2 * * *"]  # Daily at 2 AM UTC
+
+# Development environment
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+# Add GitHub token via: wrangler secret put GITHUB_TOKEN
