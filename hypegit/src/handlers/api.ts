@@ -6,6 +6,7 @@ import { Hono } from 'hono';
 import type { Env, ExecutionContext } from '../types/bindings';
 import { RepositoryService } from '../services/repositoryService';
 import { handleManualRefresh } from './cron';
+import { requireAuth } from '../middleware/auth';
 
 /**
  * Create API route handlers
@@ -197,8 +198,9 @@ export function createAPIHandlers() {
   /**
    * POST /api/refresh - Manual refresh trigger (background)
    * Triggers the daily trending scrape in background (may timeout)
+   * 🔒 Requires authentication
    */
-  app.post('/refresh', async (c) => {
+  app.post('/refresh', requireAuth(), async (c) => {
     try {
       const result = await handleManualRefresh(
         c.env,
@@ -220,8 +222,9 @@ export function createAPIHandlers() {
    * Query params:
    *   - language: typescript|python|go|rust|javascript|all
    *   - range: daily|weekly|monthly
+   * 🔒 Requires authentication
    */
-  app.post('/refresh-sync', async (c) => {
+  app.post('/refresh-sync', requireAuth(), async (c) => {
     try {
       const { handleDailyTrendingScrape } = await import('./cron');
       const language = c.req.query('language') || 'typescript';
@@ -299,10 +302,10 @@ export function createAPIHandlers() {
   });
 
   /**
-   * GET /api/trending - Get current trending (already exists above)
    * GET /api/test-scrape - Test scraping synchronously (for debugging)
+   * 🔒 Requires authentication
    */
-  app.get('/test-scrape', async (c) => {
+  app.get('/test-scrape', requireAuth(), async (c) => {
     try {
       const { TrendingScraperService } = await import('../services/trendingScraper');
       const scraper = new TrendingScraperService();

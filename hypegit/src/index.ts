@@ -8,6 +8,7 @@ import { cors } from 'hono/cors';
 import type { Env, ExecutionContext, ScheduledEvent } from './types/bindings';
 import { createHealthHandlers } from './handlers/health';
 import { createAPIHandlers } from './handlers/api';
+import { createAdminHandlers } from './handlers/admin';
 import { handleScheduledEvent } from './handlers/cron';
 
 /**
@@ -25,6 +26,10 @@ app.route('/', healthHandlers);
 // Mount API routes
 const apiHandlers = createAPIHandlers();
 app.route('/api', apiHandlers);
+
+// Mount admin routes (key management)
+const adminHandlers = createAdminHandlers();
+app.route('/admin', adminHandlers);
 
 // 404 handler
 app.notFound((c) => {
