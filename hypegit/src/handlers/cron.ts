@@ -2,7 +2,7 @@
  * Cron handlers for scheduled tasks
  */
 
-import type { Env, ExecutionContext, ScheduledEvent } from '../types/bindings';
+import type { Env, ExecutionContext, ScheduledEvent, GitHubRepository } from '../types/bindings';
 import { TrendingScraperService } from '../services/trendingScraper';
 import { GitHubAPIService } from '../services/githubAPI';
 import { StorageService } from '../services/storage';
@@ -24,6 +24,9 @@ export async function handleScheduledEvent(
   try {
     // Run daily trending scrape
     await handleDailyTrendingScrape(env, ctx);
+
+    // Run repository snapshot
+    await handleRepositorySnapshot(env, ctx);
 
     const duration = Date.now() - startTime;
     console.log(`✅ Scheduled task completed in ${duration}ms`);
@@ -134,13 +137,13 @@ export async function handleDailyTrendingScrape(
           }
 
           // Small delay between GitHub API calls
-          await sleep(50);
+          await sleep(1000);
         }
 
         totalVariants++;
 
         // Delay between scraping different trending pages
-        await sleep(500);
+        await sleep(5000);
 
       } catch (error) {
         console.error(`Failed to scrape ${range}/${language || 'all'}:`, error);
@@ -150,6 +153,66 @@ export async function handleDailyTrendingScrape(
   }
 
   console.log(`✅ Daily scrape complete: ${totalRepos} repos from ${totalVariants} variants`);
+
+  // Check rate limit status
+  try {
+    const rateLimit = await github.getRateLimit();
+    console.log(`📊 GitHub API rate limit: ${rateLimit.remaining}/${rateLimit.limit}`);
+  } catch (error) {
+    console.warn('Failed to check rate limit:', error);
+  }
+}
+
+export async function handleRepositorySnapshot(
+  env: Env,
+  ctx: ExecutionContext
+): Promise<void> {
+  const repoService = new RepositoryService(env);
+  const github = new GitHubAPIService(env.GITHUB_TOKEN);
+  const batchSize = 1000;
+  let offset = 0;
+  let totalProcessed = 0;
+
+  console.log('📸 Starting repository snapshot...');
+
+  while (true) {
+    const repositories = await repoService.getAllRepositories(batchSize, offset, 'id', 'asc');
+    if (repositories.length === 0) {
+      break;
+    }
+
+    console.log(`Processing batch: ${offset} to ${offset + repositories.length}`);
+
+    for (const repo of repositories) {
+      try {
+        // Fetch fresh data from GitHub API
+        const details = await github.getRepoDetails(repo.owner, repo.name);
+
+        // Upsert with fresh GitHub data
+        await repoService.upsertRepository(details);
+
+        // Create star snapshot
+        await repoService.createStarSnapshot({
+          repo_id: repo.id,
+          stars_count: details.stargazers_count,
+          forks_count: details.forks_count
+        });
+
+        totalProcessed++;
+
+        // Small delay between GitHub API calls
+        await sleep(5000);
+
+      } catch (error) {
+        console.error(`Failed to snapshot ${repo.id}:`, error);
+        // Continue with next repo
+      }
+    }
+
+    offset += batchSize;
+  }
+
+  console.log(`✅ Repository snapshot complete: ${totalProcessed} repos processed`);
 
   // Check rate limit status
   try {

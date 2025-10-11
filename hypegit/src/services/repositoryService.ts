@@ -107,10 +107,11 @@ export class RepositoryService {
   /**
    * Get all repositories
    */
-  async getAllRepositories(limit: number = 100) {
+  async getAllRepositories(limit: number = 100, offset: number = 0, orderByColumn: string = 'id', order: 'asc' | 'desc' = 'desc') {
     return await this.prisma.repository.findMany({
-      orderBy: { last_updated: 'desc' },
-      take: limit
+      orderBy: { [orderByColumn]: order },
+      take: limit,
+      skip: offset
     });
   }
 

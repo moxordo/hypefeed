@@ -27,4 +27,11 @@ crons = ["0 5 * * *"]  # Daily at 5 AM UTC (2 PM KST)
 [env.development]
 vars = { ENVIRONMENT = "development" }
 
-# Add GitHub token via: wrangler secret put GITHUB_TOKEN
+# wrangler.toml (wrangler v3.88.0^)
+[observability]
+enabled = false
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
