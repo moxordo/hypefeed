@@ -21,7 +21,7 @@ ENVIRONMENT = "production"
 
 # Cron triggers
 [triggers]
-crons = ["0 2 * * *"]  # Daily at 2 AM UTC
+crons = ["0 5 * * *"]  # Daily at 5 AM UTC (2 PM KST)
 
 # Development environment
 [env.development]

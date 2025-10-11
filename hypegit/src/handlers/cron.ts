@@ -36,8 +36,11 @@ export async function handleScheduledEvent(
 
 /**
  * Daily trending scrape handler
- * Scrapes all trending variants (3 ranges × 11 languages = 33 pages)
- * Covers: TypeScript, Python, JavaScript, Go, Rust, Java, C++, C#, Kotlin, Swift, All
+ * Scrapes all trending variants (3 ranges × 21 languages = 63 pages)
+ * Priority 1: TypeScript, Python, JavaScript, Go, Rust
+ * Priority 2: Java, C++, C#, C, Kotlin, Swift, Ruby, PHP
+ * Priority 3: Dart, Elixir, Scala, Zig, HTML, CSS, Shell
+ * Plus: All Languages combined
  */
 export async function handleDailyTrendingScrape(
   env: Env,
@@ -50,19 +53,33 @@ export async function handleDailyTrendingScrape(
 
   const today = format(new Date(), 'yyyy-MM-dd');
 
-  // Priority 1 languages (most active developer communities)
+  // All tracked languages organized by priority
   const languages = [
+    // Priority 1: Top developer languages
     'typescript',
     'python',
     'javascript',
     'go',
     'rust',
+    // Priority 2: Major languages
     'java',
     'c++',
     'c%23', // C#
+    'c',
     'kotlin',
     'swift',
-    null  // All languages
+    'ruby',
+    'php',
+    // Priority 3: Additional languages
+    'dart',
+    'elixir',
+    'scala',
+    'zig',
+    'html',
+    'css',
+    'shell',
+    // All languages combined
+    null
   ];
 
   const ranges: Array<'daily' | 'weekly' | 'monthly'> = ['daily', 'weekly', 'monthly'];
