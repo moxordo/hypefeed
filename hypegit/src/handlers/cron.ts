@@ -69,7 +69,24 @@ export async function handleScheduledEvent(
       }
     }
 
-    console.log(`📤 Queuing ${messages.length} scraping tasks...`);
+    // Add repository snapshot batch messages
+    // Process all repos in batches of 50
+    const batchSize = 50;
+    const estimatedTotalRepos = 4000; // Estimate, will stop early if no repos found
+    const numBatches = Math.ceil(estimatedTotalRepos / batchSize);
+
+    for (let i = 0; i < numBatches; i++) {
+      messages.push({
+        body: {
+          task: 'snapshot-repos' as const,
+          date: today,
+          batchOffset: i * batchSize,
+          batchLimit: batchSize,
+        }
+      });
+    }
+
+    console.log(`📤 Queuing ${messages.length} tasks (63 trending + ${numBatches} snapshot batches)...`);
 
     // Send all messages to the queue
     await env.SCRAPER_QUEUE.sendBatch(messages);

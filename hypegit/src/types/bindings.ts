@@ -171,6 +171,7 @@ export interface ScraperQueueMessage {
   range?: 'daily' | 'weekly' | 'monthly';
   language?: string | null;
   date: string;
-  // For repository snapshots (if we use queue for this too):
-  repoIds?: string[];
+  // For repository snapshots batch processing:
+  batchOffset?: number;
+  batchLimit?: number;
 }

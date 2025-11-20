@@ -126,7 +126,8 @@ async function handleScrapeTrending(
 }
 
 /**
- * Handle repository snapshots (optional, can be separate queue or cron)
+ * Handle repository snapshots using offset/limit batching
+ * Queries database for repos at the given offset and snapshots them
  */
 async function handleSnapshotRepos(
   payload: ScraperQueueMessage,
@@ -135,40 +136,51 @@ async function handleSnapshotRepos(
   const repoService = new RepositoryService(env);
   const github = new GitHubAPIService(env.GITHUB_TOKEN);
 
-  const repoIds = payload.repoIds || [];
+  const offset = payload.batchOffset ?? 0;
+  const limit = payload.batchLimit ?? 50;
 
-  console.log(`📸 Snapshotting ${repoIds.length} repositories...`);
+  console.log(`📸 Snapshotting repositories (offset: ${offset}, limit: ${limit})...`);
+
+  // Get repositories for this batch
+  const repositories = await repoService.getAllRepositories(limit, offset, 'id', 'asc');
+
+  if (repositories.length === 0) {
+    console.log(`  No repositories found at offset ${offset}`);
+    return;
+  }
+
+  console.log(`  Found ${repositories.length} repositories to snapshot`);
 
   let processed = 0;
+  let errors = 0;
 
-  for (const repoId of repoIds) {
+  for (const repo of repositories) {
     try {
-      const [owner, name] = repoId.split('/');
-
       // Fetch fresh data from GitHub API
-      const details = await github.getRepoDetails(owner, name);
+      const details = await github.getRepoDetails(repo.owner, repo.name);
 
       // Upsert with fresh GitHub data
       await repoService.upsertRepository(details);
 
       // Create star snapshot
       await repoService.createStarSnapshot({
-        repo_id: repoId,
+        repo_id: repo.id,
         stars_count: details.stargazers_count,
         forks_count: details.forks_count,
       });
 
       processed++;
 
-      // Delay between API calls
-      await sleep(2000);
+      // Delay between API calls (rate limiting)
+      await sleep(1000);
     } catch (error) {
-      console.error(`  Failed to snapshot ${repoId}:`, error);
+      console.error(`  Failed to snapshot ${repo.id}:`, error);
+      errors++;
       // Continue with next repo
     }
   }
 
-  console.log(`  Snapshotted: ${processed}/${repoIds.length} repos`);
+  console.log(`  Snapshotted: ${processed}/${repositories.length} repos (${errors} errors)`);
 }
 
 /**
