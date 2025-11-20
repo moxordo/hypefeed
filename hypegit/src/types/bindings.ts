@@ -10,6 +10,9 @@ export interface Env {
   // R2 Bucket
   HYPEGIT_BUCKET: R2Bucket;
 
+  // Queues
+  SCRAPER_QUEUE: Queue;
+
   // Secrets
   GITHUB_TOKEN: string;
   ADMIN_API_KEY: string;  // Bearer token for protected API endpoints
@@ -161,3 +164,13 @@ export const StorageKeys = {
   TRENDING_INDEX: (yearMonth: string) =>
     `metadata/trending-index-${yearMonth}.json`,
 } as const;
+
+// Queue message types
+export interface ScraperQueueMessage {
+  task: 'scrape-trending' | 'snapshot-repos';
+  range?: 'daily' | 'weekly' | 'monthly';
+  language?: string | null;
+  date: string;
+  // For repository snapshots (if we use queue for this too):
+  repoIds?: string[];
+}
