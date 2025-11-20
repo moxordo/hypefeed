@@ -328,5 +328,54 @@ export function createAPIHandlers() {
     }
   });
 
+  /**
+   * POST /api/trigger-queue - Manually trigger scraper by queuing tasks
+   * 🔒 Requires authentication
+   */
+  app.post('/trigger-queue', requireAuth(), async (c) => {
+    try {
+      const { format } = await import('date-fns');
+      const today = format(new Date(), 'yyyy-MM-dd');
+
+      // Queue all 63 scraping tasks
+      const languages: Array<string | null> = [
+        'typescript', 'python', 'javascript', 'go', 'rust',
+        'java', 'c++', 'c%23', 'c', 'kotlin', 'swift', 'ruby', 'php',
+        'dart', 'elixir', 'scala', 'zig', 'html', 'css', 'shell',
+        null
+      ];
+      const ranges: Array<'daily' | 'weekly' | 'monthly'> = ['daily', 'weekly', 'monthly'];
+
+      const messages = [];
+      for (const range of ranges) {
+        for (const language of languages) {
+          messages.push({
+            body: {
+              task: 'scrape-trending' as const,
+              range,
+              language,
+              date: today,
+            }
+          });
+        }
+      }
+
+      await c.env.SCRAPER_QUEUE.sendBatch(messages);
+
+      return c.json({
+        success: true,
+        messagesQueued: messages.length,
+        message: 'Scraping tasks queued successfully'
+      });
+
+    } catch (error) {
+      return c.json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      }, 500);
+    }
+  });
+
   return app;
 }

@@ -5,11 +5,12 @@
 
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import type { Env, ExecutionContext, ScheduledEvent } from './types/bindings';
+import type { Env, ExecutionContext, ScheduledEvent, ScraperQueueMessage } from './types/bindings';
 import { createHealthHandlers } from './handlers/health';
 import { createAPIHandlers } from './handlers/api';
 import { createAdminHandlers } from './handlers/admin';
 import { handleScheduledEvent } from './handlers/cron';
+import { handleQueueBatch } from './handlers/queueConsumer';
 
 /**
  * Create main Hono app
@@ -72,5 +73,16 @@ export default {
     ctx: ExecutionContext
   ): Promise<void> {
     await handleScheduledEvent(event, env, ctx);
+  },
+
+  /**
+   * Queue handler for processing scraper messages
+   */
+  async queue(
+    batch: MessageBatch<ScraperQueueMessage>,
+    env: Env,
+    ctx: ExecutionContext
+  ): Promise<void> {
+    await handleQueueBatch(batch, env);
   }
 };
