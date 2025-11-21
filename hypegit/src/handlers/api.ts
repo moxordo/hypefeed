@@ -329,6 +329,26 @@ export function createAPIHandlers() {
   });
 
   /**
+   * POST /api/trigger-cron-test - Test endpoint to trigger full cron (TEMPORARY)
+   */
+  app.post('/trigger-cron-test', async (c) => {
+    try {
+      const { handleScheduledEvent } = await import('./cron');
+      await handleScheduledEvent(
+        { scheduledTime: Date.now(), cron: 'test' } as any,
+        c.env,
+        c.executionCtx
+      );
+      return c.json({ success: true, message: 'Cron triggered successfully' });
+    } catch (error) {
+      return c.json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      }, 500);
+    }
+  });
+
+  /**
    * POST /api/trigger-queue - Manually trigger scraper by queuing tasks
    * 🔒 Requires authentication
    */

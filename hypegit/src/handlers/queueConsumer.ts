@@ -145,11 +145,11 @@ async function handleSnapshotRepos(
   const repositories = await repoService.getAllRepositories(limit, offset, 'id', 'asc');
 
   if (repositories.length === 0) {
-    console.log(`  No repositories found at offset ${offset}`);
+    console.log(`No repositories found at offset ${offset}`);
     return;
   }
 
-  console.log(`  Found ${repositories.length} repositories to snapshot`);
+  console.log(`Found ${repositories.length} repositories to snapshot`);
 
   let processed = 0;
   let errors = 0;
@@ -174,13 +174,13 @@ async function handleSnapshotRepos(
       // Delay between API calls (rate limiting)
       await sleep(1000);
     } catch (error) {
-      console.error(`  Failed to snapshot ${repo.id}:`, error);
+      console.error(`Failed to snapshot ${repo.id}:`, error);
       errors++;
       // Continue with next repo
     }
   }
 
-  console.log(`  Snapshotted: ${processed}/${repositories.length} repos (${errors} errors)`);
+  console.log(`Snapshotted: ${processed}/${repositories.length} repos (${errors} errors)`);
 }
 
 /**
