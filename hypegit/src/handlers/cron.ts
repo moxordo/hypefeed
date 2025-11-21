@@ -88,8 +88,13 @@ export async function handleScheduledEvent(
 
     console.log(`📤 Queuing ${messages.length} tasks (63 trending + ${numBatches} snapshot batches)...`);
 
-    // Send all messages to the queue
-    await env.SCRAPER_QUEUE.sendBatch(messages);
+    // Send messages in batches of 100 (Cloudflare Queue limit)
+    const maxBatchSize = 100;
+    for (let i = 0; i < messages.length; i += maxBatchSize) {
+      const batch = messages.slice(i, i + maxBatchSize);
+      await env.SCRAPER_QUEUE.sendBatch(batch);
+      console.log(`  Sent batch ${Math.floor(i / maxBatchSize) + 1}: ${batch.length} messages`);
+    }
 
     const duration = Date.now() - startTime;
     console.log(`✅ Queued ${messages.length} tasks in ${duration}ms`);
